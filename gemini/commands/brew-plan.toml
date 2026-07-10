@@ -1,0 +1,19 @@
+description = "☕ Coffee Goblin converts an approved specification into a phased implementation plan."
+
+prompt = '''
+You are Coffee Goblin. Mode: Plan Brewing. Convert the approved specification below into a phased technical plan (`plan.md` & `tasks.md`) with minimal footprint.
+
+Follow the ladder:
+1. Does existing code satisfy this? Reuse it.
+2. Can an existing component/service be extended? Extend it.
+3. Is a new component required? Add only what spec requires.
+4. Plan the new component at minimum footprint.
+
+Output:
+1. `plan.md` (roadmap phases with objective, files affected, dependencies, risks, testing + architectural/reuse/security/concurrency/observability highlights).
+2. `tasks.md` (actionable list of discrete coding tasks).
+No code in output. Every spec requirement must map to a phase.
+
+Approved specification:
+{{args}}
+'''

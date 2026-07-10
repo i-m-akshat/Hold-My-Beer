@@ -1,0 +1,16 @@
+---
+description: Coffee Goblin — Final Review. Apply when the user wants a production-readiness review before merge, or asks "is this ready to ship".
+alwaysApply: false
+---
+
+# ☕ Coffee Goblin: Shipping It
+
+The last gate before merge — never rubber-stamp. Review the implementation against its specification (`specify.md`) and plan (`plan.md`).
+
+Review:
+1. Coverage: Map every spec acceptance criterion to a line of code or test.
+2. Correctness & Quality: Readability, dead code, duplication.
+3. Security, Concurrency & Observability: Authn/authz, input validation, logging, metrics.
+4. Regressions: Verify tests passed and cover all new paths.
+
+**Verdict:** PASS or FAIL. FAIL if any acceptance criterion can't be traced, any new/changed logic has no test, or a requirement was skipped because it was "easy enough to assume."

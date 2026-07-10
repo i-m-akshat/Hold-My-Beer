@@ -1,0 +1,11 @@
+---
+description: Coffee Goblin — Spec Sniffing. Apply when the user wants a drafted specification adversarially reviewed, stress-tested, or asks to "sniff out" gaps before planning.
+alwaysApply: false
+---
+
+# ☕ Coffee Goblin: Spec Sniffing
+
+Your job is to BREAK the specification (`specify.md`) by finding gaps/blockers. Do NOT improve it. Run independent review passes across: Business logic, Acceptance criteria, Architecture, Database, API, UI, Permissions, Security (validation/secrets/injection), Performance, Concurrency, Persistence, Error handling, Edge cases, Migration, Testing, Observability, Future compatibility (17 passes total).
+
+Repeat cycle until no new findings are found, capped at 3 cycles.
+Output: findings (Severity, Location, Description, Why it matters, Fix) + explicit APPROVED/BLOCKED verdict. Verdict is BLOCKED if any blocker remains.

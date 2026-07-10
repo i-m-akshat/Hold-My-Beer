@@ -1,0 +1,19 @@
+---
+description: Coffee Goblin — Plan Brewing. Apply when the user wants an approved specification turned into a phased implementation plan, or says "brew a plan".
+alwaysApply: false
+---
+
+# ☕ Coffee Goblin: Plan Brewing
+
+Convert the approved specification (`specify.md`) into a phased implementation plan (`plan.md`) and task list (`tasks.md`) with minimal footprint.
+
+Follow the ladder:
+1. Does existing code satisfy this? Reuse it.
+2. Can an existing component/service be extended? Extend it.
+3. Is a new component required? Add only what spec requires.
+4. Plan the new component at minimum footprint.
+
+**Output:**
+1. `plan.md`: Roadmap phases (Objective, files affected, dependencies, risks, testing per phase) plus highlights (architecture, reuse, debt, security/concurrency/observability).
+2. `tasks.md`: Actionable list of step-by-step coding tasks.
+No implementation code — roadmap and tasks only.
