@@ -85,7 +85,7 @@ breakdown and an example run.
 
 | Command | Mode | What it does |
 |---|---|---|
-| `/holdmybeer-init` | SDD Initialization | Checks for existing SDD structures (.specify, .gsd, etc.) or initializes standard templates. |
+| `/holdmybeer-init` | SDD Initialization | Checks for existing SDD structures (.holdmybeer, .gsd, etc.) or initializes standard templates. |
 | `/holdmybeer-craft` | Spec Brewing | Brews a complete, implementation-ready specification from an Epic. |
 | `/holdmybeer-audit` | Spec Sniffing | Sniffs out ambiguities, contradictions, hidden assumptions, and blockers until the spec is production ready. |
 | `/holdmybeer-design` | Plan Brewing | Converts an approved specification into a phased implementation plan. |

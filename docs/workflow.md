@@ -31,7 +31,7 @@ open issues.
 
 | Stage | Input | Output | Verdict |
 |---|---|---|---|
-| `holdmybeer-init` | Optional target path | Diagnostics report or initialized `.specify/` templates | — |
+| `holdmybeer-init` | Optional target path | Diagnostics report or initialized `.holdmybeer/` templates | — |
 | `holdmybeer-craft` | An epic, ticket, or feature request | A complete specification | — |
 | `holdmybeer-audit` | A drafted specification | Findings + verdict | APPROVED / BLOCKED |
 | `holdmybeer-design` | An approved specification | A phased implementation plan | — |
@@ -47,7 +47,7 @@ step) can't run against the plan alone.
 
 ```
 holdmybeer-init:
-→ checks for .specify/.gsd and offers template initialization
+→ checks for .holdmybeer/.gsd and offers template initialization
 
 holdmybeer-craft: Add a "save for later" feature to the checkout flow, as described in TICKET-482.md
 → produces SPEC-save-for-later.md (specify.md)

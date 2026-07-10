@@ -585,8 +585,8 @@
         <div class="glass-panel">
           <div class="panel-title">Getting Started Workflow</div>
           <ol style="margin-left: 1.5rem; line-height: 1.8; color: var(--text-muted);">
-            <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text-main);">Modify templates:</strong> Edit `.specify/specify.md` to document your epic or business requirements.</li>
-            <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text-main);">Run Spec Sniffing:</strong> Execute `/holdmybeer-audit .specify/specify.md` to adversarially review and break your spec before writing code.</li>
+            <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text-main);">Modify templates:</strong> Edit `.holdmybeer/specify.md` to document your epic or business requirements.</li>
+            <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text-main);">Run Spec Sniffing:</strong> Execute `/holdmybeer-audit .holdmybeer/specify.md` to adversarially review and break your spec before writing code.</li>
             <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text-main);">Plan and Build:</strong> Generate your implementation plan using `/holdmybeer-design` and implement safely with `/holdmybeer-code`.</li>
           </ol>
         </div>
@@ -642,27 +642,27 @@
             <div class="glass-panel command-card">
               <span class="cmd-name">/holdmybeer-audit</span>
               <span class="cmd-desc">Sniffs out ambiguities and blockers in your specify.md.</span>
-              <button class="copy-btn" onclick="copyCmd('/holdmybeer-audit .specify/specify.md')">📋 Copy Command</button>
+              <button class="copy-btn" onclick="copyCmd('/holdmybeer-audit .holdmybeer/specify.md')">📋 Copy Command</button>
             </div>
             <div class="glass-panel command-card">
               <span class="cmd-name">/holdmybeer-design</span>
               <span class="cmd-desc">Converts approved specification into a phased technical plan.</span>
-              <button class="copy-btn" onclick="copyCmd('/holdmybeer-design .specify/specify.md')">📋 Copy Command</button>
+              <button class="copy-btn" onclick="copyCmd('/holdmybeer-design .holdmybeer/specify.md')">📋 Copy Command</button>
             </div>
             <div class="glass-panel command-card">
               <span class="cmd-name">/holdmybeer-stress</span>
               <span class="cmd-desc">Stress-tests the plan against the specification for architectural risks.</span>
-              <button class="copy-btn" onclick="copyCmd('/holdmybeer-stress .specify/plan.md .specify/specify.md')">📋 Copy Command</button>
+              <button class="copy-btn" onclick="copyCmd('/holdmybeer-stress .holdmybeer/plan.md .holdmybeer/specify.md')">📋 Copy Command</button>
             </div>
             <div class="glass-panel command-card">
               <span class="cmd-name">/holdmybeer-code</span>
               <span class="cmd-desc">Implements code changes in the repository based on the plan.</span>
-              <button class="copy-btn" onclick="copyCmd('/holdmybeer-code .specify/plan.md')">📋 Copy Command</button>
+              <button class="copy-btn" onclick="copyCmd('/holdmybeer-code .holdmybeer/plan.md')">📋 Copy Command</button>
             </div>
             <div class="glass-panel command-card">
               <span class="cmd-name">/holdmybeer-ship</span>
               <span class="cmd-desc">Performs pre-merge production-readiness check of implemented changes.</span>
-              <button class="copy-btn" onclick="copyCmd('/holdmybeer-ship .specify/specify.md .specify/plan.md')">📋 Copy Command</button>
+              <button class="copy-btn" onclick="copyCmd('/holdmybeer-ship .holdmybeer/specify.md .holdmybeer/plan.md')">📋 Copy Command</button>
             </div>
           </div>
         </div>
@@ -718,7 +718,7 @@
               <span>To view this file, you can run a local server:</span>
               <code>npx http-server -p 8080</code>
               <span>Or view the file directly in your editor:</span>
-              <code>.specify/${fileName}</code>
+              <code>.holdmybeer/${fileName}</code>
             </div>
           `;
         });

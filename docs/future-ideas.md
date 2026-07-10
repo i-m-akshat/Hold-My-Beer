@@ -6,7 +6,7 @@ future brainstorming pass, not commitments.
 ## Workspace detection & auto-init
 
 Have every HoldMyBeer skill start by detecting whether the project
-already uses a Spec-Driven Development workspace (e.g. `.specify/` for
+already uses a Spec-Driven Development workspace (e.g. `.holdmybeer/` for
 spec-kit, `.planning/` for GSD) and adapt to it instead of scattering
 loose files in the repo root. If none is found, initialize Coffee
 Goblin's own `.holdmybeer/` workspace with numbered feature dirs
