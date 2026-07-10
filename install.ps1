@@ -105,11 +105,18 @@ function Install-Codex {
     }
 }
 
+function Install-CLI {
+    Write-Host "Installing HoldMyBeer global CLI command..." -ForegroundColor Cyan
+    $localBinDir = Join-Path $TargetHome ".local\bin"
+    Copy-SingleFile -SourceFile (Join-Path $RepoRoot "bin\holdmybeer-init.ps1") -DestDir $localBinDir
+    Copy-SingleFile -SourceFile (Join-Path $RepoRoot "bin\holdmybeer-init.cmd") -DestDir $localBinDir
+}
+
 switch ($Platform) {
-    "claude" { Install-Claude }
-    "gemini" { Install-Gemini }
-    "codex"  { Install-Codex }
-    "all"    { Install-Claude; Install-Gemini; Install-Codex }
+    "claude" { Install-Claude; Install-CLI }
+    "gemini" { Install-Gemini; Install-CLI }
+    "codex"  { Install-Codex; Install-CLI }
+    "all"    { Install-Claude; Install-Gemini; Install-Codex; Install-CLI }
 }
 
 Write-Host ""
@@ -126,3 +133,4 @@ if ($skippedItems.Count -gt 0) {
 }
 Write-Host ""
 Write-Host "Done. Restart your CLI session if it was already running so it picks up the new skills/commands." -ForegroundColor Green
+

@@ -113,16 +113,35 @@ install_codex() {
   done
 }
 
+install_cli() {
+  echo "Installing HoldMyBeer global CLI command..."
+  local bin_dest="$TARGET_HOME/.local/bin"
+  mkdir -p "$bin_dest"
+  copy_single_file "$REPO_ROOT/bin/holdmybeer-init" "$bin_dest"
+  chmod +x "$bin_dest/holdmybeer-init"
+}
+
 case "$PLATFORM" in
-  claude) install_claude ;;
-  gemini) install_gemini ;;
-  codex) install_codex ;;
+  claude)
+    install_claude
+    install_cli
+    ;;
+  gemini)
+    install_gemini
+    install_cli
+    ;;
+  codex)
+    install_codex
+    install_cli
+    ;;
   all)
     install_claude
     install_gemini
     install_codex
+    install_cli
     ;;
 esac
+
 
 echo ""
 echo "===== HoldMyBeer install summary ====="
