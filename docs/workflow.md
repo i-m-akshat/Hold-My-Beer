@@ -32,16 +32,12 @@ open issues.
 | Stage | Input | Output | Verdict |
 |---|---|---|---|
 | `holdmybeer-init` | Optional target path | Diagnostics report or initialized `.holdmybeer/` templates | — |
-| `holdmybeer-craft` | An epic, ticket, or feature request | A complete specification | — |
-| `holdmybeer-audit` | A drafted specification | Findings + verdict | APPROVED / BLOCKED |
-| `holdmybeer-design` | An approved specification | A phased implementation plan | — |
-| `holdmybeer-stress` | The plan **and** its source spec | Findings + verdict | APPROVED / BLOCKED |
-| `holdmybeer-code` | An approved plan + repo access | Code changes | — |
-| `holdmybeer-ship` | Spec + plan + implementation | Findings + verdict | PASS / FAIL |
+| `holdmybeer-spec` | An epic, ticket, or feature request | A complete specification (`spec.md`) | APPROVED / BLOCKED |
+| `holdmybeer-plan` | An approved specification | A phased roadmap and tasks checklist (`blueprint.md`) | APPROVED / BLOCKED |
+| `holdmybeer-code` | An approved blueprint + repo access | Code changes | — |
+| `holdmybeer-review` | Spec + blueprint + implementation | Findings + verdict | PASS / FAIL |
 
-Note that `holdmybeer-stress` needs **both** the plan and the specification it
-implements — its highest-priority check (does every requirement map to a
-step) can't run against the plan alone.
+---
 
 ## Example run
 
@@ -49,38 +45,30 @@ step) can't run against the plan alone.
 holdmybeer-init:
 → checks for .holdmybeer/.gsd and offers template initialization
 
-holdmybeer-craft: Add a "save for later" feature to the checkout flow, as described in TICKET-482.md
-→ produces SPEC-save-for-later.md (specify.md)
+holdmybeer-spec: Add a "save for later" feature to the checkout flow, as described in TICKET-482.md
+→ produces spec.md after self-audit validation (verdict: APPROVED)
 
+holdmybeer-plan: .holdmybeer/spec.md
+→ produces blueprint.md after stress-test validation (verdict: APPROVED)
 
-holdmybeer-audit: SPEC-save-for-later.md
-→ returns findings + APPROVED (or BLOCKED with a list of blockers to resolve)
+holdmybeer-code: .holdmybeer/blueprint.md
+→ writes the code step-by-step running verification commands
 
-holdmybeer-design: SPEC-save-for-later.md
-→ produces PLAN-save-for-later.md
-
-holdmybeer-stress: PLAN-save-for-later.md SPEC-save-for-later.md
-→ returns findings + APPROVED (or BLOCKED)
-
-holdmybeer-code: PLAN-save-for-later.md
-→ writes the code
-
-holdmybeer-ship: SPEC-save-for-later.md PLAN-save-for-later.md src/checkout/
+holdmybeer-review: .holdmybeer/spec.md .holdmybeer/blueprint.md
 → returns PASS (or FAIL with remaining issues)
 ```
 
 ## Platform notes
 
 - **Claude Code**: each stage is both an auto-discoverable skill and a
-  short slash command (`/holdmybeer-craft`, etc.) — use whichever fits; the
+  short slash command (`/holdmybeer-spec`, etc.) — use whichever fits; the
   command is just a convenience wrapper around the skill.
 - **Gemini CLI**: each stage is a `.toml` command under
-  `~/.gemini/commands/`, invoked the same way (`/holdmybeer-craft <input>`).
+  `~/.gemini/commands/`, invoked the same way (`/holdmybeer-spec <input>`).
 - **Codex CLI**: each stage is a skill under `~/.codex/skills/`, same
   `SKILL.md` format as Claude — Codex decides when to invoke it, or you
   can name it explicitly.
 - **Cursor**: each stage is a description-matched rule under
   `.cursor/rules/` — reference it in chat or let Cursor auto-attach it
-  when your request matches the rule's description. This is the least
-  mature adapter (🚧) since Cursor rules aren't a direct request/response
-  slash-command mechanism the way the others are.
+  when your request matches the rule's description.
+

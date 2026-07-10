@@ -42,9 +42,8 @@ Write-Host " |_|  |_|\___/|_|\__,_|_|  |_|\___||____/ \___|\___|_|" -ForegroundC
 Write-Host ""
 Write-Host "🍺 HoldMyBeer Workspace Initialized Successfully!" -ForegroundColor Green
 Write-Host "Files created in .holdmybeer/:" -ForegroundColor Green
-Write-Host "  + specify.md      (Requirement Specification Template)" -ForegroundColor Green
-Write-Host "  + plan.md         (Technical Phased Roadmap)" -ForegroundColor Green
-Write-Host "  + tasks.md        (Implementation Task Checklist)" -ForegroundColor Green
+Write-Host "  + spec.md         (Requirement Specification Template)" -ForegroundColor Green
+Write-Host "  + blueprint.md    (Phased Implementation Blueprint)" -ForegroundColor Green
 Write-Host "  + constitution.md (Repository Standards & Rules)" -ForegroundColor Green
 Write-Host "  + dashboard.html  (Interactive HTML Workspace View)" -ForegroundColor Green
 Write-Host ""

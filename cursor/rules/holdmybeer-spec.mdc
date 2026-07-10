@@ -1,0 +1,16 @@
+---
+description: HoldMyBeer — Spec Distillation. Apply when the user wants to draft or audit a specification from a requirement/epic.
+alwaysApply: false
+---
+
+# 🍺 HoldMyBeer: Spec Distillation
+
+Synthesize input requirements (epic/ticket/raw description) into a high-fidelity, verified specification file (`.holdmybeer/spec.md`) following the 6-section Beer-Spec format:
+- **1. Context & Objectives**
+- **2. Requirements & Behavior**
+- **3. Technical Contracts**
+- **4. Guardrails & Performance**
+- **5. Observability & Errors**
+- **6. Acceptance Criteria**
+
+Self-Check Audit: Validate for race conditions, validation bounds, authorization loopholes, and logging. Output APPROVED or BLOCKED.

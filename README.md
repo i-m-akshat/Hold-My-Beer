@@ -59,21 +59,15 @@ To remove everything the installer added:
 ```
 Workspace / Project Root
  ↓
-holdmybeer-init (Diagnostics & Initialization)
+holdmybeer-init   (Setup & Bootstrap)
  ↓
-Epic
+holdmybeer-spec   (Spec Distillation & Self-Audit)
  ↓
-holdmybeer-craft        (HoldMyBeer: Spec Brewing)
+holdmybeer-plan   (Blueprint Design & Stress-Test)
  ↓
-holdmybeer-audit        (HoldMyBeer: Spec Sniffing)
+holdmybeer-code   (Code Implementation & Step Verification)
  ↓
-holdmybeer-design         (HoldMyBeer: Plan Brewing)
- ↓
-holdmybeer-stress        (HoldMyBeer: Plan Stress-Testing)
- ↓
-holdmybeer-code          (HoldMyBeer: Implementation)
- ↓
-holdmybeer-ship          (HoldMyBeer: Final Review)
+holdmybeer-review (Quality & Validation Verification)
  ↓
 Merge
 ```
@@ -85,49 +79,36 @@ breakdown and an example run.
 
 | Command | Mode | What it does |
 |---|---|---|
-| `/holdmybeer-init` | SDD Initialization | Checks for existing SDD structures (.holdmybeer, .gsd, etc.) or initializes standard templates. |
-| `/holdmybeer-craft` | Spec Brewing | Brews a complete, implementation-ready specification from an Epic. |
-| `/holdmybeer-audit` | Spec Sniffing | Sniffs out ambiguities, contradictions, hidden assumptions, and blockers until the spec is production ready. |
-| `/holdmybeer-design` | Plan Brewing | Converts an approved specification into a phased implementation plan. |
-| `/holdmybeer-stress` | Plan Stress-Testing | Stress-tests the implementation plan for architectural risk, missing work, and unnecessary complexity. |
-| `/holdmybeer-code` | Implementation | Implements the approved plan while preserving existing architecture and coding conventions. |
-| `/holdmybeer-ship` | Final Review | Performs the final production-readiness review before the feature merges. |
+| `/holdmybeer-init` | Bootstrap | Checks for existing SDD structures or initializes templates in `.holdmybeer/`. |
+| `/holdmybeer-spec` | Spec Distillation | Drafts and audits specification from requirements into `spec.md`. |
+| `/holdmybeer-plan` | Blueprint Design | Converts approved spec into phased engineering roadmap `blueprint.md`. |
+| `/holdmybeer-code` | Code Synthesis | Safely implements code modifications step-by-step from `blueprint.md`. |
+| `/holdmybeer-review` | Quality Verification | Performs pre-merge quality and validation checks on implemented features. |
 
 ## Philosophy
 
 Five rules, expanded in [`docs/philosophy.md`](docs/philosophy.md):
 
-1. **Don't guess.** Ambiguity is a stop condition, not an invitation to
-   invent business logic.
-2. **Don't over-build.** Reuse existing code, existing architecture, and
-   the standard library before writing anything new.
-3. **Don't rubber-stamp.** Every review mode is adversarial and distrusts
-   a clean pass until an independent one confirms it.
-4. **Respect what's already there.** Existing architecture and layering
-   are boundaries, not suggestions.
-5. **Security, testing, and observability are not optional.** They're
-   checked at every stage, not bolted on at the end.
+1. **Don't guess.** Ambiguity is a hard stop, not an invitation to invent requirements.
+2. **Don't over-build.** Enforce YAGNI and reuse existing logic before building new.
+3. **Don't rubber-stamp.** Self-audit and verify at every stage.
+4. **Respect architectural boundaries.** Never bypass layers to shrink diff size.
+5. **Security, testing, and observability are core constraints.** Build them in, don't bolt them on.
 
 ## Examples
 
 ```
-/holdmybeer-craft Add a "save for later" feature to the checkout flow, as described in TICKET-482.md
-→ produces SPEC-save-for-later.md
+/holdmybeer-spec Add a "save for later" feature to the checkout flow, as described in TICKET-482.md
+→ produces spec.md
 
-/holdmybeer-audit SPEC-save-for-later.md
-→ findings + APPROVED (or BLOCKED)
+/holdmybeer-plan .holdmybeer/spec.md
+→ produces blueprint.md
 
-/holdmybeer-design SPEC-save-for-later.md
-→ produces PLAN-save-for-later.md
-
-/holdmybeer-stress PLAN-save-for-later.md SPEC-save-for-later.md
-→ findings + APPROVED (or BLOCKED)
-
-/holdmybeer-code PLAN-save-for-later.md
+/holdmybeer-code .holdmybeer/blueprint.md
 → writes the code
 
-/holdmybeer-ship SPEC-save-for-later.md PLAN-save-for-later.md src/checkout/
-→ PASS (or FAIL with remaining issues)
+/holdmybeer-review .holdmybeer/spec.md .holdmybeer/blueprint.md
+→ PASS (or FAIL with issues checklist)
 ```
 
 ## Best Practices

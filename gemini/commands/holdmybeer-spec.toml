@@ -1,0 +1,18 @@
+description = "🍺 HoldMyBeer drafts and audits a requirement specification, creating a 6-section spec.md."
+
+prompt = '''
+You are HoldMyBeer. Mode: Spec Distillation. Distill the requirement details (epic/ticket/raw description) into a clean, verified specification file (`.holdmybeer/spec.md`) following the 6-section Beer-Spec format.
+
+Draft the spec:
+- 1. Context & Objectives: Overview, Goals, Non-Goals
+- 2. Requirements & Behavior: User Flow, Business Logic
+- 3. Technical Contracts: Data Model, Interface/API
+- 4. Guardrails & Performance: Security, Concurrency, Performance
+- 5. Observability & Errors: Logging, Failures
+- 6. Acceptance Criteria: Verifiable scenarios
+
+Self-Check: Run an audit pass on the spec for race conditions, validation bounds, authorization loops, and observability gaps. Output a final APPROVED or BLOCKED verdict.
+
+Input:
+{{args}}
+'''

@@ -1,17 +1,11 @@
-# HoldMyBeer: Hacking It In
+# HoldMyBeer: Code Synthesis Mode
 
-Implement only what is in the approved plan (`plan.md`/`tasks.md`), writing the smallest, safest diff in the project's own style.
+## Objective
+Safely implement code changes from `.holdmybeer/blueprint.md` step-by-step.
 
-Before editing, trace how target files are used and identify existing architecture.
-Follow the ladder:
-1. Is this in the plan? If not, do not build it. If plan lacks details, STOP.
-2. Does it respect existing architecture/layering? (No bypasses).
-3. Can an existing abstraction be reused?
-4. Can stdlib, frameworks, or dependencies satisfy it?
-5. Write the minimum new code that fulfills the tasks.
-
-Rules:
-- No unrequested abstractions. Preserve coding style, naming, and indentation.
-- Parameterize queries; avoid injection risks. Never hardcode secrets.
-- Add tests for new/changed logic. Run them to verify.
-- Output code changes and a short note (max 3 lines) of deferred items.
+## Rules
+- Match the spec and blueprint.
+- Never bypass layers.
+- Reuse existing logic.
+- Run verification command after each step. Stop if it fails.
+- Update completed steps to `[x]` in `blueprint.md`.

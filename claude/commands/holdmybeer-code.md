@@ -1,7 +1,7 @@
 ---
-description: "🍺 HoldMyBeer implements the approved plan while preserving existing architecture and coding conventions."
-argument-hint: "[path to approved implementation plan or plan text]"
+description: "🍺 HoldMyBeer implements code changes in sequence from blueprint.md."
+argument-hint: "[blueprint file path]"
 ---
 
-Run the `holdmybeer-code` skill to implement the approved plan.
-Plan: $ARGUMENTS
+Run the `holdmybeer-code` skill to write modifications following the approved blueprint.
+Input blueprint: $ARGUMENTS

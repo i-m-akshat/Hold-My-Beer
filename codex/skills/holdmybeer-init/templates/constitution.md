@@ -1,26 +1,8 @@
-# Repository Constitution
+# HoldMyBeer Constitution
 
-This constitution defines the core software engineering principles and guardrails for this repository.
+These 4 core directives govern all modifications in this repository:
 
-## 1. Don't Guess
-Ambiguity is a stop condition. Do not invent business logic, rules, or personas. If a requirement is unclear or undocumented, log it in **Needs Clarification** and stop.
-
-## 2. Minimal Footprint & YAGNI
-- Reuse existing code, classes, helper methods, and third-party libraries before creating new ones.
-- Keep modifications as lean as possible.
-- Do not build speculative features "for later".
-
-## 3. Architecture & Layer Boundaries
-- Respect existing layering (e.g., Controllers -> Services -> Repositories -> Database).
-- Never bypass intermediate layers to shrink a diff.
-- Keep business logic isolated from presentation and raw data storage.
-
-## 4. Security & Safety
-- Validate all input at trust boundaries.
-- Never construct queries, templates, or shell scripts via string concatenation of untrusted input. Use parameterized interfaces.
-- No secrets or credentials in repository files.
-
-## 5. Observability & Testing
-- Log errors and critical events with context and tracing.
-- Every new or changed functional code path must have corresponding tests.
-- Swallowing exceptions silently without logging is prohibited.
+1. **Zero Guesswork**: Do not make assumptions about business logic. If a requirement is missing from `spec.md`, stop and log it under "Open Questions" for human review.
+2. **Reuse First**: Check for existing helper methods, third-party libraries, and modules before writing new code.
+3. **Layer Integrity**: Respect directory boundaries and architectural layers. Bypassing layers is forbidden.
+4. **Immediate Verification**: Run tests, type checks, and linter validation after every step in `blueprint.md`.
