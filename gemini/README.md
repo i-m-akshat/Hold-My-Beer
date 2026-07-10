@@ -34,12 +34,12 @@ cp gemini/commands/*.toml ~/.gemini/commands/
 
 ```
 gemini
-> /brew-spec Add a "save for later" feature to the checkout flow, described in TICKET-482.md
-> /sniff-spec <paste the spec>
-> /brew-plan <paste the approved spec>
-> /stress-plan <paste the plan and spec>
-> /hack-it <paste the approved plan>
-> /ship-it <paste spec, plan, and a description of the implementation>
+> /holdmybeer-craft Add a "save for later" feature to the checkout flow, described in TICKET-482.md
+> /holdmybeer-audit <paste the spec>
+> /holdmybeer-design <paste the approved spec>
+> /holdmybeer-stress <paste the plan and spec>
+> /holdmybeer-code <paste the approved plan>
+> /holdmybeer-ship <paste spec, plan, and a description of the implementation>
 ```
 
 ## Known differences from Claude Code

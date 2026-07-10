@@ -1,13 +1,8 @@
 # 🍺 HoldMyBeer
 
-An AI-powered software engineering toolkit for Spec-Driven Development —
-one legendary, deliberately-generic engineer persona, six specialized
-working modes, and a cross-platform installer.
+A professional, Spec-Driven Development (SDD) toolkit for AI-assisted engineering. It provides a structured, adversarial pipeline of development gates to prevent context collapse, eliminate model hallucinations, and ensure codebase architectural integrity.
 
-HoldMyBeer has survived a thousand production incidents, a dozen
-legacy migrations, and more impossible deadlines than anyone should admit
-to. It doesn't guess, doesn't over-build, and doesn't rubber-stamp a
-review. Every mode below is one of its working states.
+HoldMyBeer enforces zero-guess requirements gathering, reuse-first technical planning, multi-pass adversarial auditing, and strict security and test coverage verification before code is merged.
 
 ## Supported Platforms
 
@@ -68,17 +63,17 @@ holdmybeer-init (Diagnostics & Initialization)
  ↓
 Epic
  ↓
-brew-spec        (HoldMyBeer: Spec Brewing)
+holdmybeer-craft        (HoldMyBeer: Spec Brewing)
  ↓
-sniff-spec        (HoldMyBeer: Spec Sniffing)
+holdmybeer-audit        (HoldMyBeer: Spec Sniffing)
  ↓
-brew-plan         (HoldMyBeer: Plan Brewing)
+holdmybeer-design         (HoldMyBeer: Plan Brewing)
  ↓
-stress-plan        (HoldMyBeer: Plan Stress-Testing)
+holdmybeer-stress        (HoldMyBeer: Plan Stress-Testing)
  ↓
-hack-it          (HoldMyBeer: Implementation)
+holdmybeer-code          (HoldMyBeer: Implementation)
  ↓
-ship-it          (HoldMyBeer: Final Review)
+holdmybeer-ship          (HoldMyBeer: Final Review)
  ↓
 Merge
 ```
@@ -91,12 +86,12 @@ breakdown and an example run.
 | Command | Mode | What it does |
 |---|---|---|
 | `/holdmybeer-init` | SDD Initialization | Checks for existing SDD structures (.specify, .gsd, etc.) or initializes standard templates. |
-| `/brew-spec` | Spec Brewing | Brews a complete, implementation-ready specification from an Epic. |
-| `/sniff-spec` | Spec Sniffing | Sniffs out ambiguities, contradictions, hidden assumptions, and blockers until the spec is production ready. |
-| `/brew-plan` | Plan Brewing | Converts an approved specification into a phased implementation plan. |
-| `/stress-plan` | Plan Stress-Testing | Stress-tests the implementation plan for architectural risk, missing work, and unnecessary complexity. |
-| `/hack-it` | Implementation | Implements the approved plan while preserving existing architecture and coding conventions. |
-| `/ship-it` | Final Review | Performs the final production-readiness review before the feature merges. |
+| `/holdmybeer-craft` | Spec Brewing | Brews a complete, implementation-ready specification from an Epic. |
+| `/holdmybeer-audit` | Spec Sniffing | Sniffs out ambiguities, contradictions, hidden assumptions, and blockers until the spec is production ready. |
+| `/holdmybeer-design` | Plan Brewing | Converts an approved specification into a phased implementation plan. |
+| `/holdmybeer-stress` | Plan Stress-Testing | Stress-tests the implementation plan for architectural risk, missing work, and unnecessary complexity. |
+| `/holdmybeer-code` | Implementation | Implements the approved plan while preserving existing architecture and coding conventions. |
+| `/holdmybeer-ship` | Final Review | Performs the final production-readiness review before the feature merges. |
 
 ## Philosophy
 
@@ -116,29 +111,29 @@ Five rules, expanded in [`docs/philosophy.md`](docs/philosophy.md):
 ## Examples
 
 ```
-/brew-spec Add a "save for later" feature to the checkout flow, as described in TICKET-482.md
+/holdmybeer-craft Add a "save for later" feature to the checkout flow, as described in TICKET-482.md
 → produces SPEC-save-for-later.md
 
-/sniff-spec SPEC-save-for-later.md
+/holdmybeer-audit SPEC-save-for-later.md
 → findings + APPROVED (or BLOCKED)
 
-/brew-plan SPEC-save-for-later.md
+/holdmybeer-design SPEC-save-for-later.md
 → produces PLAN-save-for-later.md
 
-/stress-plan PLAN-save-for-later.md SPEC-save-for-later.md
+/holdmybeer-stress PLAN-save-for-later.md SPEC-save-for-later.md
 → findings + APPROVED (or BLOCKED)
 
-/hack-it PLAN-save-for-later.md
+/holdmybeer-code PLAN-save-for-later.md
 → writes the code
 
-/ship-it SPEC-save-for-later.md PLAN-save-for-later.md src/checkout/
+/holdmybeer-ship SPEC-save-for-later.md PLAN-save-for-later.md src/checkout/
 → PASS (or FAIL with remaining issues)
 ```
 
 ## Best Practices
 
-- **Don't skip stages.** `hack-it` assumes a plan that already survived
-  `stress-plan`; running it against an unreviewed plan reintroduces the
+- **Don't skip stages.** `holdmybeer-code` assumes a plan that already survived
+  `holdmybeer-stress`; running it against an unreviewed plan reintroduces the
   risk the pipeline exists to catch.
 - **Treat BLOCKED/FAIL as a return trip, not a suggestion.** Fix the
   artifact one stage back and re-run the same gate — don't push forward

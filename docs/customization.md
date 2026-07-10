@@ -6,19 +6,19 @@ supported ways to adapt it without breaking that.
 
 ## Avoiding name collisions
 
-The skill/command names (`brew-spec`, `sniff-spec`, `brew-plan`,
-`stress-plan`, `hack-it`, `ship-it`) are distinctive by design, so
+The skill/command names (`holdmybeer-craft`, `holdmybeer-audit`, `holdmybeer-design`,
+`holdmybeer-stress`, `holdmybeer-code`, `holdmybeer-ship`) are distinctive by design, so
 collisions with your own custom skills are unlikely. If you still want
 extra insurance — e.g. you already have a skill literally named
-`hack-it` — rename the folder under `claude/skills/` (or
-`codex/skills/`) to `holdmybeer-hack-it` and update its frontmatter
+`holdmybeer-code` — rename the folder under `claude/skills/` (or
+`codex/skills/`) to `holdmybeer-holdmybeer-code` and update its frontmatter
 `name:` field to match. You do **not** need to rename the command file
 under `claude/commands/`; the command's job is just to invoke the skill by
 name, so update the one line inside it that says which skill to invoke.
 
 ## Adjusting review rigor
 
-`sniff-spec` and `stress-plan` both cap their repeat cycles at 3 to bound
+`holdmybeer-audit` and `holdmybeer-stress` both cap their repeat cycles at 3 to bound
 runaway token spend. If your specs/plans are large enough that 3 cycles
 routinely isn't enough to reach a quiet pass, raise the cap in the
 skill's "Process" section — but raise it deliberately, not by removing the
@@ -30,8 +30,8 @@ To add a mode (the toolkit's own docs use `holdmybeer-debug` and
 `holdmybeer-refactor` as hypothetical examples):
 
 1. Copy the closest existing skill as a starting template — a new review
-   mode should start from `sniff-spec` or `stress-plan`; a new
-   build/transform mode should start from `hack-it` or `brew-plan`.
+   mode should start from `holdmybeer-audit` or `holdmybeer-stress`; a new
+   build/transform mode should start from `holdmybeer-code` or `holdmybeer-design`.
 2. Keep the same section skeleton: Objective, Expected Input, Expected
    Output, Process, Guardrails, Completion Criteria, Stopping Conditions,
    Failure Conditions.
@@ -66,7 +66,7 @@ To add support for a new tool:
 ## Specializing for one project or stack
 
 HoldMyBeer intentionally has no project- or language-specific content.
-If you want a stack-specific variant (e.g. a `hack-it` that also enforces
+If you want a stack-specific variant (e.g. a `holdmybeer-code` that also enforces
 your team's specific test-framework conventions), do it in your own
 project-level instructions (`AGENTS.md`, `CLAUDE.md`, project-scoped
 `.cursor/rules/`, etc.) that layer on top of HoldMyBeer, rather than

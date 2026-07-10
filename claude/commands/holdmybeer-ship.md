@@ -3,5 +3,5 @@ description: "🍺 HoldMyBeer performs the final production readiness review bef
 argument-hint: "[paths/texts of spec, plan, and implementation]"
 ---
 
-Run the `ship-it` skill to perform a final production readiness review.
+Run the `holdmybeer-ship` skill to perform a final production readiness review.
 Input: $ARGUMENTS

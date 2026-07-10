@@ -1,5 +1,5 @@
 ---
-name: brew-plan
+name: holdmybeer-design
 description: >
   Convert an approved spec (specify.md) into a phased technical plan (plan.md & tasks.md).
   Enforces reuse-first and minimal footprint.

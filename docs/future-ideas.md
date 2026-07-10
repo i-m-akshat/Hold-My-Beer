@@ -26,6 +26,6 @@ covering (non-exhaustive):
   given the 4 adapters currently duplicate prompt text with no shared
   include mechanism.
 - How this interacts with today's explicit file-path arguments (e.g.
-  `/sniff-spec SPEC-x.md`, `/ship-it SPEC-x.md PLAN-x.md src/`) —
+  `/holdmybeer-audit SPEC-x.md`, `/holdmybeer-ship SPEC-x.md PLAN-x.md src/`) —
   whether workspace inference replaces, supplements, or is overridden
   by an explicit path.

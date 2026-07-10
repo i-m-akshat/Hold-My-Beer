@@ -7,8 +7,8 @@ All notable changes to HoldMyBeer are documented here. Format follows
 
 ### Added
 
-- Initial six-mode pipeline: `brew-spec`, `sniff-spec`, `brew-plan`,
-  `stress-plan`, `hack-it`, `ship-it`.
+- Initial six-mode pipeline: `holdmybeer-craft`, `holdmybeer-audit`, `holdmybeer-design`,
+  `holdmybeer-stress`, `holdmybeer-code`, `holdmybeer-ship`.
 - Claude Code adapter: `SKILL.md` skills + slash commands under
   `claude/skills/` and `claude/commands/`.
 - Gemini CLI adapter: `.toml` custom commands under `gemini/commands/`,
@@ -28,9 +28,9 @@ All notable changes to HoldMyBeer are documented here. Format follows
 
 - Security, concurrency, and observability requirements/checks present at
   every pipeline stage (spec, plan, and final review).
-- Adversarial review modes (`sniff-spec`, `stress-plan`) cap at 3 repeat
+- Adversarial review modes (`holdmybeer-audit`, `holdmybeer-stress`) cap at 3 repeat
   cycles to bound runaway token spend while still requiring an independent
   confirming pass before trusting a clean result.
-- `hack-it` requires a test for any new or changed logic and never
+- `holdmybeer-code` requires a test for any new or changed logic and never
   bypasses existing architectural layering, even under simulated deadline
   pressure (verified via adversarial pressure-testing during development).

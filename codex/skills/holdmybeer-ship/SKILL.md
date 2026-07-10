@@ -1,5 +1,5 @@
 ---
-name: ship-it
+name: holdmybeer-ship
 description: >
   Perform a final production readiness review of completed code against the spec and plan.
   Verifies requirements are met and tests pass.

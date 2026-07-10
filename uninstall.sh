@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #
 # Removes HoldMyBeer's skills/commands from one or more supported AI
-# coding assistants. Only removes the exact set of files/folders Coffee
-# Goblin installs - never wipes an entire skills/commands directory.
+# coding assistants. Only removes the exact set of files/folders HoldMyBeer
+# installs - never wipes an entire skills/commands directory.
 #
 # Usage:
 #   ./uninstall.sh
@@ -39,7 +39,7 @@ case "$PLATFORM" in
     ;;
 esac
 
-SKILL_NAMES=(brew-spec sniff-spec brew-plan stress-plan hack-it ship-it)
+SKILL_NAMES=(holdmybeer-init holdmybeer-craft holdmybeer-audit holdmybeer-design holdmybeer-stress holdmybeer-code holdmybeer-ship)
 REMOVED=()
 
 remove_known_folder() {

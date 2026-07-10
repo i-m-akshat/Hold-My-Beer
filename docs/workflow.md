@@ -7,23 +7,23 @@
          │
         Epic
          │
-    brew-spec        (HoldMyBeer: Spec Brewing)
+    holdmybeer-craft        (HoldMyBeer: Spec Brewing)
          │
-    sniff-spec        (HoldMyBeer: Spec Sniffing)
+    holdmybeer-audit        (HoldMyBeer: Spec Sniffing)
          │
-    brew-plan         (HoldMyBeer: Plan Brewing)
+    holdmybeer-design         (HoldMyBeer: Plan Brewing)
          │
-   stress-plan        (HoldMyBeer: Plan Stress-Testing)
+   holdmybeer-stress        (HoldMyBeer: Plan Stress-Testing)
          │
-     hack-it          (HoldMyBeer: Implementation)
+     holdmybeer-code          (HoldMyBeer: Implementation)
          │
-     ship-it          (HoldMyBeer: Final Review)
+     holdmybeer-ship          (HoldMyBeer: Final Review)
          │
        Merge
 ```
 
 Each stage's output is the next stage's input. A **BLOCKED** or **FAIL**
-verdict from any review stage (`sniff-spec`, `stress-plan`, `ship-it`)
+verdict from any review stage (`holdmybeer-audit`, `holdmybeer-stress`, `holdmybeer-ship`)
 means go back one stage and fix the artifact there — not skip forward with
 open issues.
 
@@ -32,14 +32,14 @@ open issues.
 | Stage | Input | Output | Verdict |
 |---|---|---|---|
 | `holdmybeer-init` | Optional target path | Diagnostics report or initialized `.specify/` templates | — |
-| `brew-spec` | An epic, ticket, or feature request | A complete specification | — |
-| `sniff-spec` | A drafted specification | Findings + verdict | APPROVED / BLOCKED |
-| `brew-plan` | An approved specification | A phased implementation plan | — |
-| `stress-plan` | The plan **and** its source spec | Findings + verdict | APPROVED / BLOCKED |
-| `hack-it` | An approved plan + repo access | Code changes | — |
-| `ship-it` | Spec + plan + implementation | Findings + verdict | PASS / FAIL |
+| `holdmybeer-craft` | An epic, ticket, or feature request | A complete specification | — |
+| `holdmybeer-audit` | A drafted specification | Findings + verdict | APPROVED / BLOCKED |
+| `holdmybeer-design` | An approved specification | A phased implementation plan | — |
+| `holdmybeer-stress` | The plan **and** its source spec | Findings + verdict | APPROVED / BLOCKED |
+| `holdmybeer-code` | An approved plan + repo access | Code changes | — |
+| `holdmybeer-ship` | Spec + plan + implementation | Findings + verdict | PASS / FAIL |
 
-Note that `stress-plan` needs **both** the plan and the specification it
+Note that `holdmybeer-stress` needs **both** the plan and the specification it
 implements — its highest-priority check (does every requirement map to a
 step) can't run against the plan alone.
 
@@ -49,33 +49,33 @@ step) can't run against the plan alone.
 holdmybeer-init:
 → checks for .specify/.gsd and offers template initialization
 
-brew-spec: Add a "save for later" feature to the checkout flow, as described in TICKET-482.md
+holdmybeer-craft: Add a "save for later" feature to the checkout flow, as described in TICKET-482.md
 → produces SPEC-save-for-later.md (specify.md)
 
 
-sniff-spec: SPEC-save-for-later.md
+holdmybeer-audit: SPEC-save-for-later.md
 → returns findings + APPROVED (or BLOCKED with a list of blockers to resolve)
 
-brew-plan: SPEC-save-for-later.md
+holdmybeer-design: SPEC-save-for-later.md
 → produces PLAN-save-for-later.md
 
-stress-plan: PLAN-save-for-later.md SPEC-save-for-later.md
+holdmybeer-stress: PLAN-save-for-later.md SPEC-save-for-later.md
 → returns findings + APPROVED (or BLOCKED)
 
-hack-it: PLAN-save-for-later.md
+holdmybeer-code: PLAN-save-for-later.md
 → writes the code
 
-ship-it: SPEC-save-for-later.md PLAN-save-for-later.md src/checkout/
+holdmybeer-ship: SPEC-save-for-later.md PLAN-save-for-later.md src/checkout/
 → returns PASS (or FAIL with remaining issues)
 ```
 
 ## Platform notes
 
 - **Claude Code**: each stage is both an auto-discoverable skill and a
-  short slash command (`/brew-spec`, etc.) — use whichever fits; the
+  short slash command (`/holdmybeer-craft`, etc.) — use whichever fits; the
   command is just a convenience wrapper around the skill.
 - **Gemini CLI**: each stage is a `.toml` command under
-  `~/.gemini/commands/`, invoked the same way (`/brew-spec <input>`).
+  `~/.gemini/commands/`, invoked the same way (`/holdmybeer-craft <input>`).
 - **Codex CLI**: each stage is a skill under `~/.codex/skills/`, same
   `SKILL.md` format as Claude — Codex decides when to invoke it, or you
   can name it explicitly.

@@ -1,8 +1,8 @@
 <#
 .SYNOPSIS
     Removes HoldMyBeer's skills/commands from one or more supported AI
-    coding assistants. Only removes the exact set of files/folders Coffee
-    Goblin installs - never wipes an entire skills/commands directory.
+    coding assistants. Only removes the exact set of files/folders HoldMyBeer
+    installs - never wipes an entire skills/commands directory.
 
 .PARAMETER Platform
     Which platform(s) to uninstall from: claude (default), gemini, codex, or all.
@@ -24,7 +24,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$SkillNames = @("brew-spec", "sniff-spec", "brew-plan", "stress-plan", "hack-it", "ship-it")
+$SkillNames = @("holdmybeer-init", "holdmybeer-craft", "holdmybeer-audit", "holdmybeer-design", "holdmybeer-stress", "holdmybeer-code", "holdmybeer-ship")
 
 $removedItems = @()
 $notFoundItems = @()

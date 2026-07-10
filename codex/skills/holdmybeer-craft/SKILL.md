@@ -1,5 +1,5 @@
 ---
-name: brew-spec
+name: holdmybeer-craft
 description: >
   Brew a complete, implementation-ready specification (specify.md) from an epic or ticket.
   Extracts functional, non-functional, security, concurrency, and observability requirements.

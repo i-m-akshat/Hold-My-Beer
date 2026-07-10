@@ -586,8 +586,8 @@
           <div class="panel-title">Getting Started Workflow</div>
           <ol style="margin-left: 1.5rem; line-height: 1.8; color: var(--text-muted);">
             <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text-main);">Modify templates:</strong> Edit `.specify/specify.md` to document your epic or business requirements.</li>
-            <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text-main);">Run Spec Sniffing:</strong> Execute `/sniff-spec .specify/specify.md` to adversarially review and break your spec before writing code.</li>
-            <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text-main);">Plan and Build:</strong> Generate your implementation plan using `/brew-plan` and implement safely with `/hack-it`.</li>
+            <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text-main);">Run Spec Sniffing:</strong> Execute `/holdmybeer-audit .specify/specify.md` to adversarially review and break your spec before writing code.</li>
+            <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text-main);">Plan and Build:</strong> Generate your implementation plan using `/holdmybeer-design` and implement safely with `/holdmybeer-code`.</li>
           </ol>
         </div>
       </div>
@@ -635,34 +635,34 @@
               <button class="copy-btn" onclick="copyCmd('/holdmybeer-init')">📋 Copy Command</button>
             </div>
             <div class="glass-panel command-card">
-              <span class="cmd-name">/brew-spec</span>
+              <span class="cmd-name">/holdmybeer-craft</span>
               <span class="cmd-desc">Brews a complete, implementation-ready specification from an Epic.</span>
-              <button class="copy-btn" onclick="copyCmd('/brew-spec')">📋 Copy Command</button>
+              <button class="copy-btn" onclick="copyCmd('/holdmybeer-craft')">📋 Copy Command</button>
             </div>
             <div class="glass-panel command-card">
-              <span class="cmd-name">/sniff-spec</span>
+              <span class="cmd-name">/holdmybeer-audit</span>
               <span class="cmd-desc">Sniffs out ambiguities and blockers in your specify.md.</span>
-              <button class="copy-btn" onclick="copyCmd('/sniff-spec .specify/specify.md')">📋 Copy Command</button>
+              <button class="copy-btn" onclick="copyCmd('/holdmybeer-audit .specify/specify.md')">📋 Copy Command</button>
             </div>
             <div class="glass-panel command-card">
-              <span class="cmd-name">/brew-plan</span>
+              <span class="cmd-name">/holdmybeer-design</span>
               <span class="cmd-desc">Converts approved specification into a phased technical plan.</span>
-              <button class="copy-btn" onclick="copyCmd('/brew-plan .specify/specify.md')">📋 Copy Command</button>
+              <button class="copy-btn" onclick="copyCmd('/holdmybeer-design .specify/specify.md')">📋 Copy Command</button>
             </div>
             <div class="glass-panel command-card">
-              <span class="cmd-name">/stress-plan</span>
+              <span class="cmd-name">/holdmybeer-stress</span>
               <span class="cmd-desc">Stress-tests the plan against the specification for architectural risks.</span>
-              <button class="copy-btn" onclick="copyCmd('/stress-plan .specify/plan.md .specify/specify.md')">📋 Copy Command</button>
+              <button class="copy-btn" onclick="copyCmd('/holdmybeer-stress .specify/plan.md .specify/specify.md')">📋 Copy Command</button>
             </div>
             <div class="glass-panel command-card">
-              <span class="cmd-name">/hack-it</span>
+              <span class="cmd-name">/holdmybeer-code</span>
               <span class="cmd-desc">Implements code changes in the repository based on the plan.</span>
-              <button class="copy-btn" onclick="copyCmd('/hack-it .specify/plan.md')">📋 Copy Command</button>
+              <button class="copy-btn" onclick="copyCmd('/holdmybeer-code .specify/plan.md')">📋 Copy Command</button>
             </div>
             <div class="glass-panel command-card">
-              <span class="cmd-name">/ship-it</span>
+              <span class="cmd-name">/holdmybeer-ship</span>
               <span class="cmd-desc">Performs pre-merge production-readiness check of implemented changes.</span>
-              <button class="copy-btn" onclick="copyCmd('/ship-it .specify/specify.md .specify/plan.md')">📋 Copy Command</button>
+              <button class="copy-btn" onclick="copyCmd('/holdmybeer-ship .specify/specify.md .specify/plan.md')">📋 Copy Command</button>
             </div>
           </div>
         </div>

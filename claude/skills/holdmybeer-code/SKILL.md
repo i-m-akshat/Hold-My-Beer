@@ -1,5 +1,5 @@
 ---
-name: hack-it
+name: holdmybeer-code
 description: >
   Implement an approved plan (plan.md & tasks.md) by writing the smallest, safest diff.
   Enforces reuse-first, security boundaries, and local testing.

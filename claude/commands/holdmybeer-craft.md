@@ -3,5 +3,5 @@ description: "🍺 HoldMyBeer brews a complete implementation-ready specificatio
 argument-hint: "[epic/ticket text or file path]"
 ---
 
-Run the `brew-spec` skill to turn the input below into a complete specification (`specify.md`).
+Run the `holdmybeer-craft` skill to turn the input below into a complete specification (`specify.md`).
 Input: $ARGUMENTS

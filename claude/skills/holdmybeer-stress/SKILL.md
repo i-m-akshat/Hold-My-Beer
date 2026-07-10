@@ -1,5 +1,5 @@
 ---
-name: stress-plan
+name: holdmybeer-stress
 description: >
   Adversarially review a technical plan against its spec for architecture, scope, risk, and YAGNI.
   Flags redundant code, layer bypasses, and security gaps.

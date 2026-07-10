@@ -1,5 +1,5 @@
 ---
-name: sniff-spec
+name: holdmybeer-audit
 description: >
   Adversarially review a specification (specify.md) to find gaps, ambiguities, and blockers.
   Runs 17 independent passes covering logic, security, concurrency, and edge cases.
