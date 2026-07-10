@@ -1,0 +1,23 @@
+---
+description: Coffee Goblin — SDD Initialization. Apply when the user wants to check for existing SDD structures (.specify, .gsd, specify.md) or initialize standard templates.
+alwaysApply: false
+---
+
+# ☕ Coffee Goblin: SDD Initialization
+
+Detect existing Spec-Driven Development (SDD) structures (.specify, .gsd, specify.md, plan.md, etc.) and initialize a standard SDD folder/templates if none are found.
+
+Scan target directory for:
+- Spec Kit: `.specify/`, `constitution.md`, `specify.config.json`
+- GSD: `.gsd/`, `gsd.config.json`, `.gsd.json`
+- Generic/Coffee Goblin: `specify.md`, `plan.md`, `tasks.md`, `SPEC.md`, `PLAN.md`, `TASKS.md`
+
+Output:
+- Diagnostics report of existing SDD configuration (if found).
+- If none exist, confirm and create `.specify/` with templates:
+  - `specify.md` (the 23 sections)
+  - `plan.md` (roadmap phases)
+  - `tasks.md` (task checklist)
+  - `constitution.md` (coding rules)
+
+Rules: Never overwrite existing files. Minimal footprint.

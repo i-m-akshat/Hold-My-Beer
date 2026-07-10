@@ -1,6 +1,10 @@
 # Workflow
 
 ```
+   Workspace / Project Root
+         │
+     sdd-init         (Diagnostics & Initialization)
+         │
         Epic
          │
     brew-spec        (Coffee Goblin: Spec Brewing)
@@ -27,6 +31,7 @@ open issues.
 
 | Stage | Input | Output | Verdict |
 |---|---|---|---|
+| `sdd-init` | Optional target path | Diagnostics report or initialized `.specify/` templates | — |
 | `brew-spec` | An epic, ticket, or feature request | A complete specification | — |
 | `sniff-spec` | A drafted specification | Findings + verdict | APPROVED / BLOCKED |
 | `brew-plan` | An approved specification | A phased implementation plan | — |
@@ -41,8 +46,12 @@ step) can't run against the plan alone.
 ## Example run
 
 ```
+sdd-init:
+→ checks for .specify/.gsd and offers template initialization
+
 brew-spec: Add a "save for later" feature to the checkout flow, as described in TICKET-482.md
-→ produces SPEC-save-for-later.md
+→ produces SPEC-save-for-later.md (specify.md)
+
 
 sniff-spec: SPEC-save-for-later.md
 → returns findings + APPROVED (or BLOCKED with a list of blockers to resolve)

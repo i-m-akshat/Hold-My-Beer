@@ -62,19 +62,25 @@ To remove everything the installer added:
 ## Workflow
 
 ```
+Workspace / Project Root
+ ↓
+sdd-init          (Diagnostics & Initialization)
+ ↓
 Epic
  ↓
-brew-spec
+brew-spec        (Coffee Goblin: Spec Brewing)
  ↓
-sniff-spec
+sniff-spec        (Coffee Goblin: Spec Sniffing)
  ↓
-brew-plan
+brew-plan         (Coffee Goblin: Plan Brewing)
  ↓
-stress-plan
+stress-plan        (Coffee Goblin: Plan Stress-Testing)
  ↓
-hack-it
+hack-it          (Coffee Goblin: Implementation)
  ↓
-ship-it
+ship-it          (Coffee Goblin: Final Review)
+ ↓
+Merge
 ```
 
 See [`docs/workflow.md`](docs/workflow.md) for the full stage-by-stage
@@ -84,6 +90,7 @@ breakdown and an example run.
 
 | Command | Mode | What it does |
 |---|---|---|
+| `/sdd-init` | SDD Initialization | Checks for existing SDD structures (.specify, .gsd, etc.) or initializes standard templates. |
 | `/brew-spec` | Spec Brewing | Brews a complete, implementation-ready specification from an Epic. |
 | `/sniff-spec` | Spec Sniffing | Sniffs out ambiguities, contradictions, hidden assumptions, and blockers until the spec is production ready. |
 | `/brew-plan` | Plan Brewing | Converts an approved specification into a phased implementation plan. |
