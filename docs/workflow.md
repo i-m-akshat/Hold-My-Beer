@@ -3,7 +3,7 @@
 ```
    Workspace / Project Root
          │
-     sdd-init         (Diagnostics & Initialization)
+    coffee-goblin-init (Diagnostics & Initialization)
          │
         Epic
          │
@@ -31,7 +31,7 @@ open issues.
 
 | Stage | Input | Output | Verdict |
 |---|---|---|---|
-| `sdd-init` | Optional target path | Diagnostics report or initialized `.specify/` templates | — |
+| `coffee-goblin-init` | Optional target path | Diagnostics report or initialized `.specify/` templates | — |
 | `brew-spec` | An epic, ticket, or feature request | A complete specification | — |
 | `sniff-spec` | A drafted specification | Findings + verdict | APPROVED / BLOCKED |
 | `brew-plan` | An approved specification | A phased implementation plan | — |
@@ -46,7 +46,7 @@ step) can't run against the plan alone.
 ## Example run
 
 ```
-sdd-init:
+coffee-goblin-init:
 → checks for .specify/.gsd and offers template initialization
 
 brew-spec: Add a "save for later" feature to the checkout flow, as described in TICKET-482.md

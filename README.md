@@ -64,7 +64,7 @@ To remove everything the installer added:
 ```
 Workspace / Project Root
  ↓
-sdd-init          (Diagnostics & Initialization)
+coffee-goblin-init (Diagnostics & Initialization)
  ↓
 Epic
  ↓
@@ -90,7 +90,7 @@ breakdown and an example run.
 
 | Command | Mode | What it does |
 |---|---|---|
-| `/sdd-init` | SDD Initialization | Checks for existing SDD structures (.specify, .gsd, etc.) or initializes standard templates. |
+| `/coffee-goblin-init` | SDD Initialization | Checks for existing SDD structures (.specify, .gsd, etc.) or initializes standard templates. |
 | `/brew-spec` | Spec Brewing | Brews a complete, implementation-ready specification from an Epic. |
 | `/sniff-spec` | Spec Sniffing | Sniffs out ambiguities, contradictions, hidden assumptions, and blockers until the spec is production ready. |
 | `/brew-plan` | Plan Brewing | Converts an approved specification into a phased implementation plan. |

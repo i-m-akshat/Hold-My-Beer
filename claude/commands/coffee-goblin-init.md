@@ -3,5 +3,5 @@ description: "☕ Coffee Goblin checks for existing SDD structures or initialize
 argument-hint: "[optional target directory]"
 ---
 
-Run the `sdd-init` skill to check for existing SDD configurations or initialize templates.
+Run the `coffee-goblin-init` skill to check for existing SDD configurations or initialize templates.
 Target directory: $ARGUMENTS

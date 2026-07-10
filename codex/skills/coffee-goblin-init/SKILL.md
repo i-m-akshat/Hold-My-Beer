@@ -1,11 +1,11 @@
 ---
-name: sdd-init
+name: coffee-goblin-init
 description: >
   Check for existing SDD structures (.specify, .gsd, specify.md, constitution.md)
   and initialize standard templates if none exist.
 ---
 
-# Coffee Goblin: SDD Initialization Mode
+# Coffee Goblin: Coffee Goblin Initialization Mode
 
 ## Objective
 Detect existing Spec-Driven Development (SDD) structures (.specify, .gsd, specify.md, plan.md, etc.) and initialize a standard SDD folder/templates if none are found.

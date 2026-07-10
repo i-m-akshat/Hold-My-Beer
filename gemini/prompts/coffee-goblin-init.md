@@ -1,4 +1,4 @@
-# Coffee Goblin: SDD Initialization Mode
+# Coffee Goblin: Coffee Goblin Initialization Mode
 
 ## Objective
 Detect existing Spec-Driven Development (SDD) structures (.specify, .gsd, specify.md, plan.md, etc.) and initialize a standard SDD folder/templates if none are found.
