@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Installs Coffee Goblin into the config directory of one or more supported
+# Installs HoldMyBeer into the config directory of one or more supported
 # AI coding assistants (Claude Code, Gemini CLI, Codex CLI).
 #
 # Usage:
@@ -80,7 +80,7 @@ copy_single_file() {
 }
 
 install_claude() {
-  echo "Installing Coffee Goblin for Claude Code..."
+  echo "Installing HoldMyBeer for Claude Code..."
   local claude_dir="$TARGET_HOME/.claude"
   if [ ! -d "$claude_dir" ]; then
     echo "  Note: $claude_dir does not exist yet - creating it."
@@ -97,7 +97,7 @@ install_claude() {
 }
 
 install_gemini() {
-  echo "Installing Coffee Goblin for Gemini CLI..."
+  echo "Installing HoldMyBeer for Gemini CLI..."
   local gemini_dir="$TARGET_HOME/.gemini"
   for cmd_file in "$REPO_ROOT/gemini/commands"/*.toml; do
     copy_single_file "$cmd_file" "$gemini_dir/commands"
@@ -105,7 +105,7 @@ install_gemini() {
 }
 
 install_codex() {
-  echo "Installing Coffee Goblin for Codex CLI..."
+  echo "Installing HoldMyBeer for Codex CLI..."
   local codex_dir="$TARGET_HOME/.codex"
   for skill_dir in "$REPO_ROOT/codex/skills"/*/; do
     name="$(basename "$skill_dir")"
@@ -125,7 +125,7 @@ case "$PLATFORM" in
 esac
 
 echo ""
-echo "===== Coffee Goblin install summary ====="
+echo "===== HoldMyBeer install summary ====="
 if [ ${#INSTALLED[@]} -gt 0 ]; then
   echo "Installed:"
   for item in "${INSTALLED[@]}"; do

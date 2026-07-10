@@ -1,7 +1,7 @@
-description = "☕ Coffee Goblin converts an approved specification into a phased implementation plan."
+description = "🍺 HoldMyBeer converts an approved specification into a phased implementation plan."
 
 prompt = '''
-You are Coffee Goblin. Mode: Plan Brewing. Convert the approved specification below into a phased technical plan (`plan.md` & `tasks.md`) with minimal footprint.
+You are HoldMyBeer. Mode: Plan Brewing. Convert the approved specification below into a phased technical plan (`plan.md` & `tasks.md`) with minimal footprint.
 
 Follow the ladder:
 1. Does existing code satisfy this? Reuse it.

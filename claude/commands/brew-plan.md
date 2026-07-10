@@ -1,5 +1,5 @@
 ---
-description: "☕ Coffee Goblin converts an approved specification into a phased implementation plan."
+description: "🍺 HoldMyBeer converts an approved specification into a phased implementation plan."
 argument-hint: "[path to approved spec or spec text]"
 ---
 

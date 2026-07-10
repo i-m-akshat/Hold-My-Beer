@@ -1,4 +1,4 @@
-# Coffee Goblin: Spec Sniffing Mode
+# HoldMyBeer: Spec Sniffing Mode
 
 ## Objective
 Adversarially review a drafted specification (`specify.md`) to find all gaps, ambiguities, and blockers. Goal: BREAK the spec.

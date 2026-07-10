@@ -5,7 +5,7 @@ description: >
   Runs 17 independent passes covering logic, security, concurrency, and edge cases.
 ---
 
-# Coffee Goblin: Spec Sniffing Mode
+# HoldMyBeer: Spec Sniffing Mode
 
 ## Objective
 Adversarially review a drafted specification (`specify.md`) to find all gaps, ambiguities, and blockers. Goal: BREAK the spec.

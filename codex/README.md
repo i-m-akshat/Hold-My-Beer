@@ -1,4 +1,4 @@
-# Coffee Goblin for Codex CLI
+# HoldMyBeer for Codex CLI
 
 **A deliberate deviation from the layout you might expect:** Codex CLI's
 older "custom prompts" mechanism (`~/.codex/prompts/*.md`) is deprecated —
@@ -33,7 +33,7 @@ cp -r codex/skills/* ~/.codex/skills/
   (same description-matching mechanism as Claude), or by naming them
   explicitly in your prompt.
 - Codex supports an optional `openai.yaml` file per skill folder for
-  Codex-specific UI metadata and MCP tool dependencies. Coffee Goblin
+  Codex-specific UI metadata and MCP tool dependencies. HoldMyBeer
   doesn't use one — the plain `SKILL.md` is enough for every mode here.
 - If you're on an older Codex CLI version that only supports the
   deprecated `~/.codex/prompts/*.md` format, adapt a skill's content into

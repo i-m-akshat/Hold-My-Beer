@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    Removes Coffee Goblin's skills/commands from one or more supported AI
+    Removes HoldMyBeer's skills/commands from one or more supported AI
     coding assistants. Only removes the exact set of files/folders Coffee
     Goblin installs - never wipes an entire skills/commands directory.
 
@@ -54,7 +54,7 @@ function Remove-KnownFile {
 }
 
 function Uninstall-Claude {
-    Write-Host "Uninstalling Coffee Goblin from Claude Code..." -ForegroundColor Cyan
+    Write-Host "Uninstalling HoldMyBeer from Claude Code..." -ForegroundColor Cyan
     $claudeDir = Join-Path $TargetHome ".claude"
     $skillsDest = Join-Path $claudeDir "skills"
     $cmdDest = Join-Path $claudeDir "commands"
@@ -65,7 +65,7 @@ function Uninstall-Claude {
 }
 
 function Uninstall-Gemini {
-    Write-Host "Uninstalling Coffee Goblin from Gemini CLI..." -ForegroundColor Cyan
+    Write-Host "Uninstalling HoldMyBeer from Gemini CLI..." -ForegroundColor Cyan
     $geminiDir = Join-Path $TargetHome ".gemini"
     $cmdDest = Join-Path $geminiDir "commands"
     foreach ($name in $SkillNames) {
@@ -74,7 +74,7 @@ function Uninstall-Gemini {
 }
 
 function Uninstall-Codex {
-    Write-Host "Uninstalling Coffee Goblin from Codex CLI..." -ForegroundColor Cyan
+    Write-Host "Uninstalling HoldMyBeer from Codex CLI..." -ForegroundColor Cyan
     $codexDir = Join-Path $TargetHome ".codex"
     $skillsDest = Join-Path $codexDir "skills"
     foreach ($name in $SkillNames) {
@@ -90,7 +90,7 @@ switch ($Platform) {
 }
 
 Write-Host ""
-Write-Host "===== Coffee Goblin uninstall summary =====" -ForegroundColor Green
+Write-Host "===== HoldMyBeer uninstall summary =====" -ForegroundColor Green
 if ($removedItems.Count -gt 0) {
     Write-Host "Removed:" -ForegroundColor Green
     $removedItems | ForEach-Object { Write-Host "  - $_" }
@@ -98,4 +98,4 @@ if ($removedItems.Count -gt 0) {
     Write-Host "Nothing found to remove." -ForegroundColor Yellow
 }
 Write-Host ""
-Write-Host "Note: this only removes Coffee Goblin's own files by exact name - any other skills/commands you have installed are untouched." -ForegroundColor Yellow
+Write-Host "Note: this only removes HoldMyBeer's own files by exact name - any other skills/commands you have installed are untouched." -ForegroundColor Yellow

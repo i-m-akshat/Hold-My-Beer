@@ -3,21 +3,21 @@
 ```
    Workspace / Project Root
          │
-    coffee-goblin-init (Diagnostics & Initialization)
+    holdmybeer-init (Diagnostics & Initialization)
          │
         Epic
          │
-    brew-spec        (Coffee Goblin: Spec Brewing)
+    brew-spec        (HoldMyBeer: Spec Brewing)
          │
-    sniff-spec        (Coffee Goblin: Spec Sniffing)
+    sniff-spec        (HoldMyBeer: Spec Sniffing)
          │
-    brew-plan         (Coffee Goblin: Plan Brewing)
+    brew-plan         (HoldMyBeer: Plan Brewing)
          │
-   stress-plan        (Coffee Goblin: Plan Stress-Testing)
+   stress-plan        (HoldMyBeer: Plan Stress-Testing)
          │
-     hack-it          (Coffee Goblin: Implementation)
+     hack-it          (HoldMyBeer: Implementation)
          │
-     ship-it          (Coffee Goblin: Final Review)
+     ship-it          (HoldMyBeer: Final Review)
          │
        Merge
 ```
@@ -31,7 +31,7 @@ open issues.
 
 | Stage | Input | Output | Verdict |
 |---|---|---|---|
-| `coffee-goblin-init` | Optional target path | Diagnostics report or initialized `.specify/` templates | — |
+| `holdmybeer-init` | Optional target path | Diagnostics report or initialized `.specify/` templates | — |
 | `brew-spec` | An epic, ticket, or feature request | A complete specification | — |
 | `sniff-spec` | A drafted specification | Findings + verdict | APPROVED / BLOCKED |
 | `brew-plan` | An approved specification | A phased implementation plan | — |
@@ -46,7 +46,7 @@ step) can't run against the plan alone.
 ## Example run
 
 ```
-coffee-goblin-init:
+holdmybeer-init:
 → checks for .specify/.gsd and offers template initialization
 
 brew-spec: Add a "save for later" feature to the checkout flow, as described in TICKET-482.md

@@ -1,9 +1,9 @@
 ---
-description: Coffee Goblin — Plan Stress-Testing. Apply when the user wants a drafted implementation plan adversarially reviewed for architecture, scope, or risk, or says "stress-test the plan".
+description: HoldMyBeer — Plan Stress-Testing. Apply when the user wants a drafted implementation plan adversarially reviewed for architecture, scope, or risk, or says "stress-test the plan".
 alwaysApply: false
 ---
 
-# ☕ Coffee Goblin: Plan Stress-Testing
+# 🍺 HoldMyBeer: Plan Stress-Testing
 
 Adversarially review the implementation plan (`plan.md`) against its specification (`specify.md`). Reject if over-built, under-scoped, or risk-heavy.
 

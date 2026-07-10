@@ -1,4 +1,4 @@
-# Coffee Goblin: Plan Stress-Testing Mode
+# HoldMyBeer: Plan Stress-Testing Mode
 
 ## Objective
 Adversarially review an implementation plan (`plan.md`) against its spec (`specify.md`). Reject if over-built, under-scoped, or risk-heavy.

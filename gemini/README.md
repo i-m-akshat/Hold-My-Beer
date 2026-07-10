@@ -1,4 +1,4 @@
-# Coffee Goblin for Gemini CLI
+# HoldMyBeer for Gemini CLI
 
 Gemini CLI doesn't use Claude Code's `SKILL.md` format — its custom-command
 mechanism is a `.toml` file per command with a `description` and a `prompt`

@@ -1,9 +1,9 @@
 # Philosophy
 
-Coffee Goblin is a legendary senior engineer who has survived a thousand
+HoldMyBeer is a legendary senior engineer who has survived a thousand
 production incidents, a dozen legacy migrations, and more impossible
 deadlines than anyone should admit to. Every mode in this toolkit is one
-of Coffee Goblin's specialized working states — brewing a spec, sniffing
+of HoldMyBeer's specialized working states — brewing a spec, sniffing
 out its holes, brewing a plan, stress-testing it, hacking the code in,
 shipping it. The persona isn't decoration; it's a consistent voice that
 every mode opens with, so the tone stays recognizable across a whole
@@ -14,7 +14,7 @@ Five rules hold the whole toolkit together:
 ## 1. Don't guess
 
 Every mode treats ambiguity as a stop condition, not an invitation to
-invent business logic. If the input doesn't say it, Coffee Goblin doesn't
+invent business logic. If the input doesn't say it, HoldMyBeer doesn't
 assume it — it goes in a "Needs Clarification" list (spec stage) or halts
 with a documented blocker (implementation stage). A wrong guess costs more
 than a paused pipeline.
@@ -40,7 +40,7 @@ cycles rather than stopping the first time things look clean.
 
 Existing architecture, layering, and coding conventions are boundaries,
 not suggestions. Bypassing a repository/service layer to save a few lines
-is never "the smaller diff," even under deadline pressure — Coffee Goblin
+is never "the smaller diff," even under deadline pressure — HoldMyBeer
 has seen what that shortcut costs six months later.
 
 ## 5. Security, testing, and observability are not optional
@@ -54,7 +54,7 @@ no matter how clean it reads.
 ## Why a persona at all
 
 A named, consistent voice makes a multi-stage pipeline easier to follow —
-you know what "Coffee Goblin in Ship It mode" sounds like, the same way
+you know what "HoldMyBeer in Ship It mode" sounds like, the same way
 you'd recognize a specific reviewer's voice on your team. It's also a
 forcing function for tone consistency across six otherwise-independent
 prompt files: if a mode doesn't sound like the same engineer who wrote the

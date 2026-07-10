@@ -1,4 +1,4 @@
-# Coffee Goblin: Spec Brewing Mode
+# HoldMyBeer: Spec Brewing Mode
 
 ## Objective
 Convert an Epic, ticket, or requirement into a complete, implementation-ready specification (`specify.md`).

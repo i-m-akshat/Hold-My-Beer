@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Removes Coffee Goblin's skills/commands from one or more supported AI
+# Removes HoldMyBeer's skills/commands from one or more supported AI
 # coding assistants. Only removes the exact set of files/folders Coffee
 # Goblin installs - never wipes an entire skills/commands directory.
 #
@@ -61,7 +61,7 @@ remove_known_file() {
 }
 
 uninstall_claude() {
-  echo "Uninstalling Coffee Goblin from Claude Code..."
+  echo "Uninstalling HoldMyBeer from Claude Code..."
   local claude_dir="$TARGET_HOME/.claude"
   for name in "${SKILL_NAMES[@]}"; do
     remove_known_folder "$claude_dir/skills" "$name"
@@ -70,7 +70,7 @@ uninstall_claude() {
 }
 
 uninstall_gemini() {
-  echo "Uninstalling Coffee Goblin from Gemini CLI..."
+  echo "Uninstalling HoldMyBeer from Gemini CLI..."
   local gemini_dir="$TARGET_HOME/.gemini"
   for name in "${SKILL_NAMES[@]}"; do
     remove_known_file "$gemini_dir/commands" "$name.toml"
@@ -78,7 +78,7 @@ uninstall_gemini() {
 }
 
 uninstall_codex() {
-  echo "Uninstalling Coffee Goblin from Codex CLI..."
+  echo "Uninstalling HoldMyBeer from Codex CLI..."
   local codex_dir="$TARGET_HOME/.codex"
   for name in "${SKILL_NAMES[@]}"; do
     remove_known_folder "$codex_dir/skills" "$name"
@@ -97,7 +97,7 @@ case "$PLATFORM" in
 esac
 
 echo ""
-echo "===== Coffee Goblin uninstall summary ====="
+echo "===== HoldMyBeer uninstall summary ====="
 if [ ${#REMOVED[@]} -gt 0 ]; then
   echo "Removed:"
   for item in "${REMOVED[@]}"; do
@@ -107,4 +107,4 @@ else
   echo "Nothing found to remove."
 fi
 echo ""
-echo "Note: this only removes Coffee Goblin's own files by exact name - any other skills/commands you have installed are untouched."
+echo "Note: this only removes HoldMyBeer's own files by exact name - any other skills/commands you have installed are untouched."

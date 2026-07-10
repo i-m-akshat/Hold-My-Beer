@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    Installs Coffee Goblin into the config directory of one or more supported
+    Installs HoldMyBeer into the config directory of one or more supported
     AI coding assistants (Claude Code, Gemini CLI, Codex CLI).
 
 .PARAMETER Platform
@@ -66,7 +66,7 @@ function Copy-SingleFile {
 }
 
 function Install-Claude {
-    Write-Host "Installing Coffee Goblin for Claude Code..." -ForegroundColor Cyan
+    Write-Host "Installing HoldMyBeer for Claude Code..." -ForegroundColor Cyan
     $claudeDir = Join-Path $TargetHome ".claude"
     if (-not (Test-Path $claudeDir)) {
         Write-Host "  Note: $claudeDir does not exist yet - creating it." -ForegroundColor Yellow
@@ -86,7 +86,7 @@ function Install-Claude {
 }
 
 function Install-Gemini {
-    Write-Host "Installing Coffee Goblin for Gemini CLI..." -ForegroundColor Cyan
+    Write-Host "Installing HoldMyBeer for Gemini CLI..." -ForegroundColor Cyan
     $geminiDir = Join-Path $TargetHome ".gemini"
     $cmdSrc = Join-Path $RepoRoot "gemini\commands"
     $cmdDest = Join-Path $geminiDir "commands"
@@ -96,7 +96,7 @@ function Install-Gemini {
 }
 
 function Install-Codex {
-    Write-Host "Installing Coffee Goblin for Codex CLI..." -ForegroundColor Cyan
+    Write-Host "Installing HoldMyBeer for Codex CLI..." -ForegroundColor Cyan
     $codexDir = Join-Path $TargetHome ".codex"
     $skillsSrc = Join-Path $RepoRoot "codex\skills"
     $skillsDest = Join-Path $codexDir "skills"
@@ -113,7 +113,7 @@ switch ($Platform) {
 }
 
 Write-Host ""
-Write-Host "===== Coffee Goblin install summary =====" -ForegroundColor Green
+Write-Host "===== HoldMyBeer install summary =====" -ForegroundColor Green
 if ($installedItems.Count -gt 0) {
     Write-Host "Installed:" -ForegroundColor Green
     $installedItems | ForEach-Object { Write-Host "  + $_" }

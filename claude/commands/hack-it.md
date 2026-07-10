@@ -1,5 +1,5 @@
 ---
-description: "☕ Coffee Goblin implements the approved plan while preserving existing architecture and coding conventions."
+description: "🍺 HoldMyBeer implements the approved plan while preserving existing architecture and coding conventions."
 argument-hint: "[path to approved implementation plan or plan text]"
 ---
 

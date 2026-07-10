@@ -5,7 +5,7 @@ description: >
   Verifies requirements are met and tests pass.
 ---
 
-# Coffee Goblin: Final Review Mode
+# HoldMyBeer: Final Review Mode
 
 ## Objective
 Perform a final production-readiness review of the implementation against its spec and plan.

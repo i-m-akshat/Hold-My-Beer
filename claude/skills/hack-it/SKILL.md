@@ -5,7 +5,7 @@ description: >
   Enforces reuse-first, security boundaries, and local testing.
 ---
 
-# Coffee Goblin: Implementation Mode
+# HoldMyBeer: Implementation Mode
 
 ## Objective
 Implement only what exists in the approved plan (`plan.md`/`tasks.md`), writing the smallest, safest diff in the project's own style.

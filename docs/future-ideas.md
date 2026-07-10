@@ -5,11 +5,11 @@ future brainstorming pass, not commitments.
 
 ## Workspace detection & auto-init
 
-Have every Coffee Goblin skill start by detecting whether the project
+Have every HoldMyBeer skill start by detecting whether the project
 already uses a Spec-Driven Development workspace (e.g. `.specify/` for
 spec-kit, `.planning/` for GSD) and adapt to it instead of scattering
 loose files in the repo root. If none is found, initialize Coffee
-Goblin's own `.coffee-goblin/` workspace with numbered feature dirs
+Goblin's own `.holdmybeer/` workspace with numbered feature dirs
 (`specs/001-user-authentication/{epic,spec,research,plan,implementation,review}.md`),
 auto-incrementing numbering, and a `config.yml`.
 

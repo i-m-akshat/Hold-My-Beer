@@ -1,10 +1,10 @@
-# ☕ Coffee Goblin
+# 🍺 HoldMyBeer
 
 An AI-powered software engineering toolkit for Spec-Driven Development —
 one legendary, deliberately-generic engineer persona, six specialized
 working modes, and a cross-platform installer.
 
-Coffee Goblin has survived a thousand production incidents, a dozen
+HoldMyBeer has survived a thousand production incidents, a dozen
 legacy migrations, and more impossible deadlines than anyone should admit
 to. It doesn't guess, doesn't over-build, and doesn't rubber-stamp a
 review. Every mode below is one of its working states.
@@ -26,8 +26,8 @@ gaps.
 ## Install
 
 ```bash
-git clone https://github.com/yourname/coffee-goblin
-cd coffee-goblin
+git clone https://github.com/yourname/holdmybeer
+cd holdmybeer
 ```
 
 **Windows:**
@@ -64,21 +64,21 @@ To remove everything the installer added:
 ```
 Workspace / Project Root
  ↓
-coffee-goblin-init (Diagnostics & Initialization)
+holdmybeer-init (Diagnostics & Initialization)
  ↓
 Epic
  ↓
-brew-spec        (Coffee Goblin: Spec Brewing)
+brew-spec        (HoldMyBeer: Spec Brewing)
  ↓
-sniff-spec        (Coffee Goblin: Spec Sniffing)
+sniff-spec        (HoldMyBeer: Spec Sniffing)
  ↓
-brew-plan         (Coffee Goblin: Plan Brewing)
+brew-plan         (HoldMyBeer: Plan Brewing)
  ↓
-stress-plan        (Coffee Goblin: Plan Stress-Testing)
+stress-plan        (HoldMyBeer: Plan Stress-Testing)
  ↓
-hack-it          (Coffee Goblin: Implementation)
+hack-it          (HoldMyBeer: Implementation)
  ↓
-ship-it          (Coffee Goblin: Final Review)
+ship-it          (HoldMyBeer: Final Review)
  ↓
 Merge
 ```
@@ -90,7 +90,7 @@ breakdown and an example run.
 
 | Command | Mode | What it does |
 |---|---|---|
-| `/coffee-goblin-init` | SDD Initialization | Checks for existing SDD structures (.specify, .gsd, etc.) or initializes standard templates. |
+| `/holdmybeer-init` | SDD Initialization | Checks for existing SDD structures (.specify, .gsd, etc.) or initializes standard templates. |
 | `/brew-spec` | Spec Brewing | Brews a complete, implementation-ready specification from an Epic. |
 | `/sniff-spec` | Spec Sniffing | Sniffs out ambiguities, contradictions, hidden assumptions, and blockers until the spec is production ready. |
 | `/brew-plan` | Plan Brewing | Converts an approved specification into a phased implementation plan. |
@@ -156,7 +156,7 @@ Five rules, expanded in [`docs/philosophy.md`](docs/philosophy.md):
 ## Repository Layout
 
 ```
-coffee-goblin/
+holdmybeer/
 ├── claude/      Claude Code skills + slash commands (primary platform)
 ├── gemini/      Gemini CLI .toml commands + source prompts
 ├── codex/       Codex CLI skills (same format as Claude)

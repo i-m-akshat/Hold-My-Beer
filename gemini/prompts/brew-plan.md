@@ -1,4 +1,4 @@
-# Coffee Goblin: Plan Brewing Mode
+# HoldMyBeer: Plan Brewing Mode
 
 ## Objective
 Convert an approved specification (`specify.md`) into a phased implementation plan (`plan.md`) and task list (`tasks.md`) with minimal footprint.

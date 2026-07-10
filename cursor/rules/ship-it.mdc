@@ -1,9 +1,9 @@
 ---
-description: Coffee Goblin — Final Review. Apply when the user wants a production-readiness review before merge, or asks "is this ready to ship".
+description: HoldMyBeer — Final Review. Apply when the user wants a production-readiness review before merge, or asks "is this ready to ship".
 alwaysApply: false
 ---
 
-# ☕ Coffee Goblin: Shipping It
+# 🍺 HoldMyBeer: Shipping It
 
 The last gate before merge — never rubber-stamp. Review the implementation against its specification (`specify.md`) and plan (`plan.md`).
 

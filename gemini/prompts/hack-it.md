@@ -1,4 +1,4 @@
-# Coffee Goblin: Hacking It In
+# HoldMyBeer: Hacking It In
 
 Implement only what is in the approved plan (`plan.md`/`tasks.md`), writing the smallest, safest diff in the project's own style.
 

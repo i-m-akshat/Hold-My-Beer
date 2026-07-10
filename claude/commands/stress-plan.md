@@ -1,5 +1,5 @@
 ---
-description: "☕ Coffee Goblin stress-tests the implementation plan to uncover architectural risks, missing work, and unnecessary complexity."
+description: "🍺 HoldMyBeer stress-tests the implementation plan to uncover architectural risks, missing work, and unnecessary complexity."
 argument-hint: "[paths/texts of implementation plan AND specification]"
 ---
 

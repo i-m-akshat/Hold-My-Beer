@@ -1,5 +1,5 @@
 ---
-description: "☕ Coffee Goblin sniffs out ambiguities and blockers in the specification."
+description: "🍺 HoldMyBeer sniffs out ambiguities and blockers in the specification."
 argument-hint: "[path to spec or spec text]"
 ---
 

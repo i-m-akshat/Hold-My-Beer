@@ -1,5 +1,5 @@
 ---
-description: "☕ Coffee Goblin brews a complete implementation-ready specification from an Epic."
+description: "🍺 HoldMyBeer brews a complete implementation-ready specification from an Epic."
 argument-hint: "[epic/ticket text or file path]"
 ---
 

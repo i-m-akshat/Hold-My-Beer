@@ -5,7 +5,7 @@ description: >
   Enforces reuse-first and minimal footprint.
 ---
 
-# Coffee Goblin: Plan Brewing Mode
+# HoldMyBeer: Plan Brewing Mode
 
 ## Objective
 Convert an approved specification (`specify.md`) into a phased technical plan (`plan.md`) and task list (`tasks.md`) with the smallest footprint.

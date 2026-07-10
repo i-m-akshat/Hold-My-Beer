@@ -1,6 +1,6 @@
 # Customization
 
-Coffee Goblin ships generic and reusable on purpose — no skill or command
+HoldMyBeer ships generic and reusable on purpose — no skill or command
 is tied to a specific language, framework, or repository. These are the
 supported ways to adapt it without breaking that.
 
@@ -11,7 +11,7 @@ The skill/command names (`brew-spec`, `sniff-spec`, `brew-plan`,
 collisions with your own custom skills are unlikely. If you still want
 extra insurance — e.g. you already have a skill literally named
 `hack-it` — rename the folder under `claude/skills/` (or
-`codex/skills/`) to `coffee-goblin-hack-it` and update its frontmatter
+`codex/skills/`) to `holdmybeer-hack-it` and update its frontmatter
 `name:` field to match. You do **not** need to rename the command file
 under `claude/commands/`; the command's job is just to invoke the skill by
 name, so update the one line inside it that says which skill to invoke.
@@ -26,8 +26,8 @@ cap entirely; an unbounded adversarial loop has no natural stopping point.
 
 ## Adding a new mode
 
-To add a mode (the toolkit's own docs use `coffee-goblin-debug` and
-`coffee-goblin-refactor` as hypothetical examples):
+To add a mode (the toolkit's own docs use `holdmybeer-debug` and
+`holdmybeer-refactor` as hypothetical examples):
 
 1. Copy the closest existing skill as a starting template — a new review
    mode should start from `sniff-spec` or `stress-plan`; a new
@@ -35,7 +35,7 @@ To add a mode (the toolkit's own docs use `coffee-goblin-debug` and
 2. Keep the same section skeleton: Objective, Expected Input, Expected
    Output, Process, Guardrails, Completion Criteria, Stopping Conditions,
    Failure Conditions.
-3. Open with the same Coffee Goblin persona paragraph, changing only the
+3. Open with the same HoldMyBeer persona paragraph, changing only the
    last sentence (the mode name and one-line purpose).
 4. Add a matching command file, README entry, and workflow-diagram
    position.
@@ -54,7 +54,7 @@ To add support for a new tool:
    discovery or requires explicit invocation. Don't assume it matches
    Claude Code's format.
 2. Create a new top-level folder (e.g. `windsurf/`) with its own README
-   explaining the mapping from Coffee Goblin's six modes to that tool's
+   explaining the mapping from HoldMyBeer's six modes to that tool's
    mechanism, and note any features that don't have an equivalent (the
    way `gemini/README.md` and `codex/README.md` do).
 3. Add an install/uninstall path for it in `install.ps1` / `install.sh`
@@ -65,10 +65,10 @@ To add support for a new tool:
 
 ## Specializing for one project or stack
 
-Coffee Goblin intentionally has no project- or language-specific content.
+HoldMyBeer intentionally has no project- or language-specific content.
 If you want a stack-specific variant (e.g. a `hack-it` that also enforces
 your team's specific test-framework conventions), do it in your own
 project-level instructions (`AGENTS.md`, `CLAUDE.md`, project-scoped
-`.cursor/rules/`, etc.) that layer on top of Coffee Goblin, rather than
+`.cursor/rules/`, etc.) that layer on top of HoldMyBeer, rather than
 editing these files directly — that way you keep the ability to pull
 upstream updates without a merge conflict with your own customizations.

@@ -1,5 +1,5 @@
 ---
-description: "☕ Coffee Goblin performs the final production readiness review before the feature is ready to merge."
+description: "🍺 HoldMyBeer performs the final production readiness review before the feature is ready to merge."
 argument-hint: "[paths/texts of spec, plan, and implementation]"
 ---
 

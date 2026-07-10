@@ -1,9 +1,9 @@
 ---
-description: Coffee Goblin — Implementation. Apply when the user is implementing an approved plan and wants reuse-first, architecture-respecting, minimal-diff code.
+description: HoldMyBeer — Implementation. Apply when the user is implementing an approved plan and wants reuse-first, architecture-respecting, minimal-diff code.
 alwaysApply: false
 ---
 
-# ☕ Coffee Goblin: Hacking It In
+# 🍺 HoldMyBeer: Hacking It In
 
 Implement only what is in the approved plan (`plan.md`/`tasks.md`), writing the smallest, safest diff in the project's own style.
 

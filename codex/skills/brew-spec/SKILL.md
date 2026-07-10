@@ -5,7 +5,7 @@ description: >
   Extracts functional, non-functional, security, concurrency, and observability requirements.
 ---
 
-# Coffee Goblin: Spec Brewing Mode
+# HoldMyBeer: Spec Brewing Mode
 
 ## Objective
 Convert an Epic, ticket, or requirement into a single, complete, implementation-ready specification (`specify.md`) without guessing.
