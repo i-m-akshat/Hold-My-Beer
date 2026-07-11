@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.png" width="250" alt="HoldMyBeer Logo">
+  <img src="assets/logo.png" width="450" alt="HoldMyBeer Logo">
 </p>
 
 # 🍺 HoldMyBeer
