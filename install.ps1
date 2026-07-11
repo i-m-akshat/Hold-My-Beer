@@ -93,6 +93,20 @@ function Install-Gemini {
     Get-ChildItem -Path $cmdSrc -Filter "*.toml" | ForEach-Object {
         Copy-SingleFile -SourceFile $_.FullName -DestDir $cmdDest
     }
+
+    # Copy prompt skills for Antigravity / Gemini UI integration
+    $skillsSrc = Join-Path $RepoRoot "claude\skills"
+    $configSkillsDest = Join-Path (Join-Path $geminiDir "config") "skills"
+    Get-ChildItem -Path $skillsSrc -Directory | ForEach-Object {
+        Copy-SkillFolder -SourceDir $_.FullName -DestParentDir $configSkillsDest -Name $_.Name
+    }
+
+    $cliSkillsDest = Join-Path (Join-Path $geminiDir "antigravity-cli") "skills"
+    if (Test-Path $cliSkillsDest) {
+        Get-ChildItem -Path $skillsSrc -Directory | ForEach-Object {
+            Copy-SkillFolder -SourceDir $_.FullName -DestParentDir $cliSkillsDest -Name $_.Name
+        }
+    }
 }
 
 function Install-Codex {

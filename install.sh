@@ -102,6 +102,15 @@ install_gemini() {
   for cmd_file in "$REPO_ROOT/gemini/commands"/*.toml; do
     copy_single_file "$cmd_file" "$gemini_dir/commands"
   done
+
+  # Copy prompt skills for Antigravity / Gemini UI integration
+  for skill_dir in "$REPO_ROOT/claude/skills"/*/; do
+    name="$(basename "$skill_dir")"
+    copy_skill_folder "$skill_dir" "$gemini_dir/config/skills" "$name"
+    if [ -d "$gemini_dir/antigravity-cli" ]; then
+      copy_skill_folder "$skill_dir" "$gemini_dir/antigravity-cli/skills" "$name"
+    fi
+  done
 }
 
 install_codex() {
