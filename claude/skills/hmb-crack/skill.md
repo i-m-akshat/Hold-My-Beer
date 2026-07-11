@@ -1,3 +1,8 @@
+---
+name: hmb-crack
+description: 🍳 Cracking eggs... — Extracts and converts requirement text to structured PSM format. Use this skill to parse raw specifications or requirements and transform them into structured node definitions.
+---
+
 <skill_description>
 🍺 Cracking open a fresh specification... — Extracts semantic requirements & features into the Project Model and exports spec.md.
 </skill_description>
