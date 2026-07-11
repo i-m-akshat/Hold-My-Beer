@@ -1,7 +1,7 @@
 ---
-description: "🍺 Hold my beer... writing production code. — Implement approved blueprint.md"
-argument-hint: "[path to blueprint.md, default: .holdmybeer/blueprint.md]"
+description: "🍺 Hold my beer... writing production code. — Generate implementation for a task"
+argument-hint: "<step number / task slug> [path to psm.json, default: .holdmybeer/psm.json]"
 ---
 
 Run the `hmb-pour` skill.
-Blueprint: $ARGUMENTS
+Task: $ARGUMENTS

@@ -1,34 +1,23 @@
-description = "🧪 Fermenting the plan to see if it holds pressure... — Stress-test blueprint.md"
+description = "🧪 Fermenting under pressure... — Validate implementation plan coverage"
 
 prompt = '''
-ROLE=Reviewer | FLAGS=STRICT,TRACE,LEAN | OP=PLAN→AUDIT
-FLAVOR=🧪 Fermenting the plan to see if it holds pressure...
+ROLE=Reviewer | FLAGS=STRICT,COMPLETE,LEAN,TRACE | OP=Q.COVERAGE→VALIDATE
+FLAVOR=🧪 Fermenting under pressure...
 
-AUDIT CHECKLIST (address every item):
-- Requirement coverage — every spec req maps to ≥1 blueprint step
-- YAGNI — no steps for unrequested features
-- Layer integrity — no step bypasses architectural boundaries
-- Secrets safety — no credentials/tokens in plan steps
-- Step atomicity — each step independently executable and verifiable
-- Verification commands — every step has a concrete verify command
-- Rollback viability — complete and executable
-- Dependency justification — every new lib/service is necessary
-- Missing work — security hardening, tests, migrations, config changes
+PROCESS:
+1. Load Q.COVERAGE fragment from .holdmybeer/psm.json.
+2. Evaluate rules:
+   - V.FEATURE_HAS_TASK: Ensure every Feature has at least one Task.
+   - V.TEST_COVERS_FEATURE: Ensure every Feature has at least one acceptance Test linked.
+   - V.FEATURE_HAS_API: If API project, verify Feature maps to an API node.
+3. Validate confidence levels:
+   - Node confidence.score < 0.60 creates a BLOCKER.
+   - Node confidence.score between 0.60 and 0.85 generates a WARNING.
+4. Report and update psm.json:
+   - If blockers exist -> update properties.status = "blocked", log to patches, and report BLOCKED verdict.
+   - If clear -> update properties.status = "approved", log to patches, and report APPROVED verdict.
 
-OUTPUT:
-```
-🧪 Fermenting the plan to see if it holds pressure...
-## Requirement Coverage Matrix
-| Req # | Requirement | Blueprint Step(s) | Status |
-## Findings
-| # | Category | Finding | Severity |
-## Verdict: [APPROVED] / [BLOCKED]
-```
+RULES: No relationships/node terminology in user report. Single blocker fails audit.
 
-SELF-VALIDATION:
-✓ Coverage matrix complete — every spec requirement listed
-✓ Every checklist item addressed
-✓ No BLOCKER when verdict is APPROVED
-
-Inputs (blueprint + spec): {{args}}
+PSM Path: {{args}}
 '''

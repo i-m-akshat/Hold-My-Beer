@@ -1,37 +1,42 @@
 # Philosophy
 
-HoldMyBeer is a legendary senior engineer who has survived a thousand production incidents, a dozen legacy migrations, and more impossible deadlines than anyone should admit to. Every mode in this toolkit is one of HoldMyBeer's specialized working states — cracking open a spec, sniffing out its holes, brewing a blueprint, fermenting it under pressure, pouring the code, checking the hangover. The persona isn't decoration; it's a consistent voice that every mode opens with, so the tone stays recognizable across a whole pipeline run.
+HoldMyBeer v0.3 represents a major architectural paradigm shift: **from prompt-based code generation to a safe, model-driven change management workflow.**
 
-Five rules hold the whole toolkit together:
+---
 
-## 1. Don't guess
+## The Core Shifts
 
-Every mode treats ambiguity as a stop condition, not an invitation to invent business logic. If the input doesn't say it, HoldMyBeer doesn't assume it — it goes in a "Needs Clarification" list (`hmb-crack`) or halts with a documented blocker (review stages). A wrong guess costs more than a paused pipeline.
+### 1. Markdown is Documentation. The Project Model is Reality.
+Traditional AI coding agents operate on text files, constantly converting markdown (spec.md -> plan.md -> tasks.md) back and forth. This introduces context loss, hallucination, and massive token bloats. 
+HoldMyBeer translates the project structure into an internal schema-enforced dependency graph: the **Project Model** stored at `.holdmybeer/psm.json`. Markdown files are only generated as user-facing human exports.
 
-## 2. Don't over-build
+### 2. Safeguarding Manual Edits via Ownership Mappings
+Unlike agentic builders that blindly overwrite developer progress, HoldMyBeer respects manual edits. Files (Artifacts) can be assigned `"ownership": "manual"` or `"ownership": "mixed"`. Once configured, the automated builder (`hmb-pour`) and the Impact Engine (`hmb-impact`) will preserve these files and flag them for human verification/merge rather than overwriting.
 
-Every planning and implementation mode runs a **reuse ladder**: a strict check order — does existing code already solve this, can an existing component be extended, does the standard library cover it — before writing anything new. The best code is the code you don't have to write, but only once you've actually understood what's required.
+### 3. Change Management > Code Generation (The Impact Engine)
+The value of HoldMyBeer is not in writing code from scratch, but in managing software evolution. When requirements change:
+- You inject the change at a specific requirement node.
+- The **Impact Engine** calculates the downstream blast radius and marks affected nodes *stale*.
+- The builder regenerates *only* the stale, `"generated"` artifacts and tests, preserving the rest of the codebase untouched.
 
-## 3. Don't rubber-stamp
+---
 
-Every review mode (`hmb-sniff`, `hmb-ferment`, `hmb-hangover`) is adversarial: its job is to find reasons to reject, not reasons to approve. The structured audit checklists enforce that every category is checked explicitly — a reviewer can't skip concurrency or authorization to get to a faster verdict.
+## Key Development Assumptions & Limitations
 
-## 4. Respect what's already there
+> [!WARNING]
+> **No Reverse-Synchronization (Model Drift)**
+> Custom edits made by developers directly inside the codebase are **not** back-imported or reverse-synchronized into the Project Model. The pipeline flow is one-way: `Requirements ──> Project Model ──> Codebase`.
+> To prevent model drift, always modify requirements and architectural models inside the Project Model first before generating updates.
 
-Existing architecture, layering, and coding conventions are boundaries, not suggestions. Bypassing a repository/service layer to save a few lines is never "the smaller diff" — `hmb-pour` enforces this with explicit layer-integrity rules, and `hmb-hangover` checks it again at merge time.
+### Futures: Symbol-Level Granularity
+This version executes overrides at the **file level**. In complex codebases, developers may customize some methods in a file while wanting others auto-generated. In subsequent improvements, the Artifact scope can expand to class/method symbols, enabling granular symbol-level ownership division.
 
-## 5. Security, testing, and observability are not optional
+---
 
-They're boundaries checked at every stage. A spec without security/concurrency/observability requirements is incomplete. A blueprint without verification commands is unreviewed. Code without tests for new logic paths doesn't pass `hmb-hangover`, no matter how clean it reads.
+## The 5 Engineering Laws of HoldMyBeer
 
-## Why a shared constitution
-
-The `shared/CONSTITUTION.md` file is the engineering backbone all skills inherit. Rather than duplicating rules across seven prompt files (where they'd drift out of sync), every skill references a single source of truth. This keeps HoldMyBeer deterministic — the same principles govern the planner, the architect, the builder, and all three reviewers.
-
-## Why a DSL
-
-The `shared/DSL.md` replaces English paragraphs with dense symbolic operations (`SPEC→PLAN`, `CODE→REVIEW`). Language models process structural directives more efficiently than prose, producing more consistent, traceable outputs with fewer tokens. The DSL is the toolkit's grammar.
-
-## Why a persona at all
-
-A named, consistent voice makes a multi-stage pipeline easier to follow — you know what "HoldMyBeer in Builder mode" sounds like, in the same way you'd recognize a specific reviewer's voice on your team. It's also a forcing function for tone consistency: if a mode doesn't sound like the same engineer who wrote the other six, that's a signal something drifted.
+1. **Don't guess**: If information is missing during extraction, assign low confidence. Low confidence blocks downstream steps, forcing clarity before code is written.
+2. **Follow the Reuse Ladder**: Do not invent new structures if the stdlib or existing components solve the problem.
+3. **Be Adversarial**: Sniffers, Ferments, and Handovers are designed to find reasons to reject work, not rubber-stamp it.
+4. **Enforce Complete Traceability**: Every requirement must trace through features, tasks, and code classes directly to a test block.
+5. **No Hallucinated Terminology**: The graph is an internal blueprint contract. The user-facing output must always present findings in plain English (features, files, tasks), shielding users from developer/graph-theory jargon.

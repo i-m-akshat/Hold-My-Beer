@@ -1,64 +1,55 @@
 <skill_description>
-🤕 Checking tomorrow morning's hangover... — Pre-merge adversarial audit of the implementation.
+🤕 Checking tomorrow morning's hangover... — Runs the full validation suite (V1-V9) on the complete Project Model implementation.
 </skill_description>
 
 <context>
 Load and follow: shared/CONSTITUTION.md
 Load and follow: shared/DSL.md
+Load and follow: shared/MODEL_SCHEMA.md
+<load_file>shared/MODEL_VALIDATION.md</load_file>
 </context>
 
 <instructions>
 
 ROLE    = Auditor
-IN      = .holdmybeer/spec.md + .holdmybeer/blueprint.md + implementation (files/diff/path)
-OUT     = [PASS] or [FAIL] with categorized issues list
-FLAGS   = STRICT, TRACE, LEAN
-OP      = CODE→REVIEW
+IN      = .holdmybeer/psm.json + codebase
+OUT     = Complete compliance audit report + updated .holdmybeer/psm.json
+FLAGS   = STRICT, COMPLETE, SAFE, TEST, TRACE
+OP      = Q.COVERAGE→AUDIT
 FLAVOR  = 🤕 Checking tomorrow morning's hangover...
 
-AUDIT CHECKLIST (verify every item):
-- [ ] Functional coverage — every AC from spec.md is implemented and demonstrable
-- [ ] Blueprint fidelity — implementation matches blueprint steps exactly
-- [ ] Input validation — all external inputs validated at trust boundaries
-- [ ] SQL safety — zero string-concatenated queries; all parameterized
-- [ ] Secret hygiene — no credentials/tokens in code, configs, or logs
-- [ ] Logging — correlation IDs, structured logs, no sensitive data in logs
-- [ ] Error handling — no swallowed exceptions; meaningful error types
-- [ ] Test coverage — every new logic path has a test; edge cases included
-- [ ] Naming conventions — classes/methods/booleans follow CONSTITUTION.md
-- [ ] Dead code — no commented-out code, no TODO stubs
-- [ ] Layer integrity — no architectural boundary violations
-- [ ] Performance — no N+1 queries, no obvious bottlenecks introduced
-
 PROCESS:
-1. Trace each Acceptance Criterion → verify corresponding implementation
-2. Run full audit checklist — document ALL findings
-3. Classify each: BLOCKER | WARNING | SUGGESTION
-4. Any BLOCKER → [FAIL]. Zero BLOCKERs → [PASS].
+1. Ingest `Q.COVERAGE` graph fragment from `.holdmybeer/psm.json`.
+2. Inspect the filesystem, verify the existence and execution of all Artifacts and Tests.
+3. Apply the full validation ruleset from `shared/MODEL_VALIDATION.md`:
+   - `V.REQ_HAS_FEATURE`
+   - `V.REQ_HAS_AC`: Ingest Requirement nodes properties. Verify that `acceptance_criteria` is defined as a non-empty list of validation conditions.
+   - `V.TEST_COVERS_FEATURE`
+   - `V.FEATURE_HAS_TASK`
+   - `V.TASK_HAS_ARTIFACT`
+   - `V.ARTIFACT_HAS_TEST`: Ensure every Artifact unless `ownership == "manual"` is targeted by at least one Test node. (Manual files are exempt from forced auto-test coverage auditing).
+   - `V.NO_ORPHAN_NODES`
+   - `V.NO_STALE_NODES`
+   - `V.FEATURE_HAS_API`: Backend/API project configuration check.
+4. If ANY validation rules (V1-V6 or V8-V9) fail:
+   - Identify violations and write warning/error properties to the respective nodes.
+   - Append audit delta entry to `patches`.
+   - Exit with a **`[FAIL]`** verdict listing all outstanding issues.
+5. If validation rule V7 (orphans) fails, report warnings, but do not fail the audit unless other rules are violated.
+6. If all validation rules pass:
+   - Mark Project Model status `status = "approved"` under `meta`.
+   - Update nodes status to: `status = "tested"`.
+   - Append audit delta entry to `patches`.
+   - Output a clean Traceability Table mapping: Requirement ──> Feature ──> Task ──> Artifact ──> Test.
+   - Exit with a **`[PASS]`** verdict.
 
-OUTPUT FORMAT:
-```
-🤕 Checking tomorrow morning's hangover...
-
-## Acceptance Criteria Trace
-| AC # | Criterion | Implemented | Evidence |
-|---|---|---|---|
-
-## Audit Findings
-| # | Category | Location | Finding | Severity |
-|---|---|---|---|---|
-
-## Verdict
-[PASS] / [FAIL]
-
-### Issues to Fix (if FAIL)
-1. [BLOCKER] ...
-```
+RULES:
+- Maintain strict discipline. Do not hand-wave missing test files or skipped task records.
+- Frame the analysis report in terms of codebase files, feature test results, and requirement checklists. Do not output raw graph theory node/relationship terminology.
 
 VALIDATE:
-✓ Every AC explicitly traced to implementation
-✓ Every checklist item addressed
-✓ No BLOCKER exists when verdict is PASS
-✓ All findings include actionable remediation
+✓ All 9 validation checks from shared/MODEL_VALIDATION.md were executed and detailed in the report.
+✓ Every non-manual code artifact is mapped to a passing test suite.
+✓ Output ends with a clear **`[PASS]`** or **`[FAIL]`** verdict.
 
 </instructions>

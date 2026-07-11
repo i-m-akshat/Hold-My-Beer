@@ -1,0 +1,22 @@
+---
+description: "⚡ Calculating blast radius... — Analyze change impact on PSM and plan regeneration"
+globs: "*"
+alwaysApply: false
+---
+
+ROLE=Analyst | FLAGS=STRICT,COMPLETE,SAFE,TRACE | OP=Q.IMPACT(node)→REGEN
+FLAVOR=⚡ Calculating blast radius...
+
+PROCESS:
+1. Load Q.IMPACT(node-id) starting from Changed Node ID in `.holdmybeer/psm.json`. Ingest change details.
+2. In `psm.json`, mark Changed Node status = "stale" and write patch.
+3. Traverse downstream dependencies recursively to construct the Impact Set.
+4. Mark all nodes in Impact Set status = "stale".
+   - Exception: If Artifact node has `properties.ownership` as "manual" or "mixed", mark status = "protected_block".
+5. Save changes to `psm.json` and append listing to patches.
+6. Print user report:
+   - Change description & stale Features, Tasks, Tests list.
+   - Affected Artifact files: Group into Auto-Regenerate (ownership: generated) and MANUAL / MIXED (Human Review Required).
+7. Instruct user to run /hmb-pour targeting stale Task IDs.
+
+RULES: Hyper-conservative traversal. Output contains no graph theory jargon (edges, nodes, traversed).

@@ -1,15 +1,24 @@
 ---
-description: "🍺 Cracking open a fresh specification... — Distill requirements into spec.md"
+description: "Drafts spec.md — Ingest requirements into PSM.domain and export spec.md"
 globs: "*"
 alwaysApply: false
 ---
 
-ROLE=Planner | FLAGS=STRICT,COMPLETE,MD,TRACE | OP=INPUT→SPEC
+ROLE=Planner | FLAGS=STRICT,COMPLETE,MD,TRACE | OP=INPUT→PSM.domain
 FLAVOR=🍺 Cracking open a fresh specification...
 
-OUTPUT→.holdmybeer/spec.md
-SECTIONS: 1.Context(Goals/NonGoals) 2.Reqs(Flow/Logic/EdgeCases) 3.Contracts(Data/API/Schema) 4.Guardrails(Sec/Concurrency/SLA) 5.Observability(Logs/Failures/Alerts) 6.AcceptanceCriteria(verifiable pass/fail per req)
+PROCESS:
+1. Load raw input requirements and current `.holdmybeer/psm.json`.
+2. Extract `Requirement` and `Feature` nodes. Use short, stable, action-focused human-slug IDs (e.g. `req-login`, `feat-verify`). Keep details in the `label` field.
+3. Assign a confidence object:
+   ```json
+   "confidence": {
+     "score": 0.95,
+     "reason": "text explanation"
+   }
+   ```
+4. Establish implements edges from Feature to Requirement.
+5. Save to `psm.json` (domain layer) and append entry to `patches`.
+6. Export domain data to `.holdmybeer/spec.md` (Context, Requirements, Feature tables, and warning sections for confidence.score < 0.60).
 
-RULES: Ambiguity→NeedsClassification(never invent) | Every req→≥1 AC | Sec+Observability always required
-CONSTITUTION: SOLID·DRY·KISS·YAGNI | No TODOs | No placeholders | No hallucinated features
-VALIDATE: ✓ All 6 sections ✓ Every req has AC ✓ No scope creep ✓ Ambiguities listed
+RULES: No hallucinated features. Explicit non-goals.

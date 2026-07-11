@@ -1,39 +1,41 @@
 # Customization
 
-HoldMyBeer ships generic and reusable on purpose — no skill or command is tied to a specific language, framework, or repository. These are the supported ways to adapt it without breaking that.
+HoldMyBeer ships generic and reusable on purpose — no skill or command is tied to a specific language, framework, or repository. These are the supported ways to customize it without breaking that.
 
-## Avoiding Name Collisions
+---
 
-The skill/command names (`hmb`, `hmb-crack`, `hmb-sniff`, `hmb-brew`, `hmb-ferment`, `hmb-pour`, `hmb-hangover`) are distinctive by design. If you still want extra insurance, rename the folder under `claude/skills/` (or `codex/skills/`) and update the thin command wrapper under `claude/commands/` to reference the new folder name.
+## Specialty Stack Constraints
+HoldMyBeer intentionally has no project- or language-specific rules in the code generator. Layer project-specific rules (e.g. library syntax patterns or framework preferences) inside your project's local `.holdmybeer/constitution.md` file. The skills will automatically read this overrides file and apply the guidelines.
 
-## Adjusting Review Rigor
+---
 
-`hmb-sniff` and `hmb-ferment` both run a structured audit checklist. To add more checks, extend the checklist in the skill's `AUDIT CHECKLIST` section. To require multiple independent passes before issuing a verdict, add an explicit `PASSES_REQUIRED=N` field to the skill's header.
+## 1. Custom Semantic Nodes & Properties
 
-## Adding a New Mode
+If you need to represent extra semantic concepts in the Project Semantic Model (PSM) (e.g., storing security credentials metadata, routing configurations, or deployment tags):
+1. Document the nodes and properties inside `shared/MODEL_SCHEMA.md`.
+2. Add your properties inside the appropriate namespace (`domain`, `architecture`, `implementation`) in `.holdmybeer/psm.json`.
+3. Update the relevant skills to write or parse these keys.
 
-1. Choose the closest existing skill as a template:
-   - New **review mode** → start from `hmb-sniff` or `hmb-ferment`
-   - New **build/transform mode** → start from `hmb-pour` or `hmb-brew`
-2. Follow the exact skill skeleton from `shared/DSL.md`:
-   ```
-   ROLE / IN / OUT / FLAGS / OP / FLAVOR / SECTIONS / RULES / VALIDATE
-   ```
-3. Reference `shared/CONSTITUTION.md` and `shared/DSL.md` in the `<context>` block (Claude/Codex). Inline a compressed version for Gemini TOMLs and Cursor `.mdc` rules.
-4. Add a thin command wrapper in `claude/commands/`, a `.toml` in `gemini/commands/`, and a `.mdc` in `cursor/rules/`.
-5. Update `docs/workflow.md` and the pipeline diagram in `README.md`.
+---
 
-## Adding a New Platform
+## 2. Adding Custom Verification Rules
 
-1. Research the tool's actual custom-skill mechanism (file location, format, argument-passing, auto-discovery).
-2. Create a new top-level folder (e.g. `windsurf/`) with its own README explaining the mapping from HoldMyBeer's pipeline to that tool's convention, and note any unsupported features.
-3. Add an install/uninstall path in `install.ps1` / `install.sh`, following the existing `--platform` flag pattern.
-4. Mark it 🚧 in the root README's platform table until it's been run end-to-end at least once.
+To enforce code standards or architectural constraints (e.g., forcing all controllers to belong to a specific package):
+1. Define a rule ID (e.g. `V.ALL_CONTROLLERS_IN_API`) and verify logic in `shared/MODEL_VALIDATION.md`.
+2. Assign the validator check to either `hmb-ferment` (architecture check) or `hmb-hangover` (implementation/code check) within their respective skills blocks.
+3. The model will run the rule automatically against the PSM node graph.
 
-## Specializing for One Project or Stack
+---
 
-HoldMyBeer intentionally has no project- or language-specific content. For stack-specific variants (e.g., enforce your team's test framework conventions during `hmb-pour`), layer it on top via your own project-level instructions (`AGENTS.md`, `CLAUDE.md`, project-scoped `.cursor/rules/`, etc.) — don't edit these files directly, so you can pull upstream updates without merge conflicts.
+## 3. Adding a New Query Fragment
 
-## Editing the Engineering Constitution
+To extract specific parts of the project semantic graph (e.g., retrieving only entities with database mappings):
+1. Define the query ID (e.g. `Q.DATABASE_MODELS`) and its node/edge traversal rules in `shared/MODEL_QUERIES.md`.
+2. Tell your skills to load the query target in their `OP` definition and `IN` field.
 
-The shared constitution lives in `shared/CONSTITUTION.md`. Edits there propagate automatically to Claude and Codex (which reference it via `<context>`). For Gemini and Cursor, update the inlined/compressed constitution blocks in the relevant `.toml` and `.mdc` files manually — or run the `install.ps1` installer after your edits to recompile.
+---
+
+## 4. Extending the Engineering Constitution
+
+The shared constitution lives in `shared/CONSTITUTION.md`. Edits here propagate automatically to Claude and Codex skills (which reference it via `<context>` tags).
+For Gemini and Cursor rule adapters, you will need to update the compressed/inlined schema configurations or run the platform installer scripts again.

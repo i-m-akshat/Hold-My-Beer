@@ -1,7 +1,7 @@
 ---
-description: "🧪 Fermenting the plan to see if it holds pressure... — Stress-test blueprint.md"
-argument-hint: "[blueprint path] [spec path] (defaults: .holdmybeer/blueprint.md .holdmybeer/spec.md)"
+description: "🧪 Fermenting under pressure... — Validate implementation plan coverage"
+argument-hint: "[path to psm.json, default: .holdmybeer/psm.json]"
 ---
 
 Run the `hmb-ferment` skill.
-Inputs: $ARGUMENTS
+PSM: $ARGUMENTS

@@ -1,7 +1,7 @@
 ---
-description: "🤕 Checking tomorrow morning's hangover... — Pre-merge adversarial code review"
-argument-hint: "[spec path] [blueprint path] [implementation path/files]"
+description: "🤕 Checking tomorrow morning's hangover... — Run final pre-merge project review"
+argument-hint: "[path to psm.json, default: .holdmybeer/psm.json]"
 ---
 
 Run the `hmb-hangover` skill.
-Inputs: $ARGUMENTS
+PSM: $ARGUMENTS

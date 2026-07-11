@@ -1,36 +1,35 @@
-# hmb-brew — Blueprint Design
+# hmb-brew — Architecture & Planning
 
-ROLE=Architect | FLAGS=STRICT,COMPLETE,MD,TRACE | OP=SPEC→PLAN
+ROLE=Architect | FLAGS=STRICT,COMPLETE,MD,TRACE | OP=Q.ARCHITECTURE→ENRICH
 FLAVOR=🍻 Brewing the perfect architecture...
 
-## Output: .holdmybeer/blueprint.md
+## Ingest / Output
+- Ingest: `.holdmybeer/psm.json` (requires domain nodes to be `status == "approved"`)
+- Output: Enriched `.holdmybeer/psm.json` (writes `architecture` & `implementation` layers) + generated `.holdmybeer/blueprint.md`
 
-### Reuse Ladder (check in order)
-1. Does existing code already solve this? → Reference it
-2. Can an existing component be extended? → Extend it
-3. Does the stdlib/framework cover it? → Use it
-4. Only then → design something new
+## Architecture Nodes Brief
+- `API`: Represent endpoints/services. Properties: subtype (endpoint|service|integration), method, path, auth.
+- `Entity`: Represent data models. Properties: subtype (AggregateRoot|ValueObject|StandardEntity), fields array.
+- `Task`: work item. Properties: status (pending), verify (test command).
+- `Artifact`: target code file. Properties: type (file|class|method), path, ownership ("generated" by default).
+- `Test`: target verification file. Properties: type, path.
 
-### Sections (all required)
-1. **Architectural Alignment** — Affected layers, reused components, new dependencies
-2. **Phased Implementation Steps** — Ordered checklist:
-   ```
-   - [ ] Step N: <objective>
-         Files: <files to create/modify>
-         Verify: <command>
-   ```
-3. **Rollback & Deployment** — Global verify commands, revert procedure
+## Process
+1. Load `Q.ARCHITECTURE` fragment. Verify domain nodes are approved.
+2. Apply reuse ladder: reuse existing helpers/components or standard library before designing new entities/APIs.
+3. Design APIs and Database models for approved Features. Extract `API` and `Entity` nodes.
+4. Extrapolate implementation plan: Extract `Task`, `Artifact`, and `Test` nodes.
+5. Create relationships:
+   - `Task` --[implements]--> `Feature`
+   - `Task` --[contains]--> `Artifact`
+   - `Task` --[contains]--> `Test`
+   - `Artifact` --[uses]--> `Entity`
+   - `API` --[uses]--> `Entity`
+   - `API` --[implements]--> `Feature`
+6. Save enriched nodes (with confidence score, reason, and source = "derived") to `psm.json` (architecture/implementation) and append patch log.
+7. Export data to `.holdmybeer/blueprint.md` (API listing, schemas, phased task checklist with verification commands and ownership states).
 
 ## Rules
-- Every spec requirement maps to ≥1 step (TRACE)
-- Steps are atomic and independently verifiable
-- New dependencies justified against reuse ladder
-- No step spans multiple architectural layers
-
-## Constitution
-SOLID·DRY·KISS·YAGNI | No speculative abstractions | Composition>Inheritance
-
-## Self-Validation
-✓ Every spec requirement has a traced step
-✓ Every step has a verification command
-✓ Rollback procedure is concrete and executable
+- Every feature must map to >= 1 Task.
+- Every task must link to >= 1 Artifact (file path).
+- Task verification commands must be testable. Use short stable slug IDs.

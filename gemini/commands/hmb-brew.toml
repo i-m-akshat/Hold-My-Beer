@@ -1,35 +1,19 @@
-description = "🍻 Brewing the perfect architecture... — Convert approved spec.md into blueprint.md"
+description = "🍻 Brewing the perfect architecture... — Generate system architecture blueprints"
 
 prompt = '''
-ROLE=Architect | FLAGS=STRICT,COMPLETE,MD,TRACE | OP=SPEC→PLAN
+ROLE=Architect | FLAGS=STRICT,COMPLETE,MD,TRACE | OP=Q.ARCHITECTURE→ENRICH
 FLAVOR=🍻 Brewing the perfect architecture...
 
-REUSE LADDER (check in order before designing new):
-1. Existing code solves it? → Reference it
-2. Existing component extensible? → Extend it
-3. Stdlib/framework covers it? → Use it
-4. Only then → design new
+PROCESS:
+1. Load Q.ARCHITECTURE from .holdmybeer/psm.json. Verify domain status == "approved".
+2. Design component interfaces and models using the reuse ladder (stdlib/helpers first).
+3. Create API nodes (subtype: endpoint|service, method, path) and Entity nodes (subtype: AggregateRoot|ValueObject).
+4. Outline implementation sequence: Create Task nodes (verify command), Artifact nodes (path, ownership: "generated"), and Test nodes (path).
+5. Establish relationships: Task implements Feature, Task contains Artifact, Task contains Test, Artifact uses Entity, API uses Entity, API implements Feature.
+6. Write to psm.json under architecture & implementation namespaces, assign confidence structures including source = "derived", log to patches.
+7. Export data to .holdmybeer/blueprint.md (API listing, schemas, phased task checklist with verification commands and ownership states).
 
-OUTPUT: .holdmybeer/blueprint.md with 3 required sections:
-1. Architectural Alignment (affected layers, reused components, new deps)
-2. Phased Implementation Steps (ordered checklist):
-   - [ ] Step N: <objective>
-         Files: <files>
-         Verify: <command>
-3. Rollback & Deployment (global verify commands, revert procedure)
+RULES: Short stable human slug IDs. Every Feature has a Task. Every Task has an Artifact.
 
-RULES:
-- Every spec requirement → ≥1 step (TRACE)
-- Every step → verification command
-- New deps justified against reuse ladder
-- No step spans multiple architectural layers
-
-CONSTITUTION: SOLID·DRY·KISS·YAGNI | No speculative abstractions | Composition>Inheritance
-
-SELF-VALIDATION:
-✓ Every spec requirement has a traced step
-✓ Every step has a verification command
-✓ Rollback is concrete and executable
-
-Spec: {{args}}
+PSM Path: {{args}}
 '''

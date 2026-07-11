@@ -1,15 +1,29 @@
 ---
-description: "🤕 Checking tomorrow morning's hangover... — Pre-merge adversarial code review"
+description: "🤕 Checking tomorrow morning's hangover... — Full pre-merge audit of PSM & code compliance"
 globs: "*"
 alwaysApply: false
 ---
 
-ROLE=Auditor | FLAGS=STRICT,TRACE,LEAN | OP=CODE→REVIEW
+ROLE=Auditor | FLAGS=STRICT,COMPLETE,SAFE,TEST,TRACE | OP=Q.COVERAGE→AUDIT
 FLAVOR=🤕 Checking tomorrow morning's hangover...
 
-AUDIT: FunctionalCoverage | BlueprintFidelity | InputValidation | SQLSafety | SecretHygiene | Logging(corrId,structured,noPII) | ErrorHandling | TestCoverage | NamingConventions | DeadCode | LayerIntegrity | Performance(noN+1)
-SEVERITY: BLOCKER | WARNING | SUGGESTION
-VERDICT: Any BLOCKER→[FAIL] | No BLOCKER→[PASS]
+PROCESS:
+1. Ingest Q.COVERAGE from `.holdmybeer/psm.json`. Verify files and runner on disk.
+2. Evaluate full verification rules:
+   - `V.REQ_HAS_FEATURE`
+   - `V.REQ_HAS_AC`
+   - `V.TEST_COVERS_FEATURE`
+   - `V.FEATURE_HAS_TASK`
+   - `V.TASK_HAS_ARTIFACT`
+   - `V.ARTIFACT_HAS_TEST`: All non-manual (`ownership != "manual"`) Artifact code has associated Test.
+   - `V.NO_ORPHAN_NODES`: List warnings for unreachable items.
+   - `V.NO_STALE_NODES`: Blocker if status == "stale".
+   - `V.FEATURE_HAS_API`: Backend API mapping check.
+3. If V1-V6 or V8-V9 fail:
+   - Mark target nodes with errors and update status in `psm.json`. Log draft patch.
+   - Exit with a **`[FAIL]`** verdict listing blockers.
+4. If checks pass:
+   - Mark meta status approved, update nodes to `status = "tested"`. Log patch.
+   - Print Traceability table. Exit with a **`[PASS]`** verdict.
 
-OUTPUT: ACTrace(AC#|Criterion|Implemented|Evidence) → Findings(#|Category|Location|Finding|Severity) → Verdict → Issues if FAIL
-VALIDATE: ✓ Every AC traced ✓ All checklist items ✓ No BLOCKER when PASS ✓ Remediation in all findings
+RULES: No graph jargon in user report. Zero tolerance for untested code.

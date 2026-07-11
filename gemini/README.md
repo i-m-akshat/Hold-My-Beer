@@ -1,43 +1,103 @@
 # HoldMyBeer for Gemini CLI
 
-Gemini CLI doesn't use Claude Code's `SKILL.md` format — its custom-command mechanism is a `.toml` file per command with a `description` and a `prompt` field, discovered from `~/.gemini/commands/` (global) or `<project>/.gemini/commands/` (project-scoped).
+> **Change one requirement. Only the affected code regenerates. Your handwritten code stays untouched.**
 
-This directory has two parts:
+HoldMyBeer is a Specification-Driven Development toolkit for Gemini CLI. It turns natural language requirements into structured specifications, implementation plans, production-ready code, and selective updates. 
 
-- **`prompts/`** — The human-readable source of truth for each HoldMyBeer mode. Read these to understand or modify what each mode actually does. They are the reference format — clear, structured, and annotated.
-- **`commands/`** — The installable `.toml` files. Each bakes a compressed version of the matching `prompts/*.md` into its `prompt` field, with the engineering constitution inlined. Gemini CLI runs it as a single self-contained prompt (no separate persistent skill layer). Arguments use the `{{args}}` placeholder.
+Unlike traditional AI workflows, HoldMyBeer keeps an internal understanding of your project so requirement changes regenerate only affected artifacts instead of rewriting everything.
 
-## Architecture
+---
 
-Unlike Claude and Codex, Gemini commands cannot reference external files like `shared/CONSTITUTION.md`. The constitution is therefore compiled (compressed) into each `.toml`. If you modify `shared/CONSTITUTION.md`, mirror the relevant changes in the affected `.toml` files.
+## Why HoldMyBeer?
 
-## Install
+```
+Traditional AI Workflows:
+Requirement changes ──> Regenerate everything ──> Overwrites manual edits & custom code
 
+HoldMyBeer Workflows:
+Requirement changes ──> Analyze impact ──> Regenerate only affected files ──> Preserve manual edits
+```
+
+---
+
+## Core Workflow
+
+```
+Requirements
+     │
+     ▼
+/hmb          (Initialize project workspace)
+     │
+     ▼
+/hmb-crack    (Extract project requirements)
+     │
+     ▼
+/hmb-sniff    (Validate specification quality)
+     │
+     ▼
+/hmb-brew     (Generate system architecture)
+     │
+     ▼
+/hmb-ferment  (Validate implementation plan)
+     │
+     ▼
+/hmb-pour     (Generate implementation files)
+     │
+     ▼
+/hmb-hangover (Run final project review)
+```
+
+---
+
+## Flagship Feature: Change Management & Selective Regeneration (`/hmb-impact`)
+
+If a requirement changes mid-project:
+1. Run `/hmb-impact <requirement-id> "Description of update"`
+2. The engine calculates the change impact blast radius:
+   ```
+   > /hmb-impact req-login-mfa "Login now requires email fallback"
+
+   Calculating blast radius...
+   
+   Affected Code (Stale):
+   ✓ auth_controller.js
+   ✓ mfa_validator.js
+   ✓ login_tests.js
+
+   Preserved Code (Untouched):
+   ✓ orders_controller.js
+   ✓ payment_gateway.js
+   ✓ cart_reducer.js
+
+   Summary: 3 files flagged for regeneration. 132 custom developer files preserved.
+   ```
+3. Run `/hmb-pour` targeting specifically the stale tasks to update only the affected code, leaving your manual customizations safe.
+
+---
+
+## Commands Reference
+
+| Command | Action | Description |
+|---|---|---|
+| `/hmb` | Initialize project | Prepares the workspace skeleton and repository rule definitions. |
+| `/hmb-crack` | Extract requirements | Processes ticket text or descriptions to distill core requirements. |
+| `/hmb-sniff` | Validate specification | Reviews requirements for missing edge cases or ambiguity. |
+| `/hmb-brew` | Generate architecture | Plans models, APIs, and execution task sequences. |
+| `/hmb-ferment` | Validate layout | Reviews the architecture blueprints for planning coverage. |
+| `/hmb-pour` | Generate implementation | Implements code changes and runs verification tests. |
+| `/hmb-hangover` | Run final project review | Audits complete codebase trace compliance before merging. |
+| `/hmb-impact` | Analyze requirement changes | Traverses the impact blast radius of requirement changes. |
+
+---
+
+## Setup & Platform Specifics
+
+### Installation
 ```bash
+# Target Gemini CLI explicitly in the installer
 ./install.sh --platform gemini
+# Or in PowerShell:
+.\install.ps1 -Platform gemini
 ```
 
-or manually:
-
-```bash
-cp gemini/commands/*.toml ~/.gemini/commands/
-```
-
-## Usage
-
-```
-gemini
-> /hmb
-> /hmb-crack Add a "save for later" feature to the checkout flow, described in TICKET-482.md
-> /hmb-sniff .holdmybeer/spec.md
-> /hmb-brew .holdmybeer/spec.md
-> /hmb-ferment .holdmybeer/blueprint.md .holdmybeer/spec.md
-> /hmb-pour .holdmybeer/blueprint.md
-> /hmb-hangover .holdmybeer/spec.md .holdmybeer/blueprint.md src/checkout/
-```
-
-## Known Differences from Claude Code
-
-- Gemini commands are single, self-contained prompts — there's no separate skill the model can reference by name; each `.toml` must bake in everything. If you edit a skill's logic in `claude/skills/`, mirror the change in `gemini/prompts/` and recompile into `gemini/commands/*.toml`.
-- Gemini has no equivalent of Claude's automatic description-based skill discovery — commands must be invoked explicitly by name.
-- The constitution is inlined/compressed in Gemini TOMLs rather than inherited from `shared/CONSTITUTION.md`.
+*For platform architecture details, TOML configuration layouts, and known differences from other clients, refer to the [Gemini Platform Guide](../docs/platforms/gemini.md).*

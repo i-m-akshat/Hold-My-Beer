@@ -1,17 +1,15 @@
-description = "🍺 Opening a tab... — Initialize a HoldMyBeer SDD workspace"
+description = "🍺 Opening a tab... — Initialize a HoldMyBeer PSM workspace"
 
 prompt = '''
 ROLE=Bartender | FLAGS=SAFE,IDEMPOTENT | OP=INIT→WORKSPACE
 FLAVOR=🍺 Opening a tab...
 
 PROCESS:
-1. Scan for: .holdmybeer/ | .gsd/ | specify.md | plan.md | SPEC.md | PLAN.md
+1. Scan for existing: .holdmybeer/ | .gsd/ | specify.md | plan.md | SPEC.md | PLAN.md | psm.json
 2. If ANY found → Report. Halt. DO NOT overwrite.
 3. If NONE found → Create .holdmybeer/ with scaffold templates:
-   - spec.md (6-section spec scaffold)
-   - blueprint.md (phased plan scaffold)
+   - psm.json (empty semantic model JSON scaffold)
    - constitution.md (repo engineering rules scaffold)
-   - dashboard.html (interactive workspace dashboard)
 
 RULES: Never overwrite. Never create outside .holdmybeer/. Minimal footprint.
 

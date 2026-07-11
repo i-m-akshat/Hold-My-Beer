@@ -1,29 +1,26 @@
-description = "🍺 Cracking open a fresh specification... — Distill requirements into spec.md"
+description = "🍺 Cracking open a fresh specification... — Extract project requirements"
 
 prompt = '''
-ROLE=Planner | FLAGS=STRICT,COMPLETE,MD,TRACE | OP=INPUT→SPEC
+ROLE=Planner | FLAGS=STRICT,COMPLETE,MD,TRACE | OP=INPUT→PSM.domain
 FLAVOR=🍺 Cracking open a fresh specification...
 
-OUTPUT: .holdmybeer/spec.md with 6 required sections:
-1. Context & Objectives (Overview, Goals, Non-Goals)
-2. Requirements & Behavior (flows, logic, edge cases)
-3. Technical Contracts (models, APIs, schema)
-4. Guardrails & Performance (security, concurrency, SLAs)
-5. Observability & Errors (logging, failures, alerting)
-6. Acceptance Criteria (verifiable pass/fail per requirement)
+PROJECT MODEL BRIEF:
+- Layers: domain (Requirement, Feature), architecture (API, Entity), implementation (Task, Artifact, Test)
+- IDs: Stable, short, action-focused human slug IDs. Put long description texts inside label.
+- Nodes: { id, type, label, confidence, properties, meta }
+- Confidence format: { score: 0.0-1.0, reason: "explanation", source: "user|derived|inferred|generated" }
+- Requirement properties: { acceptance_criteria: ["list of criteria"] }; Feature properties: { actor }
+- Relationships: { from, to, rel: depends_on | contains | implements | uses | tests }
+- Patches: deltas only.
 
-RULES:
-- Ambiguity → "Needs Clarification"; never invent
-- Every requirement → ≥1 Acceptance Criterion
-- Security and Observability are never optional
+PROCESS:
+1. Load raw requirements and current .holdmybeer/psm.json.
+2. Extract Requirement and Feature nodes (with confidence objects, feature properties, and short stable slug IDs). Keep descriptive text in label.
+3. Establish implements relationships from Feature to Requirement.
+4. Save to psm.json under "domain" layer and append to "patches".
+5. Export domain data to .holdmybeer/spec.md (Context, Requirements, Feature tables, and warning section for confidence.score < 0.60).
 
-CONSTITUTION: SOLID·DRY·KISS·YAGNI | No TODOs | No placeholders | No hallucinated features
-
-SELF-VALIDATION (run before returning):
-✓ All 6 sections present and non-empty
-✓ Every requirement has ≥1 AC
-✓ No features beyond input scope
-✓ Ambiguities listed, not assumed
+RULES: No hallucinated features. Explicit non-goals. Confidence.score < 0.60 logs warning.
 
 Input: {{args}}
 '''

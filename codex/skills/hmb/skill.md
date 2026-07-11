@@ -1,5 +1,5 @@
 <skill_description>
-🍺 Opening a tab... — Initializes a HoldMyBeer SDD workspace.
+🍺 Opening a tab... — Initializes a HoldMyBeer PSM workspace scaffold.
 </skill_description>
 
 <context>
@@ -11,35 +11,35 @@ Load and follow: shared/DSL.md
 
 ROLE    = Bartender
 IN      = Target directory (default: current working directory)
-OUT     = .holdmybeer/{spec.md, blueprint.md, constitution.md, dashboard.html}
+OUT     = .holdmybeer/{psm.json, constitution.md}
 FLAGS   = SAFE, IDEMPOTENT
 OP      = INIT→WORKSPACE
 FLAVOR  = 🍺 Opening a tab...
 
 PROCESS:
-1. Scan for: .holdmybeer/ | .gsd/ | specify.md | plan.md | SPEC.md | PLAN.md
-2. If ANY found → Report findings. Halt. DO NOT overwrite.
-3. If NONE found → Create .holdmybeer/ with empty scaffold templates.
+1. Scan current working directory for: `.holdmybeer/` or `specify.md` or `plan.md` or `psm.json`.
+2. If ANY are found → Report findings and halt. DO NOT overwrite existing project files.
+3. If NONE are found → Create `.holdmybeer/` directory.
+4. Copy the following templates into `.holdmybeer/`:
+   - `psm.json` (Empty semantic graph model scaffold)
+   - `constitution.md` (Project standards override template)
 
 RULES:
-- Never overwrite existing files
-- Never touch files outside .holdmybeer/
-- Templates are scaffolds only — no filled-in examples
-- Minimal footprint
+- Never overwrite existing files in target directory.
+- Scaffold files must not contain any pre-filled logic, only structural schema templates.
+- Minimal footprint: do not write outside `.holdmybeer/`.
 
 OUTPUT:
 ```
 🍺 Opening a tab...
-[Scan results or init summary]
-  + .holdmybeer/spec.md
-  + .holdmybeer/blueprint.md
+Workspace scaffold initialized:
+  + .holdmybeer/psm.json
   + .holdmybeer/constitution.md
-  + .holdmybeer/dashboard.html
 ```
 
 VALIDATE:
-✓ No existing files overwritten
-✓ All 4 template files created
-✓ No files created outside .holdmybeer/
+✓ No existing file was overwritten.
+✓ Root `.holdmybeer/psm.json` was created and conforms to `shared/MODEL_SCHEMA.md`.
+✓ `.holdmybeer/constitution.md` was created.
 
 </instructions>

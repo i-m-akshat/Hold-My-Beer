@@ -1,82 +1,90 @@
 # Workflow
 
 ```
-        Epic / Ticket
-             │
-           hmb              🍺 Opening a tab...
-             │
-         hmb-crack          🍺 Cracking open a fresh specification...
-             │
-         hmb-sniff          👃 Sniffing the specification for bad hops...
-             │
-          hmb-brew          🍻 Brewing the perfect architecture...
-             │
-        hmb-ferment         🧪 Fermenting the plan to see if it holds pressure...
-             │
-          hmb-pour          🍺 Hold my beer... writing production code.
-             │
-       hmb-hangover         🤕 Checking tomorrow morning's hangover...
-             │
-           Merge
+             Requirements / Changes
+                     │
+                   hmb              🍺 Opening a tab...
+                     │
+                 hmb-crack          🍺 Cracking open a fresh specification...
+                     │
+                 hmb-sniff          👃 Sniffing for bad hops...
+                     │
+                  hmb-brew          🍻 Brewing the perfect architecture...
+                     │
+                hmb-ferment         🧪 Fermenting under pressure...
+                     │
+                  hmb-pour          🍺 Hold my beer... (implements tasks)
+                     │
+               hmb-hangover         🤕 Checking tomorrow morning's hangover...
+                     │
+               [Change Injected]
+                     │
+                 hmb-impact         ⚡ Calculating blast radius...
+                     │
+                  hmb-pour          (regenerates only stale items)
+                     │
+                   Merge
 ```
 
-Each stage's output is the next stage's input. A **[BLOCKED]** or **[FAIL]** verdict from any review stage means go back one stage and fix the artifact — not skip forward with open issues.
+HoldMyBeer v0.3 uses the **Project Semantic Model (PSM)** (`.holdmybeer/psm.json`) as the single source of truth. Markdown files (`spec.md`, `blueprint.md`) are generated as human-readable **exports** — they are not directly transformed. The PSM enables precise change management and incremental updates.
+
+---
 
 ## Stage by Stage
 
-| Stage | Input | Output | Verdict |
+| Command | Input | Output | Purpose / Verdict |
 |---|---|---|---|
-| `hmb` | Target directory | `.holdmybeer/` workspace | — |
-| `hmb-crack` | Epic / ticket / requirements | `.holdmybeer/spec.md` | — |
-| `hmb-sniff` | `spec.md` | Findings report | [APPROVED] / [BLOCKED] |
-| `hmb-brew` | Approved `spec.md` | `.holdmybeer/blueprint.md` | — |
-| `hmb-ferment` | `blueprint.md` + `spec.md` | Findings report + coverage matrix | [APPROVED] / [BLOCKED] |
-| `hmb-pour` | Approved `blueprint.md` | Production code + updated blueprint | — |
-| `hmb-hangover` | `spec.md` + `blueprint.md` + implementation | AC trace + findings | [PASS] / [FAIL] |
+| `/hmb` | Target directory | `.holdmybeer/` workspace | Initializes `psm.json` scaffold & `constitution.md`. |
+| `/hmb-crack` | Requirements text | `psm.json` + `spec.md` | Extracts domain requirements/features to PSM. |
+| `/hmb-sniff` | `psm.json` | Approved status | Runs `V.REQ_HAS_FEATURE` and `V.REQ_HAS_AC`. |
+| `/hmb-brew` | Approved `psm.json` | `psm.json` + `blueprint.md` | Designs APIs, database entities, and maps tasks/artifacts. |
+| `/hmb-ferment` | `psm.json` | Approved status | Runs `V.FEATURE_HAS_TASK` and `V.TEST_COVERS_FEATURE`. |
+| `/hmb-pour` | Task ID & `psm.json` | Code & tests + Task complete | Generates code step-by-step. Respects `protected` files. |
+| `/hmb-hangover` | `psm.json` + Codebase | Trace matrix | Pre-merge compliance verification (V1-V8 validation). |
+| `/hmb-impact` | Changed Node ID + Details | `psm.json` (stale states) | Blast radius analysis of changes; triggers selective regen. |
 
-**Note:** `hmb-ferment` needs **both** the blueprint and the spec — its requirement coverage matrix can't run against the plan alone.
+---
+
+## Incremental Change Management (The Impact Engine)
+
+The key differentiator of HoldMyBeer is how it handles requirements drift. If a requirement changes mid-project:
+
+1. Identify the changed Requirement ID (e.g. `req-user-login-mfa`).
+2. Run `/hmb-impact req-user-login-mfa "Now requires email OTP in addition to SMS"`.
+3. The **Impact Engine** traverses the dependency graph and marks all downstream Features, Tasks, Artifacts (code files), and Tests as `stale`.
+4. It checks for `protected` code files (manually edited files marked `"protected": true`). It keeps these intact and flags them for manual review rather than overwriting.
+5. You run `/hmb-pour` only targeting the `stale` items to incrementally heal the codebase, leaving all other structures safe.
+
+---
 
 ## Example Run
 
-```
+```bash
+# 1. Initialize
 /hmb
-🍺 Opening a tab...
-→ creates .holdmybeer/ workspace
+# Creates .holdmybeer/psm.json and constitution.md
 
-/hmb-crack Add a "save for later" feature to the checkout flow (TICKET-482)
-🍺 Cracking open a fresh specification...
-→ produces .holdmybeer/spec.md
+# 2. Extract domain spec
+/hmb-crack Add MFA support to login.
+# Updates psm.json domain layer and exports spec.md
 
-/hmb-sniff .holdmybeer/spec.md
-👃 Sniffing the specification for bad hops...
-→ findings + [APPROVED] (or [BLOCKED] with required fixes)
+# 3. Validate domain
+/hmb-sniff
+# Exit: [APPROVED]
 
-/hmb-brew .holdmybeer/spec.md
-🍻 Brewing the perfect architecture...
-→ produces .holdmybeer/blueprint.md
+# 4. Phase architecture
+/hmb-brew
+# Richly populates API, Entity, Task, and Artifact nodes. Exports blueprint.md
 
-/hmb-ferment .holdmybeer/blueprint.md .holdmybeer/spec.md
-🧪 Fermenting the plan to see if it holds pressure...
-→ requirement coverage matrix + [APPROVED] (or [BLOCKED])
+# 5. Review architecture coverage
+/hmb-ferment
+# Exit: [APPROVED]
 
-/hmb-pour .holdmybeer/blueprint.md
-🍺 Hold my beer... writing production code.
-→ writes production code, marks steps [x] as completed
+# 6. Execute step implementation
+/hmb-pour task-implement-mfa-otp
+# Implements code & test file and runs test verification.
 
-/hmb-hangover .holdmybeer/spec.md .holdmybeer/blueprint.md src/checkout/
-🤕 Checking tomorrow morning's hangover...
-→ AC trace + [PASS] (or [FAIL] with issues list)
+# 7. Pre-merge compliance audit
+/hmb-hangover
+# Exit: [PASS]
 ```
-
-## Platform Notes
-
-- **Claude Code**: Each stage is both an auto-discoverable SKILL.md and a thin slash command wrapper (`/hmb-crack`, etc.). Skills inherit from `shared/CONSTITUTION.md` and `shared/DSL.md`.
-- **Gemini CLI**: Each stage is a self-contained `.toml` file under `~/.gemini/commands/` with the constitution inlined. Invoked explicitly by name.
-- **Codex CLI**: Identical SKILL.md format as Claude — Codex decides when to invoke, or reference by name.
-- **Cursor**: Description-matched `.mdc` rules under `.cursor/rules/` — reference in chat or let Cursor auto-attach. The least mature adapter (🚧) since Cursor rules aren't a direct slash-command mechanism.
-
-## Shared Foundation
-
-All skills inherit from:
-- `shared/CONSTITUTION.md` — Engineering principles, code quality rules, naming, self-validation checklist
-- `shared/DSL.md` — Symbolic pipeline operations, role definitions, flag dictionary

@@ -1,57 +1,49 @@
 <skill_description>
-🧪 Fermenting the plan to see if it holds pressure... — Adversarial stress-test of blueprint.md.
+🧪 Fermenting under pressure... — Verifies the planning coverage chain and architecture feasibility before implementation.
 </skill_description>
 
 <context>
 Load and follow: shared/CONSTITUTION.md
 Load and follow: shared/DSL.md
+Load and follow: shared/MODEL_SCHEMA.md
+<load_file>shared/MODEL_VALIDATION.md</load_file>
 </context>
 
 <instructions>
 
 ROLE    = Reviewer
-IN      = .holdmybeer/blueprint.md + .holdmybeer/spec.md
-OUT     = Findings report + [APPROVED] or [BLOCKED]
-FLAGS   = STRICT, TRACE, LEAN
-OP      = PLAN→AUDIT
-FLAVOR  = 🧪 Fermenting the plan to see if it holds pressure...
-
-AUDIT CHECKLIST (verify every item):
-- [ ] Requirement coverage — every spec requirement maps to ≥1 step
-- [ ] YAGNI — no steps building speculative/unrequested features
-- [ ] Layer integrity — no step bypasses architectural boundaries
-- [ ] Secrets safety — no credentials, keys, or tokens in plan steps
-- [ ] Step atomicity — each step is independently executable and verifiable
-- [ ] Verification commands — every step has a concrete verify command
-- [ ] Rollback viability — rollback procedure is complete and executable
-- [ ] Dependency justification — every new lib/service is necessary
-- [ ] Missing work — security hardening, tests, migrations, config changes
+IN      = .holdmybeer/psm.json
+OUT     = Alignment audit report + updated .holdmybeer/psm.json
+FLAGS   = STRICT, COMPLETE, LEAN, TRACE
+OP      = Q.COVERAGE→VALIDATE
+FLAVOR  = 🧪 Fermenting under pressure...
 
 PROCESS:
-1. Cross-reference blueprint steps against spec requirements
-2. Run audit checklist — document ALL findings
-3. Classify each: BLOCKER | WARNING | SUGGESTION
-4. Issue verdict
+1. Load the `Q.COVERAGE` fragment from `.holdmybeer/psm.json`.
+2. Inspect all architecture nodes (API, Entity) and implementation nodes (Task, Artifact, Test).
+3. Apply validation rules:
+   - `V.FEATURE_HAS_TASK`: Ensure every Feature contains at least one Task (`contains`).
+   - `V.TEST_COVERS_FEATURE`: Ensure every Feature has at least one associated Test of type `acceptance` (`tests`).
+   - `V.FEATURE_HAS_API`: If project type is Backend/API in `.holdmybeer/constitution.md`, verify Feature maps to an API node.
+4. Validate confidence levels of newly added architecture and implementation nodes:
+   - Nodes with `confidence.score < 0.60` are classified as **BLOCKERS** (actionable design clarification required).
+   - Nodes with `0.60 <= confidence.score < 0.85` are classified as **WARNINGS** (needs review / refinement).
+5. If validation violations or confidence blockers exist:
+   - Mark target nodes with `properties.status = "blocked"` in `psm.json`.
+   - Log audit modifications and append a patch entry in `patches`.
+   - Exit with a **`[BLOCKED]`** verdict detailing the alignment gaps or design issues (including explanations and sources for low confidence).
+6. If all validation rules pass:
+   - Mark target nodes with `properties.status = "approved"` in `psm.json`.
+   - Log audit modifications and append a patch entry in `patches`.
+   - Exit with a **`[APPROVED]`** verdict.
 
-OUTPUT FORMAT:
-```
-🧪 Fermenting the plan to see if it holds pressure...
-
-## Requirement Coverage Matrix
-| Req # | Requirement | Blueprint Step(s) | Status |
-|---|---|---|---|
-
-## Findings
-| # | Category | Finding | Severity |
-|---|---|---|---|
-
-## Verdict
-[APPROVED] / [BLOCKED]
-```
+RULES:
+- A single BLOCKER will fail the entire planning audit.
+- Do not reference graph architecture terminology structure (nodes, relationships, relationships array) in the user report. Present metrics as "Task coverage ratio" or "Acceptance test alignment".
 
 VALIDATE:
-✓ Coverage matrix is complete — every spec requirement listed
-✓ Every audit checklist item explicitly addressed
-✓ No BLOCKER exists when verdict is APPROVED
+✓ All reviewed architecture and implementation nodes have status properties updated in psm.json.
+✓ `patches` contains a log entry for the reviewer audit.
+✓ Clear verdict of `[APPROVED]` or `[BLOCKED]` output at the end of the report.
 
 </instructions>

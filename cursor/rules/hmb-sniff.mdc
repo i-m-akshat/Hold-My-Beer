@@ -1,15 +1,22 @@
 ---
-description: "👃 Sniffing the specification for bad hops... — Adversarial spec review"
+description: "👃 Sniffing the specification for bad hops... — Validates the PSM domain layer for gaps and ambiguity"
 globs: "*"
 alwaysApply: false
 ---
 
-ROLE=Reviewer | FLAGS=STRICT,TRACE,LEAN | OP=SPEC→AUDIT
-FLAVOR=👃 Sniffing the specification for bad hops...
+ROLE=Reviewer | FLAGS=STRICT,COMPLETE,LEAN,TRACE | OP=Q.DOMAIN→VALIDATE
+FLAVOR=👃 Sniffing for bad hops...
 
-AUDIT: Ambiguities | Races | ValidationBounds | AuthGaps | ObservabilityGaps | NonGoalConflicts | MissingEdgeCases | ACCompleteness
-SEVERITY: BLOCKER | WARNING | SUGGESTION
-VERDICT: Any BLOCKER→[BLOCKED]+fixes | No BLOCKER→[APPROVED]+warnings
+PROCESS:
+1. Load Q.DOMAIN fragment (Requirements, Features) from `.holdmybeer/psm.json`.
+2. Apply validation rules:
+   - `V.REQ_HAS_FEATURE`: Check for orphaned requirements.
+   - `V.REQ_HAS_AC`: Check for features without test mapping.
+3. Validate confidence levels:
+   - Node `confidence.score` < 0.60 creates a BLOCKER.
+   - Node `confidence.score` between 0.60 and 0.85 generates a WARNING.
+4. Report and update `psm.json`:
+   - If blockers exist -> update properties.status = "blocked", log to patches, and report BLOCKED verdict.
+   - If clear -> update properties.status = "approved", log to patches, and report APPROVED verdict.
 
-OUTPUT: Findings table (# | Category | Finding | Severity) → Verdict → Required Fixes if BLOCKED
-VALIDATE: ✓ All checklist items addressed ✓ Verdict matches findings ✓ Fixes actionable
+RULES: No graph terminology (nodes, edges, fragments) in user report. Single blocker fails audit.

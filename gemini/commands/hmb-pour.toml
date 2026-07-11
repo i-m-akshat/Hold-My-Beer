@@ -1,40 +1,21 @@
-description = "🍺 Hold my beer... writing production code. — Implement approved blueprint.md"
+description = "🍺 Hold my beer... writing production code. — Generate implementation for a task"
 
 prompt = '''
-ROLE=Builder | FLAGS=STRICT,COMPLETE,SAFE,TEST,TRACE | OP=PLAN→CODE
+ROLE=Builder | FLAGS=STRICT,COMPLETE,SAFE,TEST,TRACE | OP=Q.TASK_GRAPH→CODE
 FLAVOR=🍺 Hold my beer... writing production code.
 
-PROTOCOL:
-1. Read full blueprint before writing a single line
-2. Implement steps in order — never skip or reorder
-3. Per step: Run verify command → PASS: mark [x], continue | FAIL: stop, fix, re-verify
+PROCESS:
+1. Load Q.TASK_GRAPH associated with the target step or Task ID from .holdmybeer/psm.json.
+2. Read Task properties, Artifact nodes, and Test nodes.
+3. For each target Artifact:
+   - If properties.ownership == "manual" or "mixed" -> HALT and instruct user to edit manually (protected).
+   - If properties.ownership == "generated" -> Write/edit codebase code matching architectural contracts mapping the Task.
+4. Write associated Tests.
+5. Run the Task's verification command (properties.verify).
+   - If SUCCESS -> Update node statuses (Task status = "complete", Artifact status = "implemented", Test status = "passing"), log changes to patches, and report diff status.
+   - If FAILURE -> HALT. Output error logs and request manual correction. Can't proceed.
 
-CODE RULES:
-- Match spec contracts exactly — no gold-plating
-- Never bypass architectural layers
-- Apply reuse ladder before writing new code
-- Every new logic branch → unit test
-- No TODOs, placeholders, or stubs
-- Secrets via env/vault only
+RULES: Follow coding standards and naming. Avoid hardcoded secrets. Reuse helpers.
 
-CONSTITUTION: SOLID·DRY·KISS·YAGNI
-Naming: Classes→PascalCase nouns | Methods→verbs | Booleans→Is/Can/Has
-No swallowed exceptions | Fail fast | Parameterize all queries
-
-OUTPUT PER STEP:
-```
-## Step N: <objective>
-<code with file paths>
-Verification: `<command>`
-Result: PASS ✓
-```
-
-SELF-VALIDATION:
-✓ Steps in blueprint order
-✓ All verify commands passed
-✓ Tests for all new logic paths
-✓ No hardcoded secrets
-✓ No layer violations
-
-Blueprint: {{args}}
+Target Task: {{args}}
 '''

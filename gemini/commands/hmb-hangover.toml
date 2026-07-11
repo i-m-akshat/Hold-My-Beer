@@ -1,39 +1,29 @@
-description = "🤕 Checking tomorrow morning's hangover... — Pre-merge adversarial code review"
+description = "🤕 Checking tomorrow morning's hangover... — Run final pre-merge project review"
 
 prompt = '''
-ROLE=Auditor | FLAGS=STRICT,TRACE,LEAN | OP=CODE→REVIEW
+ROLE=Auditor | FLAGS=STRICT,COMPLETE,SAFE,TEST,TRACE | OP=Q.COVERAGE→AUDIT
 FLAVOR=🤕 Checking tomorrow morning's hangover...
 
-AUDIT CHECKLIST (address every item):
-- Functional coverage — every AC from spec.md implemented and demonstrable
-- Blueprint fidelity — implementation matches blueprint steps exactly
-- Input validation — all external inputs validated at trust boundaries
-- SQL safety — zero string-concatenated queries; all parameterized
-- Secret hygiene — no credentials/tokens in code, configs, or logs
-- Logging — correlation IDs, structured logs, no PII in logs
-- Error handling — no swallowed exceptions; meaningful error types
-- Test coverage — every new logic path tested; edge cases included
-- Naming conventions — classes/methods/booleans per constitution
-- Dead code — no commented-out code, no TODO stubs
-- Layer integrity — no architectural boundary violations
-- Performance — no N+1 queries, no obvious bottlenecks
+PROCESS:
+1. Ingest Q.COVERAGE from .holdmybeer/psm.json. Verify files and runner on disk.
+2. Evaluate full verification rules:
+   - V.REQ_HAS_FEATURE
+   - V.REQ_HAS_AC: Each Requirement contains a non-empty list of validation conditions.
+   - V.TEST_COVERS_FEATURE
+   - V.FEATURE_HAS_TASK
+   - V.TASK_HAS_ARTIFACT
+   - V.ARTIFACT_HAS_TEST: All non-manual (ownership != "manual") Artifact code has associated Test.
+   - V.NO_ORPHAN_NODES: List warnings for unreachable items.
+   - V.NO_STALE_NODES: Blocker if status == "stale".
+   - V.FEATURE_HAS_API: Backend API mapping check.
+3. If V1-V6 or V8-V9 fail:
+   - Mark target nodes with errors and update status in psm.json. Log draft patch.
+   - Exit with a [FAIL] verdict listing blockers.
+4. If checks pass:
+   - Mark meta status approved, update nodes to status = "tested". Log patch.
+   - Print Traceability table. Exit with a [PASS] verdict.
 
-OUTPUT:
-```
-🤕 Checking tomorrow morning's hangover...
-## Acceptance Criteria Trace
-| AC # | Criterion | Implemented | Evidence |
-## Audit Findings
-| # | Category | Location | Finding | Severity |
-## Verdict: [PASS] / [FAIL]
-### Issues to Fix (if FAIL)
-```
+RULES: No relationships/node terminology in user report. Zero tolerance for untested code.
 
-SELF-VALIDATION:
-✓ Every AC traced to implementation
-✓ Every checklist item addressed
-✓ No BLOCKER when verdict is PASS
-✓ All findings include actionable remediation
-
-Inputs (spec + blueprint + implementation): {{args}}
+PSM Path: {{args}}
 '''

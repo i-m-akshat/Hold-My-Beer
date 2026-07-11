@@ -1,37 +1,28 @@
-# hmb-sniff — Specification Audit
+# hmb-sniff — Domain Validation
 
-ROLE=Reviewer | FLAGS=STRICT,TRACE,LEAN | OP=SPEC→AUDIT
-FLAVOR=👃 Sniffing the specification for bad hops...
+ROLE=Reviewer | FLAGS=STRICT,COMPLETE,LEAN,TRACE | OP=Q.DOMAIN→VALIDATE
+FLAVOR=👃 Sniffing for bad hops...
 
-## Audit Checklist (every item must be addressed)
-- [ ] Ambiguities — requirements with multiple valid interpretations
-- [ ] Race conditions — concurrent access, ordering assumptions
-- [ ] Validation bounds — missing input constraints, null handling
-- [ ] Authorization gaps — missing access control requirements
-- [ ] Observability gaps — operations without logging or alerting
-- [ ] Non-Goal conflicts — requirements contradicting stated non-goals
-- [ ] Missing edge cases — empty inputs, max sizes, failure paths
-- [ ] AC completeness — every requirement has a verifiable AC
+## Ingest / Output
+- Ingest: `.holdmybeer/psm.json`
+- Output: Audit findings report + updated `.holdmybeer/psm.json` (writes approval statuses to nodes + patches logger)
 
-## Severity Classification
-BLOCKER | WARNING | SUGGESTION
+## Validation Rules (Q.DOMAIN scope)
+- `V.REQ_HAS_FEATURE`: Every Requirement node must have an incoming implements relation from a Feature.
+- `V.REQ_HAS_AC`: Every Requirement node must have a non-empty `properties.acceptance_criteria` list of strings defined.
+- Confidence Limits:
+  - If any node has `confidence.score < 0.60` -> Treat as **BLOCKER** (Needs clarification).
+  - If any node has `0.60 <= confidence.score < 0.85` -> Treat as **WARNING** (Needs review).
 
-## Verdict Rules
-- Any BLOCKER → [BLOCKED] + required fixes
-- No BLOCKER → [APPROVED] + warnings/suggestions
+## Process
+1. Load `Q.DOMAIN` fragment (Requirements, Features) from `psm.json`.
+2. Inspect nodes and connections using the rules above.
+3. If any BLOCKERS exist or V rules are violated:
+   - Mark target nodes with `properties.status = "blocked"` in `psm.json`. Log to `patches`.
+   - Exit with a **`[BLOCKED]`** verdict listing the specific issues, confidence reasons, and sources.
+4. If checks pass and confidence is high:
+   - Mark target nodes with `properties.status = "approved"` in `psm.json`. Log to `patches`.
+   - Exit with a **`[APPROVED]`** verdict.
 
-## Output Format
-```
-👃 Sniffing the specification for bad hops...
-
-## Findings
-| # | Category | Finding | Severity |
-
-## Verdict: [APPROVED] / [BLOCKED]
-### Required Fixes (if BLOCKED)
-```
-
-## Self-Validation
-✓ Every checklist item explicitly addressed
-✓ Verdict matches findings
-✓ Required fixes are actionable
+## Rules
+- A single blocker fails the audit. Output findings cleanly without graph theory terminology (explain in plain English).

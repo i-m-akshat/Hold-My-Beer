@@ -1,5 +1,5 @@
 ---
-description: "🍺 Opening a tab... — Initialize a HoldMyBeer SDD workspace"
+description: "🍺 Opening a tab... — Initialize project workspace"
 argument-hint: "[target directory (optional, defaults to cwd)]"
 ---
 

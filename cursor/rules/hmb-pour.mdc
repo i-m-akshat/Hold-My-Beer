@@ -1,16 +1,21 @@
 ---
-description: "🍺 Hold my beer... writing production code. — Implement approved blueprint.md"
+description: "🍺 Hold my beer... writing production code. — Implement an active PSM Task"
 globs: "*"
 alwaysApply: false
 ---
 
-ROLE=Builder | FLAGS=STRICT,COMPLETE,SAFE,TEST,TRACE | OP=PLAN→CODE
+ROLE=Builder | FLAGS=STRICT,COMPLETE,SAFE,TEST,TRACE | OP=Q.TASK_GRAPH→CODE
 FLAVOR=🍺 Hold my beer... writing production code.
 
-PROTOCOL: ReadFullBlueprint→ImplementInOrder→PerStep(RunVerify→PASS:mark[x],continue | FAIL:stop,fix,reverify)
+PROCESS:
+1. Load Q.TASK_GRAPH associated with the target step or Task ID from `.holdmybeer/psm.json`.
+2. Read Task properties, Artifact nodes, and Test nodes.
+3. For each target Artifact:
+   - If `properties.ownership` == "manual" or "mixed" -> HALT and instruct user to edit manually (protected).
+   - If `properties.ownership` == "generated" -> Write/edit codebase code matching architectural contracts mapping the Task.
+4. Write associated Tests.
+5. Run the Task's verification command (`properties.verify`).
+   - If SUCCESS -> Update node statuses (Task status = "complete", Artifact status = "implemented", Test status = "passing"), log changes to patches, and report diff status.
+   - If FAILURE -> HALT. Output error logs and request manual correction. Can't proceed.
 
-CODE_RULES: ExactSpecContracts | NoLayerBypass | ReuseLadderFirst | TestEveryBranch | NoTODOs | SecretsViaEnv
-CONSTITUTION: SOLID·DRY·KISS·YAGNI | Classes→PascalCase | Methods→verbs | Booleans→Is/Can/Has | NoSwallowedExceptions | ParameterizeAllQueries
-
-OUTPUT_PER_STEP: "## Step N: <obj>\n<code>\nVerification: `<cmd>`\nResult: PASS ✓"
-VALIDATE: ✓ Steps in order ✓ All verify passed ✓ Tests written ✓ No secrets ✓ No layer violations
+RULES: Follow coding standards and naming. Avoid hardcoded secrets. Reuse helpers.

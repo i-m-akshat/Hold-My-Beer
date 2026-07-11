@@ -24,7 +24,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$SkillNames = @("hmb", "hmb-crack", "hmb-sniff", "hmb-brew", "hmb-ferment", "hmb-pour", "hmb-hangover")
+$SkillNames = @("hmb", "hmb-crack", "hmb-sniff", "hmb-brew", "hmb-ferment", "hmb-pour", "hmb-hangover", "hmb-impact")
 
 $removedItems = @()
 $notFoundItems = @()

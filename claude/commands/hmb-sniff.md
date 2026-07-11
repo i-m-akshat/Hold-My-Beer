@@ -1,7 +1,7 @@
 ---
-description: "👃 Sniffing the specification for bad hops... — Adversarial review of spec.md"
-argument-hint: "[path to spec.md, default: .holdmybeer/spec.md]"
+description: "👃 Sniffing for bad hops... — Validate requirements specification and quality"
+argument-hint: "[path to psm.json, default: .holdmybeer/psm.json]"
 ---
 
 Run the `hmb-sniff` skill.
-Spec: $ARGUMENTS
+PSM: $ARGUMENTS

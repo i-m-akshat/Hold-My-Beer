@@ -1,33 +1,29 @@
-# hmb-ferment — Plan Stress-Test
+# hmb-ferment — Planning Coverage Validation
 
-ROLE=Reviewer | FLAGS=STRICT,TRACE,LEAN | OP=PLAN→AUDIT
-FLAVOR=🧪 Fermenting the plan to see if it holds pressure...
+ROLE=Reviewer | FLAGS=STRICT,COMPLETE,LEAN,TRACE | OP=Q.COVERAGE→VALIDATE
+FLAVOR=🧪 Fermenting under pressure...
 
-## Audit Checklist (every item must be addressed)
-- [ ] Requirement coverage — every spec req maps to ≥1 blueprint step
-- [ ] YAGNI — no steps building unrequested features
-- [ ] Layer integrity — no step bypasses architectural boundaries
-- [ ] Secrets safety — no credentials/tokens in plan steps
-- [ ] Step atomicity — each step independently executable and verifiable
-- [ ] Verification commands — every step has a concrete verify command
-- [ ] Rollback viability — procedure is complete and executable
-- [ ] Dependency justification — every new lib/service is necessary
-- [ ] Missing work — security hardening, tests, migrations, config changes
+## Ingest / Output
+- Ingest: `.holdmybeer/psm.json`
+- Output: Alignment audit report + updated `.holdmybeer/psm.json` (writes approval statuses to nodes + patches logger)
 
-## Output Format
-```
-🧪 Fermenting the plan to see if it holds pressure...
+## Validation Rules (Q.COVERAGE Planning Scope)
+- `V.FEATURE_HAS_TASK`: Every Feature node must contain at least one Task (`contains`).
+- `V.TEST_COVERS_FEATURE`: Every Feature has at least one associated Test of type `acceptance`.
+- `V.FEATURE_HAS_API`: If project constitution specifies API/Backend, every Feature maps to at least one API endpoint.
+- Confidence Limits:
+  - Check newly planned nodes (APIs, Tasks, Entities). Any node with `confidence.score < 0.60` is a **BLOCKER**.
+  - Any node with `0.60 <= confidence.score < 0.85` is a **WARNING**.
 
-## Requirement Coverage Matrix
-| Req # | Requirement | Blueprint Step(s) | Status |
+## Process
+1. Load `Q.COVERAGE` fragment (Domain, Architecture, & Planning implementation nodes) from `psm.json`.
+2. Evaluate connections and fields according to the rules above.
+3. If violations or confidence blockers exist:
+   - Mark target nodes with `properties.status = "blocked"` in `psm.json`. Log to `patches`.
+   - Exit with a **`[BLOCKED]`** verdict listing the specific planning gaps, confidence explanations, and sources.
+4. If all checks pass:
+   - Mark target nodes with `properties.status = "approved"` in `psm.json`. Log to `patches`.
+   - Exit with a **`[APPROVED]`** verdict.
 
-## Findings
-| # | Category | Finding | Severity |
-
-## Verdict: [APPROVED] / [BLOCKED]
-```
-
-## Self-Validation
-✓ Coverage matrix complete — every spec requirement listed
-✓ Every checklist item addressed
-✓ No BLOCKER exists when verdict is APPROVED
+## Rules
+- A single blocker fails the planning audit. Express findings in plain terms (e.g. "Work details missing for Feature X") without referencing graph/relationships terminology.

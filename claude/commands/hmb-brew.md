@@ -1,7 +1,7 @@
 ---
-description: "🍻 Brewing the perfect architecture... — Convert approved spec.md into blueprint.md"
-argument-hint: "[path to spec.md, default: .holdmybeer/spec.md]"
+description: "🍻 Brewing the perfect architecture... — Generate system architecture blueprints"
+argument-hint: "[path to psm.json, default: .holdmybeer/psm.json]"
 ---
 
 Run the `hmb-brew` skill.
-Spec: $ARGUMENTS
+PSM: $ARGUMENTS

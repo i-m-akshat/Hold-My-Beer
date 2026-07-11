@@ -42,9 +42,7 @@ Write-Host '                             |___/                      ' -Foregroun
 Write-Host ""
 Write-Host "🍺 HoldMyBeer Workspace Initialized Successfully!" -ForegroundColor Green
 Write-Host "Files created in .holdmybeer/:" -ForegroundColor Green
-Write-Host "  + spec.md         (Requirement Specification Template)" -ForegroundColor Green
-Write-Host "  + blueprint.md    (Phased Implementation Blueprint)" -ForegroundColor Green
+Write-Host "  + psm.json        (Project Semantic Model empty schema)" -ForegroundColor Green
 Write-Host "  + constitution.md (Repository Standards & Rules)" -ForegroundColor Green
-Write-Host "  + dashboard.html  (Interactive HTML Workspace View)" -ForegroundColor Green
 Write-Host ""
-Write-Host "Open .holdmybeer/dashboard.html in your browser to view your SDD workspace dashboard!" -ForegroundColor Cyan
+Write-Host "Run /hmb-crack to distill requirements and start building!" -ForegroundColor Cyan

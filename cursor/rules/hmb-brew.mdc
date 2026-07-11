@@ -1,17 +1,19 @@
 ---
-description: "🍻 Brewing the perfect architecture... — Convert approved spec.md into blueprint.md"
+description: "🍻 Brewing the perfect architecture... — Enrich PSM with architecture and export blueprint.md"
 globs: "*"
 alwaysApply: false
 ---
 
-ROLE=Architect | FLAGS=STRICT,COMPLETE,MD,TRACE | OP=SPEC→PLAN
+ROLE=Architect | FLAGS=STRICT,COMPLETE,MD,TRACE | OP=Q.ARCHITECTURE→ENRICH
 FLAVOR=🍻 Brewing the perfect architecture...
 
-REUSE_LADDER: ExistingCode→ExtendComponent→Stdlib→NewDesign (in that order)
+PROCESS:
+1. Load Q.ARCHITECTURE from `.holdmybeer/psm.json`. Verify domain status == "approved".
+2. Design component interfaces and domain models using the reuse ladder (stdlib/helpers first).
+3. Create API nodes (subtype: endpoint|service, method, path) and Entity nodes (subtype: AggregateRoot|ValueObject).
+4. Outline implementation sequence: Create Task nodes (verify command), Artifact nodes (path, ownership: "generated"), and Test nodes (path).
+5. Establish edges: Task implements Feature, Task contains Artifact, Task contains Test, Artifact uses Entity, API uses Entity, API implements Feature.
+6. Write to `psm.json` under architecture & implementation namespaces, assign confidence structures, log to patches.
+7. Export data to `.holdmybeer/blueprint.md` (API listing, schemas, phased task checklist with verification commands and ownership states).
 
-OUTPUT→.holdmybeer/blueprint.md
-SECTIONS: 1.ArchitectureAlign(layers,reuse,newDeps) 2.PhasedSteps([- [ ] StepN: obj | Files: | Verify: ]) 3.Rollback(verify,revert)
-
-RULES: Every spec req→≥1 step(TRACE) | Every step→verify cmd | NewDeps justified | No cross-layer steps
-CONSTITUTION: SOLID·DRY·KISS·YAGNI | No speculative abstractions | Composition>Inheritance
-VALIDATE: ✓ Every req traced ✓ Every step has verify cmd ✓ Rollback concrete
+RULES: Short stable human slug IDs. Every Feature has a Task. Every Task has an Artifact.

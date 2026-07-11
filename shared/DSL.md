@@ -1,69 +1,55 @@
-# 🍺 HoldMyBeer DSL Dictionary
+# 🍺 HoldMyBeer DSL Dictionary (v0.3)
 
-Symbolic operations used across all HoldMyBeer skills. Use these instead of prose.
+Symbolic operations and terms used across all HoldMyBeer skills. This DSL replaces wordy English instructions in prompt configurations.
 
 ---
 
-## Pipeline Operations
+## 1. Schema Layers
+
+| Section | Target | Role |
+|---|---|---|
+| `domain` | Problem space | Requirements, Features, Entities |
+| `architecture` | Structural blueprint | APIs, Entities (schema) |
+| `implementation` | Execution artifacts | Tasks, Artifacts, Tests |
+
+---
+
+## 2. Pipeline Operations
 
 | Operation | Meaning |
 |---|---|
-| `INIT→WORKSPACE` | Scan for existing SDD structures; initialize if absent |
-| `INPUT→SPEC` | Distill raw requirements into a verified specification |
-| `SPEC→AUDIT` | Adversarially review specification for gaps and risks |
-| `SPEC→PLAN` | Convert approved specification into phased implementation plan |
-| `PLAN→AUDIT` | Stress-test plan for architectural risk and missing work |
-| `PLAN→CODE` | Implement plan steps as production code |
-| `CODE→REVIEW` | Audit implementation against spec and plan |
-| `REVIEW→FIX` | Apply fixes from review findings |
-| `SPEC→TESTS` | Derive test cases from specification |
+| `INIT→WORKSPACE` | Scan for workspace files; create `.holdmybeer/psm.json` & empty templates if absent. |
+| `INPUT→PSM.domain` | Parse raw requirements, extract features & requirements, store in `domain`. |
+| `Q.DOMAIN→VALIDATE` | Run `V.REQ_HAS_FEATURE` & `V.REQ_HAS_AC`; output APPROVED or BLOCKED. |
+| `Q.ARCHITECTURE→ENRICH` | Add API & Entity definitions to `architecture`; map Tasks. |
+| `Q.COVERAGE→VALIDATE` | Run `V.FEATURE_HAS_TASK` & `V.TEST_COVERS_FEATURE` to check planning gaps. |
+| `Q.TASK_GRAPH→CODE` | Implement active task's files (Artifacts); update `implementation`. |
+| `Q.COVERAGE→AUDIT` | Run full validation rules (V.1 - V.8); verify complete test coverage and no orphans. |
+| `Q.IMPACT(node)→REGEN` | Compute dependency blast radius; mark affected nodes `stale`; regenerate non-protected targets. |
 
 ---
 
-## Gate Verdicts
+## 3. Gate Verdicts
 
-| Verdict | Meaning |
-|---|---|
-| `[APPROVED]` | Gate passed. Proceed to next stage. |
-| `[BLOCKED]` | Gate failed. Fix artifact upstream, re-run this gate. |
-| `[PASS]` | Final review passed. Safe to merge. |
-| `[FAIL]` | Final review failed. Issues list attached. |
+- **`[APPROVED]`**: Pass validation checks. Proceed to next stage.
+- **`[BLOCKED]`**: Fail validation checks. Fix upstream, re-run command.
+- **`[PASS]`**: Final audit complete with zero blockers. Ready to merge.
+- **`[FAIL]`**: Final audit failed. Blocker issue list generated.
 
 ---
 
-## Roles
+## 4. Roles
 
-| Role | Responsibility |
-|---|---|
-| `Bartender` | Workspace initialization and environment setup |
-| `Planner` | Requirement distillation and specification authoring |
-| `Reviewer` | Adversarial review, gap analysis, risk identification |
-| `Architect` | System design, implementation planning, phased decomposition |
-| `Builder` | Production code implementation following approved plans |
-| `Auditor` | Final pre-merge quality and compliance verification |
-
----
-
-## Flags (reference → CONSTITUTION.md)
-
-```
-STRICT · TRACE · LEAN · COMPLETE · SAFE · MD · TEST · IDEMPOTENT
-```
+- **`Bartender`**: Workspace initialization and scaffold manager.
+- **`Planner`**: Semantic requirement extractor.
+- **`Reviewer`**: Adversarial domain and planning auditor.
+- **`Architect`**: API and workflow schema designer.
+- **`Builder`**: Micro-contextual file implementer.
+- **`Auditor`**: Post-build integration and coverage validator.
+- **`Analyst`**: Blast-radius evaluator (Impact Engine).
 
 ---
 
-## Skill Skeleton
+## 5. Flags (Inherited from CONSTITUTION.md)
 
-Every skill follows this exact structure:
-
-```
-ROLE    = <from Roles table>
-IN      = <input files or artifacts>
-OUT     = <output files or artifacts>
-FLAGS   = <comma-separated flags>
-OP      = <from Pipeline Operations>
-FLAVOR  = <beer theme message>
-SECTIONS = <ordered output structure>
-RULES   = <skill-specific constraints>
-VALIDATE = <self-check items beyond constitution>
-```
+`STRICT` · `TRACE` · `LEAN` · `COMPLETE` · `SAFE` · `MD` · `TEST` · `IDEMPOTENT`
