@@ -1,74 +1,82 @@
 # Workflow
 
 ```
-   Workspace / Project Root
-         │
-    holdmybeer-init (Diagnostics & Initialization)
-         │
-        Epic
-         │
-    holdmybeer-craft        (HoldMyBeer: Spec Brewing)
-         │
-    holdmybeer-audit        (HoldMyBeer: Spec Sniffing)
-         │
-    holdmybeer-design         (HoldMyBeer: Plan Brewing)
-         │
-   holdmybeer-stress        (HoldMyBeer: Plan Stress-Testing)
-         │
-     holdmybeer-code          (HoldMyBeer: Implementation)
-         │
-     holdmybeer-ship          (HoldMyBeer: Final Review)
-         │
-       Merge
+        Epic / Ticket
+             │
+           hmb              🍺 Opening a tab...
+             │
+         hmb-crack          🍺 Cracking open a fresh specification...
+             │
+         hmb-sniff          👃 Sniffing the specification for bad hops...
+             │
+          hmb-brew          🍻 Brewing the perfect architecture...
+             │
+        hmb-ferment         🧪 Fermenting the plan to see if it holds pressure...
+             │
+          hmb-pour          🍺 Hold my beer... writing production code.
+             │
+       hmb-hangover         🤕 Checking tomorrow morning's hangover...
+             │
+           Merge
 ```
 
-Each stage's output is the next stage's input. A **BLOCKED** or **FAIL**
-verdict from any review stage (`holdmybeer-audit`, `holdmybeer-stress`, `holdmybeer-ship`)
-means go back one stage and fix the artifact there — not skip forward with
-open issues.
+Each stage's output is the next stage's input. A **[BLOCKED]** or **[FAIL]** verdict from any review stage means go back one stage and fix the artifact — not skip forward with open issues.
 
-## Stage by stage
+## Stage by Stage
 
 | Stage | Input | Output | Verdict |
 |---|---|---|---|
-| `holdmybeer-init` | Optional target path | Diagnostics report or initialized `.holdmybeer/` templates | — |
-| `holdmybeer-spec` | An epic, ticket, or feature request | A complete specification (`spec.md`) | APPROVED / BLOCKED |
-| `holdmybeer-plan` | An approved specification | A phased roadmap and tasks checklist (`blueprint.md`) | APPROVED / BLOCKED |
-| `holdmybeer-code` | An approved blueprint + repo access | Code changes | — |
-| `holdmybeer-review` | Spec + blueprint + implementation | Findings + verdict | PASS / FAIL |
+| `hmb` | Target directory | `.holdmybeer/` workspace | — |
+| `hmb-crack` | Epic / ticket / requirements | `.holdmybeer/spec.md` | — |
+| `hmb-sniff` | `spec.md` | Findings report | [APPROVED] / [BLOCKED] |
+| `hmb-brew` | Approved `spec.md` | `.holdmybeer/blueprint.md` | — |
+| `hmb-ferment` | `blueprint.md` + `spec.md` | Findings report + coverage matrix | [APPROVED] / [BLOCKED] |
+| `hmb-pour` | Approved `blueprint.md` | Production code + updated blueprint | — |
+| `hmb-hangover` | `spec.md` + `blueprint.md` + implementation | AC trace + findings | [PASS] / [FAIL] |
 
----
+**Note:** `hmb-ferment` needs **both** the blueprint and the spec — its requirement coverage matrix can't run against the plan alone.
 
-## Example run
+## Example Run
 
 ```
-holdmybeer-init:
-→ checks for .holdmybeer/.gsd and offers template initialization
+/hmb
+🍺 Opening a tab...
+→ creates .holdmybeer/ workspace
 
-holdmybeer-spec: Add a "save for later" feature to the checkout flow, as described in TICKET-482.md
-→ produces spec.md after self-audit validation (verdict: APPROVED)
+/hmb-crack Add a "save for later" feature to the checkout flow (TICKET-482)
+🍺 Cracking open a fresh specification...
+→ produces .holdmybeer/spec.md
 
-holdmybeer-plan: .holdmybeer/spec.md
-→ produces blueprint.md after stress-test validation (verdict: APPROVED)
+/hmb-sniff .holdmybeer/spec.md
+👃 Sniffing the specification for bad hops...
+→ findings + [APPROVED] (or [BLOCKED] with required fixes)
 
-holdmybeer-code: .holdmybeer/blueprint.md
-→ writes the code step-by-step running verification commands
+/hmb-brew .holdmybeer/spec.md
+🍻 Brewing the perfect architecture...
+→ produces .holdmybeer/blueprint.md
 
-holdmybeer-review: .holdmybeer/spec.md .holdmybeer/blueprint.md
-→ returns PASS (or FAIL with remaining issues)
+/hmb-ferment .holdmybeer/blueprint.md .holdmybeer/spec.md
+🧪 Fermenting the plan to see if it holds pressure...
+→ requirement coverage matrix + [APPROVED] (or [BLOCKED])
+
+/hmb-pour .holdmybeer/blueprint.md
+🍺 Hold my beer... writing production code.
+→ writes production code, marks steps [x] as completed
+
+/hmb-hangover .holdmybeer/spec.md .holdmybeer/blueprint.md src/checkout/
+🤕 Checking tomorrow morning's hangover...
+→ AC trace + [PASS] (or [FAIL] with issues list)
 ```
 
-## Platform notes
+## Platform Notes
 
-- **Claude Code**: each stage is both an auto-discoverable skill and a
-  short slash command (`/holdmybeer-spec`, etc.) — use whichever fits; the
-  command is just a convenience wrapper around the skill.
-- **Gemini CLI**: each stage is a `.toml` command under
-  `~/.gemini/commands/`, invoked the same way (`/holdmybeer-spec <input>`).
-- **Codex CLI**: each stage is a skill under `~/.codex/skills/`, same
-  `SKILL.md` format as Claude — Codex decides when to invoke it, or you
-  can name it explicitly.
-- **Cursor**: each stage is a description-matched rule under
-  `.cursor/rules/` — reference it in chat or let Cursor auto-attach it
-  when your request matches the rule's description.
+- **Claude Code**: Each stage is both an auto-discoverable SKILL.md and a thin slash command wrapper (`/hmb-crack`, etc.). Skills inherit from `shared/CONSTITUTION.md` and `shared/DSL.md`.
+- **Gemini CLI**: Each stage is a self-contained `.toml` file under `~/.gemini/commands/` with the constitution inlined. Invoked explicitly by name.
+- **Codex CLI**: Identical SKILL.md format as Claude — Codex decides when to invoke, or reference by name.
+- **Cursor**: Description-matched `.mdc` rules under `.cursor/rules/` — reference in chat or let Cursor auto-attach. The least mature adapter (🚧) since Cursor rules aren't a direct slash-command mechanism.
 
+## Shared Foundation
+
+All skills inherit from:
+- `shared/CONSTITUTION.md` — Engineering principles, code quality rules, naming, self-validation checklist
+- `shared/DSL.md` — Symbolic pipeline operations, role definitions, flag dictionary

@@ -1,74 +1,39 @@
 # Customization
 
-HoldMyBeer ships generic and reusable on purpose — no skill or command
-is tied to a specific language, framework, or repository. These are the
-supported ways to adapt it without breaking that.
+HoldMyBeer ships generic and reusable on purpose — no skill or command is tied to a specific language, framework, or repository. These are the supported ways to adapt it without breaking that.
 
-## Avoiding name collisions
+## Avoiding Name Collisions
 
-The skill/command names (`holdmybeer-craft`, `holdmybeer-audit`, `holdmybeer-design`,
-`holdmybeer-stress`, `holdmybeer-code`, `holdmybeer-ship`) are distinctive by design, so
-collisions with your own custom skills are unlikely. If you still want
-extra insurance — e.g. you already have a skill literally named
-`holdmybeer-code` — rename the folder under `claude/skills/` (or
-`codex/skills/`) to `holdmybeer-holdmybeer-code` and update its frontmatter
-`name:` field to match. You do **not** need to rename the command file
-under `claude/commands/`; the command's job is just to invoke the skill by
-name, so update the one line inside it that says which skill to invoke.
+The skill/command names (`hmb`, `hmb-crack`, `hmb-sniff`, `hmb-brew`, `hmb-ferment`, `hmb-pour`, `hmb-hangover`) are distinctive by design. If you still want extra insurance, rename the folder under `claude/skills/` (or `codex/skills/`) and update the thin command wrapper under `claude/commands/` to reference the new folder name.
 
-## Adjusting review rigor
+## Adjusting Review Rigor
 
-`holdmybeer-audit` and `holdmybeer-stress` both cap their repeat cycles at 3 to bound
-runaway token spend. If your specs/plans are large enough that 3 cycles
-routinely isn't enough to reach a quiet pass, raise the cap in the
-skill's "Process" section — but raise it deliberately, not by removing the
-cap entirely; an unbounded adversarial loop has no natural stopping point.
+`hmb-sniff` and `hmb-ferment` both run a structured audit checklist. To add more checks, extend the checklist in the skill's `AUDIT CHECKLIST` section. To require multiple independent passes before issuing a verdict, add an explicit `PASSES_REQUIRED=N` field to the skill's header.
 
-## Adding a new mode
+## Adding a New Mode
 
-To add a mode (the toolkit's own docs use `holdmybeer-debug` and
-`holdmybeer-refactor` as hypothetical examples):
+1. Choose the closest existing skill as a template:
+   - New **review mode** → start from `hmb-sniff` or `hmb-ferment`
+   - New **build/transform mode** → start from `hmb-pour` or `hmb-brew`
+2. Follow the exact skill skeleton from `shared/DSL.md`:
+   ```
+   ROLE / IN / OUT / FLAGS / OP / FLAVOR / SECTIONS / RULES / VALIDATE
+   ```
+3. Reference `shared/CONSTITUTION.md` and `shared/DSL.md` in the `<context>` block (Claude/Codex). Inline a compressed version for Gemini TOMLs and Cursor `.mdc` rules.
+4. Add a thin command wrapper in `claude/commands/`, a `.toml` in `gemini/commands/`, and a `.mdc` in `cursor/rules/`.
+5. Update `docs/workflow.md` and the pipeline diagram in `README.md`.
 
-1. Copy the closest existing skill as a starting template — a new review
-   mode should start from `holdmybeer-audit` or `holdmybeer-stress`; a new
-   build/transform mode should start from `holdmybeer-code` or `holdmybeer-design`.
-2. Keep the same section skeleton: Objective, Expected Input, Expected
-   Output, Process, Guardrails, Completion Criteria, Stopping Conditions,
-   Failure Conditions.
-3. Open with the same HoldMyBeer persona paragraph, changing only the
-   last sentence (the mode name and one-line purpose).
-4. Add a matching command file, README entry, and workflow-diagram
-   position.
-5. If the new mode belongs in the main pipeline (not a standalone
-   utility), update `docs/workflow.md` and the diagram in the root
-   `README.md`.
+## Adding a New Platform
 
-## Adding a new platform
+1. Research the tool's actual custom-skill mechanism (file location, format, argument-passing, auto-discovery).
+2. Create a new top-level folder (e.g. `windsurf/`) with its own README explaining the mapping from HoldMyBeer's pipeline to that tool's convention, and note any unsupported features.
+3. Add an install/uninstall path in `install.ps1` / `install.sh`, following the existing `--platform` flag pattern.
+4. Mark it 🚧 in the root README's platform table until it's been run end-to-end at least once.
 
-Each platform adapter is independent — none of them modify the others.
-To add support for a new tool:
+## Specializing for One Project or Stack
 
-1. Research that tool's actual custom-command/skill mechanism before
-   writing anything — file location, format (TOML/YAML/Markdown),
-   argument-passing convention, and whether it supports automatic
-   discovery or requires explicit invocation. Don't assume it matches
-   Claude Code's format.
-2. Create a new top-level folder (e.g. `windsurf/`) with its own README
-   explaining the mapping from HoldMyBeer's six modes to that tool's
-   mechanism, and note any features that don't have an equivalent (the
-   way `gemini/README.md` and `codex/README.md` do).
-3. Add an install/uninstall path for it in `install.ps1` / `install.sh`
-   and `uninstall.ps1` / `uninstall.sh`, following the existing
-   `--platform` flag pattern.
-4. Mark it 🚧 in the root README's platform table until it's been
-   used end-to-end at least once.
+HoldMyBeer intentionally has no project- or language-specific content. For stack-specific variants (e.g., enforce your team's test framework conventions during `hmb-pour`), layer it on top via your own project-level instructions (`AGENTS.md`, `CLAUDE.md`, project-scoped `.cursor/rules/`, etc.) — don't edit these files directly, so you can pull upstream updates without merge conflicts.
 
-## Specializing for one project or stack
+## Editing the Engineering Constitution
 
-HoldMyBeer intentionally has no project- or language-specific content.
-If you want a stack-specific variant (e.g. a `holdmybeer-code` that also enforces
-your team's specific test-framework conventions), do it in your own
-project-level instructions (`AGENTS.md`, `CLAUDE.md`, project-scoped
-`.cursor/rules/`, etc.) that layer on top of HoldMyBeer, rather than
-editing these files directly — that way you keep the ability to pull
-upstream updates without a merge conflict with your own customizations.
+The shared constitution lives in `shared/CONSTITUTION.md`. Edits there propagate automatically to Claude and Codex (which reference it via `<context>`). For Gemini and Cursor, update the inlined/compressed constitution blocks in the relevant `.toml` and `.mdc` files manually — or run the `install.ps1` installer after your edits to recompile.

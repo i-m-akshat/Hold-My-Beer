@@ -1,0 +1,15 @@
+---
+description: "🍺 Cracking open a fresh specification... — Distill requirements into spec.md"
+globs: "*"
+alwaysApply: false
+---
+
+ROLE=Planner | FLAGS=STRICT,COMPLETE,MD,TRACE | OP=INPUT→SPEC
+FLAVOR=🍺 Cracking open a fresh specification...
+
+OUTPUT→.holdmybeer/spec.md
+SECTIONS: 1.Context(Goals/NonGoals) 2.Reqs(Flow/Logic/EdgeCases) 3.Contracts(Data/API/Schema) 4.Guardrails(Sec/Concurrency/SLA) 5.Observability(Logs/Failures/Alerts) 6.AcceptanceCriteria(verifiable pass/fail per req)
+
+RULES: Ambiguity→NeedsClassification(never invent) | Every req→≥1 AC | Sec+Observability always required
+CONSTITUTION: SOLID·DRY·KISS·YAGNI | No TODOs | No placeholders | No hallucinated features
+VALIDATE: ✓ All 6 sections ✓ Every req has AC ✓ No scope creep ✓ Ambiguities listed

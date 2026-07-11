@@ -6,10 +6,10 @@ future brainstorming pass, not commitments.
 ## Workspace detection & auto-init
 
 Have every HoldMyBeer skill start by detecting whether the project
-already uses a Spec-Driven Development workspace (e.g. `.holdmybeer/` for
+already uses a Spec-Driven Development workspace (e.g. `.specify/` for
 spec-kit, `.planning/` for GSD) and adapt to it instead of scattering
-loose files in the repo root. If none is found, initialize Coffee
-Goblin's own `.holdmybeer/` workspace with numbered feature dirs
+loose files in the repo root. If none is found, initialize HoldMyBeer's
+own `.hold-my-beer/` workspace with numbered feature dirs
 (`specs/001-user-authentication/{epic,spec,research,plan,implementation,review}.md`),
 auto-incrementing numbering, and a `config.yml`.
 
@@ -26,6 +26,6 @@ covering (non-exhaustive):
   given the 4 adapters currently duplicate prompt text with no shared
   include mechanism.
 - How this interacts with today's explicit file-path arguments (e.g.
-  `/holdmybeer-audit SPEC-x.md`, `/holdmybeer-ship SPEC-x.md PLAN-x.md src/`) —
+  `/sniff-spec SPEC-x.md`, `/ship-it SPEC-x.md PLAN-x.md src/`) —
   whether workspace inference replaces, supplements, or is overridden
   by an explicit path.

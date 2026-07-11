@@ -1,8 +1,17 @@
+<p align="center">
+  <img src="assets/logo.png" width="250" alt="HoldMyBeer Logo">
+</p>
+
 # 🍺 HoldMyBeer
 
-A professional, Spec-Driven Development (SDD) toolkit for AI-assisted engineering. It provides a structured, adversarial pipeline of development gates to prevent context collapse, eliminate model hallucinations, and ensure codebase architectural integrity.
+An AI-powered software engineering toolkit for Spec-Driven Development —
+one legendary, deliberately-generic engineer persona, six specialized
+working modes, and a cross-platform installer.
 
-HoldMyBeer enforces zero-guess requirements gathering, reuse-first technical planning, multi-pass adversarial auditing, and strict security and test coverage verification before code is merged.
+HoldMyBeer has survived a thousand production incidents, a dozen
+legacy migrations, and more impossible deadlines than anyone should admit
+to. It doesn't guess, doesn't over-build, and doesn't rubber-stamp a
+review. Every mode below is one of its working states.
 
 ## Supported Platforms
 
@@ -21,8 +30,8 @@ gaps.
 ## Install
 
 ```bash
-git clone https://github.com/yourname/holdmybeer
-cd holdmybeer
+git clone https://github.com/yourname/hold-my-beer
+cd hold-my-beer
 ```
 
 **Windows:**
@@ -57,64 +66,89 @@ To remove everything the installer added:
 ## Workflow
 
 ```
-Workspace / Project Root
+Epic / Ticket
  ↓
-holdmybeer-init   (Setup & Bootstrap)
+hmb
  ↓
-holdmybeer-spec   (Spec Distillation & Self-Audit)
+hmb-crack
  ↓
-holdmybeer-plan   (Blueprint Design & Stress-Test)
+hmb-sniff
  ↓
-holdmybeer-code   (Code Implementation & Step Verification)
+hmb-brew
  ↓
-holdmybeer-review (Quality & Validation Verification)
+hmb-ferment
  ↓
-Merge
+hmb-pour
+ ↓
+hmb-hangover
 ```
 
-See [`docs/workflow.md`](docs/workflow.md) for the full stage-by-stage
-breakdown and an example run.
+See [`docs/workflow.md`](docs/workflow.md) for the full stage-by-stage breakdown and an example run.
 
 ## Available Commands
 
-| Command | Mode | What it does |
+For a deeply immersive and simplified experience, the toolkit uses an action-packed 7-command beer lifecycle suite that combines drafting and adversarial reviews, alongside an interactive dashboard tool:
+
+| Command | Action | Output Flavor |
 |---|---|---|
-| `/holdmybeer-init` | Bootstrap | Checks for existing SDD structures or initializes templates in `.holdmybeer/`. |
-| `/holdmybeer-spec` | Spec Distillation | Drafts and audits specification from requirements into `spec.md`. |
-| `/holdmybeer-plan` | Blueprint Design | Converts approved spec into phased engineering roadmap `blueprint.md`. |
-| `/holdmybeer-code` | Code Synthesis | Safely implements code modifications step-by-step from `blueprint.md`. |
-| `/holdmybeer-review` | Quality Verification | Performs pre-merge quality and validation checks on implemented features. |
+| `/hmb` | Initializes workspace & dashboard | `🍺 Opening a tab...` |
+| `/hmb-crack` | Drafts `spec.md` | `🍺 Cracking open a fresh specification...` |
+| `/hmb-sniff` | Adversarial spec review | `👃 Sniffing the specification for bad hops...` |
+| `/hmb-brew` | Drafts `blueprint.md` | `🍻 Brewing the perfect architecture...` |
+| `/hmb-ferment` | Adversarial plan review | `🧪 Fermenting the plan to see if it holds pressure...` |
+| `/hmb-pour` | Implementation (Coding) | `🍺 Hold my beer... writing production code.` |
+| `/hmb-hangover` | Pre-merge sanity check | `🤕 Checking tomorrow morning's hangover...` |
 
 ## Philosophy
 
 Five rules, expanded in [`docs/philosophy.md`](docs/philosophy.md):
 
-1. **Don't guess.** Ambiguity is a hard stop, not an invitation to invent requirements.
-2. **Don't over-build.** Enforce YAGNI and reuse existing logic before building new.
-3. **Don't rubber-stamp.** Self-audit and verify at every stage.
-4. **Respect architectural boundaries.** Never bypass layers to shrink diff size.
-5. **Security, testing, and observability are core constraints.** Build them in, don't bolt them on.
+1. **Don't guess.** Ambiguity is a stop condition, not an invitation to
+   invent business logic.
+2. **Don't over-build.** Reuse existing code, existing architecture, and
+   the standard library before writing anything new.
+3. **Don't rubber-stamp.** Every review mode is adversarial and distrusts
+   a clean pass until an independent one confirms it.
+4. **Respect what's already there.** Existing architecture and layering
+   are boundaries, not suggestions.
+5. **Security, testing, and observability are not optional.** They're
+   checked at every stage, not bolted on at the end.
 
 ## Examples
 
 ```
-/holdmybeer-spec Add a "save for later" feature to the checkout flow, as described in TICKET-482.md
-→ produces spec.md
+/hmb
+🍺 Opening a tab...
+→ creates .holdmybeer/ workspace
 
-/holdmybeer-plan .holdmybeer/spec.md
-→ produces blueprint.md
+/hmb-crack Add a "save for later" feature to the checkout flow
+🍺 Cracking open a fresh specification...
+→ produces .holdmybeer/spec.md
 
-/holdmybeer-code .holdmybeer/blueprint.md
-→ writes the code
+/hmb-sniff .holdmybeer/spec.md
+👃 Sniffing the specification for bad hops...
+→ findings + APPROVED (or BLOCKED)
 
-/holdmybeer-review .holdmybeer/spec.md .holdmybeer/blueprint.md
-→ PASS (or FAIL with issues checklist)
+/hmb-brew .holdmybeer/spec.md
+🍻 Brewing the perfect architecture...
+→ produces .holdmybeer/blueprint.md
+
+/hmb-ferment .holdmybeer/blueprint.md
+🧪 Fermenting the plan to see if it holds pressure...
+→ findings + APPROVED (or BLOCKED)
+
+/hmb-pour .holdmybeer/blueprint.md
+🍺 Hold my beer... writing production code.
+→ writes the code step by step
+
+/hmb-hangover .holdmybeer/spec.md .holdmybeer/blueprint.md src/checkout/
+🤕 Checking tomorrow morning's hangover...
+→ PASS (or FAIL with remaining issues)
 ```
 
 ## Best Practices
 
-- **Don't skip stages.** `holdmybeer-code` assumes a plan that already survived
-  `holdmybeer-stress`; running it against an unreviewed plan reintroduces the
+- **Don't skip stages.** `/hmb-pour` assumes a plan that already survived review; running it against an unreviewed plan reintroduces the
   risk the pipeline exists to catch.
 - **Treat BLOCKED/FAIL as a return trip, not a suggestion.** Fix the
   artifact one stage back and re-run the same gate — don't push forward
@@ -132,12 +166,15 @@ Five rules, expanded in [`docs/philosophy.md`](docs/philosophy.md):
 ## Repository Layout
 
 ```
-holdmybeer/
-├── claude/      Claude Code skills + slash commands (primary platform)
-├── gemini/      Gemini CLI .toml commands + source prompts
-├── codex/       Codex CLI skills (same format as Claude)
+hold-my-beer/
+├── shared/      Shared prompt foundation (CONSTITUTION.md + DSL.md)
+├── bin/         CLI utilities (hmb init scripts)
+├── claude/      Claude Code SKILL.md skills + thin command wrappers (primary platform)
+├── gemini/      Gemini CLI .toml commands (constitution inlined) + human-readable prompts
+├── codex/       Codex CLI skills (same SKILL.md format as Claude)
 ├── cursor/      Cursor .mdc rules (🚧 in progress)
 ├── docs/        Philosophy, workflow, and customization guides
+├── assets/      Logos and static assets
 ├── install.ps1 / install.sh      Installers
 └── uninstall.ps1 / uninstall.sh  Uninstallers
 ```

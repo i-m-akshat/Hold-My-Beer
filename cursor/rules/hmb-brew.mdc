@@ -1,0 +1,17 @@
+---
+description: "🍻 Brewing the perfect architecture... — Convert approved spec.md into blueprint.md"
+globs: "*"
+alwaysApply: false
+---
+
+ROLE=Architect | FLAGS=STRICT,COMPLETE,MD,TRACE | OP=SPEC→PLAN
+FLAVOR=🍻 Brewing the perfect architecture...
+
+REUSE_LADDER: ExistingCode→ExtendComponent→Stdlib→NewDesign (in that order)
+
+OUTPUT→.holdmybeer/blueprint.md
+SECTIONS: 1.ArchitectureAlign(layers,reuse,newDeps) 2.PhasedSteps([- [ ] StepN: obj | Files: | Verify: ]) 3.Rollback(verify,revert)
+
+RULES: Every spec req→≥1 step(TRACE) | Every step→verify cmd | NewDeps justified | No cross-layer steps
+CONSTITUTION: SOLID·DRY·KISS·YAGNI | No speculative abstractions | Composition>Inheritance
+VALIDATE: ✓ Every req traced ✓ Every step has verify cmd ✓ Rollback concrete

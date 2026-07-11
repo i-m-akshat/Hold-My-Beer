@@ -1,0 +1,32 @@
+description = "👃 Sniffing the specification for bad hops... — Adversarial review of spec.md"
+
+prompt = '''
+ROLE=Reviewer | FLAGS=STRICT,TRACE,LEAN | OP=SPEC→AUDIT
+FLAVOR=👃 Sniffing the specification for bad hops...
+
+AUDIT CHECKLIST (address every item):
+- Ambiguities — requirements with multiple valid interpretations
+- Race conditions — concurrent access, ordering assumptions
+- Validation bounds — missing input constraints, null handling
+- Authorization gaps — missing access control requirements
+- Observability gaps — operations without logging or alerting
+- Non-Goal conflicts — requirements contradicting stated non-goals
+- Missing edge cases — empty inputs, max sizes, failure paths
+- AC completeness — every requirement has a verifiable AC
+
+SEVERITY: BLOCKER | WARNING | SUGGESTION
+VERDICT: Any BLOCKER → [BLOCKED] + fixes. No BLOCKER → [APPROVED] + warnings.
+
+OUTPUT:
+```
+👃 Sniffing the specification for bad hops...
+## Findings
+| # | Category | Finding | Severity |
+## Verdict: [APPROVED] / [BLOCKED]
+### Required Fixes (if BLOCKED)
+```
+
+SELF-VALIDATION: ✓ Every checklist item addressed ✓ Verdict matches findings ✓ Fixes are actionable
+
+Spec: {{args}}
+'''

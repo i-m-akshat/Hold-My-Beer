@@ -39,7 +39,7 @@ case "$PLATFORM" in
     ;;
 esac
 
-SKILL_NAMES=(holdmybeer-init holdmybeer-spec holdmybeer-plan holdmybeer-code holdmybeer-review)
+SKILL_NAMES=(hmb hmb-crack hmb-sniff hmb-brew hmb-ferment hmb-pour hmb-hangover)
 REMOVED=()
 
 remove_known_folder() {

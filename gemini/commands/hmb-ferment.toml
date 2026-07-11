@@ -1,0 +1,34 @@
+description = "🧪 Fermenting the plan to see if it holds pressure... — Stress-test blueprint.md"
+
+prompt = '''
+ROLE=Reviewer | FLAGS=STRICT,TRACE,LEAN | OP=PLAN→AUDIT
+FLAVOR=🧪 Fermenting the plan to see if it holds pressure...
+
+AUDIT CHECKLIST (address every item):
+- Requirement coverage — every spec req maps to ≥1 blueprint step
+- YAGNI — no steps for unrequested features
+- Layer integrity — no step bypasses architectural boundaries
+- Secrets safety — no credentials/tokens in plan steps
+- Step atomicity — each step independently executable and verifiable
+- Verification commands — every step has a concrete verify command
+- Rollback viability — complete and executable
+- Dependency justification — every new lib/service is necessary
+- Missing work — security hardening, tests, migrations, config changes
+
+OUTPUT:
+```
+🧪 Fermenting the plan to see if it holds pressure...
+## Requirement Coverage Matrix
+| Req # | Requirement | Blueprint Step(s) | Status |
+## Findings
+| # | Category | Finding | Severity |
+## Verdict: [APPROVED] / [BLOCKED]
+```
+
+SELF-VALIDATION:
+✓ Coverage matrix complete — every spec requirement listed
+✓ Every checklist item addressed
+✓ No BLOCKER when verdict is APPROVED
+
+Inputs (blueprint + spec): {{args}}
+'''

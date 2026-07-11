@@ -24,7 +24,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$SkillNames = @("holdmybeer-init", "holdmybeer-spec", "holdmybeer-plan", "holdmybeer-code", "holdmybeer-review")
+$SkillNames = @("hmb", "hmb-crack", "hmb-sniff", "hmb-brew", "hmb-ferment", "hmb-pour", "hmb-hangover")
 
 $removedItems = @()
 $notFoundItems = @()
@@ -54,7 +54,7 @@ function Remove-KnownFile {
 }
 
 function Uninstall-Claude {
-    Write-Host "Uninstalling HoldMyBeer from Claude Code..." -ForegroundColor Cyan
+    Write-Host 'Uninstalling HoldMyBeer from Claude Code...' -ForegroundColor Cyan
     $claudeDir = Join-Path $TargetHome ".claude"
     $skillsDest = Join-Path $claudeDir "skills"
     $cmdDest = Join-Path $claudeDir "commands"
@@ -65,7 +65,7 @@ function Uninstall-Claude {
 }
 
 function Uninstall-Gemini {
-    Write-Host "Uninstalling HoldMyBeer from Gemini CLI..." -ForegroundColor Cyan
+    Write-Host 'Uninstalling HoldMyBeer from Gemini CLI...' -ForegroundColor Cyan
     $geminiDir = Join-Path $TargetHome ".gemini"
     $cmdDest = Join-Path $geminiDir "commands"
     foreach ($name in $SkillNames) {
@@ -74,7 +74,7 @@ function Uninstall-Gemini {
 }
 
 function Uninstall-Codex {
-    Write-Host "Uninstalling HoldMyBeer from Codex CLI..." -ForegroundColor Cyan
+    Write-Host 'Uninstalling HoldMyBeer from Codex CLI...' -ForegroundColor Cyan
     $codexDir = Join-Path $TargetHome ".codex"
     $skillsDest = Join-Path $codexDir "skills"
     foreach ($name in $SkillNames) {
@@ -90,7 +90,7 @@ switch ($Platform) {
 }
 
 Write-Host ""
-Write-Host "===== HoldMyBeer uninstall summary =====" -ForegroundColor Green
+Write-Host '===== HoldMyBeer uninstall summary =====' -ForegroundColor Green
 if ($removedItems.Count -gt 0) {
     Write-Host "Removed:" -ForegroundColor Green
     $removedItems | ForEach-Object { Write-Host "  - $_" }

@@ -1,0 +1,39 @@
+description = "🤕 Checking tomorrow morning's hangover... — Pre-merge adversarial code review"
+
+prompt = '''
+ROLE=Auditor | FLAGS=STRICT,TRACE,LEAN | OP=CODE→REVIEW
+FLAVOR=🤕 Checking tomorrow morning's hangover...
+
+AUDIT CHECKLIST (address every item):
+- Functional coverage — every AC from spec.md implemented and demonstrable
+- Blueprint fidelity — implementation matches blueprint steps exactly
+- Input validation — all external inputs validated at trust boundaries
+- SQL safety — zero string-concatenated queries; all parameterized
+- Secret hygiene — no credentials/tokens in code, configs, or logs
+- Logging — correlation IDs, structured logs, no PII in logs
+- Error handling — no swallowed exceptions; meaningful error types
+- Test coverage — every new logic path tested; edge cases included
+- Naming conventions — classes/methods/booleans per constitution
+- Dead code — no commented-out code, no TODO stubs
+- Layer integrity — no architectural boundary violations
+- Performance — no N+1 queries, no obvious bottlenecks
+
+OUTPUT:
+```
+🤕 Checking tomorrow morning's hangover...
+## Acceptance Criteria Trace
+| AC # | Criterion | Implemented | Evidence |
+## Audit Findings
+| # | Category | Location | Finding | Severity |
+## Verdict: [PASS] / [FAIL]
+### Issues to Fix (if FAIL)
+```
+
+SELF-VALIDATION:
+✓ Every AC traced to implementation
+✓ Every checklist item addressed
+✓ No BLOCKER when verdict is PASS
+✓ All findings include actionable remediation
+
+Inputs (spec + blueprint + implementation): {{args}}
+'''

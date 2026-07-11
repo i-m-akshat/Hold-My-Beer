@@ -66,7 +66,7 @@ function Copy-SingleFile {
 }
 
 function Install-Claude {
-    Write-Host "Installing HoldMyBeer for Claude Code..." -ForegroundColor Cyan
+    Write-Host 'Installing HoldMyBeer for Claude Code...' -ForegroundColor Cyan
     $claudeDir = Join-Path $TargetHome ".claude"
     if (-not (Test-Path $claudeDir)) {
         Write-Host "  Note: $claudeDir does not exist yet - creating it." -ForegroundColor Yellow
@@ -86,7 +86,7 @@ function Install-Claude {
 }
 
 function Install-Gemini {
-    Write-Host "Installing HoldMyBeer for Gemini CLI..." -ForegroundColor Cyan
+    Write-Host 'Installing HoldMyBeer for Gemini CLI...' -ForegroundColor Cyan
     $geminiDir = Join-Path $TargetHome ".gemini"
     $cmdSrc = Join-Path $RepoRoot "gemini\commands"
     $cmdDest = Join-Path $geminiDir "commands"
@@ -96,7 +96,7 @@ function Install-Gemini {
 }
 
 function Install-Codex {
-    Write-Host "Installing HoldMyBeer for Codex CLI..." -ForegroundColor Cyan
+    Write-Host 'Installing HoldMyBeer for Codex CLI...' -ForegroundColor Cyan
     $codexDir = Join-Path $TargetHome ".codex"
     $skillsSrc = Join-Path $RepoRoot "codex\skills"
     $skillsDest = Join-Path $codexDir "skills"
@@ -105,22 +105,15 @@ function Install-Codex {
     }
 }
 
-function Install-CLI {
-    Write-Host "Installing HoldMyBeer global CLI command..." -ForegroundColor Cyan
-    $localBinDir = Join-Path $TargetHome ".local\bin"
-    Copy-SingleFile -SourceFile (Join-Path $RepoRoot "bin\holdmybeer-init.ps1") -DestDir $localBinDir
-    Copy-SingleFile -SourceFile (Join-Path $RepoRoot "bin\holdmybeer-init.cmd") -DestDir $localBinDir
-}
-
 switch ($Platform) {
-    "claude" { Install-Claude; Install-CLI }
-    "gemini" { Install-Gemini; Install-CLI }
-    "codex"  { Install-Codex; Install-CLI }
-    "all"    { Install-Claude; Install-Gemini; Install-Codex; Install-CLI }
+    "claude" { Install-Claude }
+    "gemini" { Install-Gemini }
+    "codex"  { Install-Codex }
+    "all"    { Install-Claude; Install-Gemini; Install-Codex }
 }
 
 Write-Host ""
-Write-Host "===== HoldMyBeer install summary =====" -ForegroundColor Green
+Write-Host '===== HoldMyBeer install summary =====' -ForegroundColor Green
 if ($installedItems.Count -gt 0) {
     Write-Host "Installed:" -ForegroundColor Green
     $installedItems | ForEach-Object { Write-Host "  + $_" }
@@ -133,4 +126,3 @@ if ($skippedItems.Count -gt 0) {
 }
 Write-Host ""
 Write-Host "Done. Restart your CLI session if it was already running so it picks up the new skills/commands." -ForegroundColor Green
-

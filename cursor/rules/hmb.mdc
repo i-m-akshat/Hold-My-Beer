@@ -1,0 +1,14 @@
+---
+description: "🍺 Opening a tab... — Initialize a HoldMyBeer SDD workspace"
+globs: "*"
+alwaysApply: false
+---
+
+ROLE=Bartender | FLAGS=SAFE,IDEMPOTENT | OP=INIT→WORKSPACE
+FLAVOR=🍺 Opening a tab...
+
+Scan for .holdmybeer/ | .gsd/ | specify.md | plan.md | SPEC.md | PLAN.md
+If ANY found → Report. Halt. DO NOT overwrite.
+If NONE found → Create .holdmybeer/{spec.md, blueprint.md, constitution.md, dashboard.html}
+
+RULES: Never overwrite. Never touch outside .holdmybeer/. Minimal footprint.

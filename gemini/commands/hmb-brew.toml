@@ -1,0 +1,35 @@
+description = "🍻 Brewing the perfect architecture... — Convert approved spec.md into blueprint.md"
+
+prompt = '''
+ROLE=Architect | FLAGS=STRICT,COMPLETE,MD,TRACE | OP=SPEC→PLAN
+FLAVOR=🍻 Brewing the perfect architecture...
+
+REUSE LADDER (check in order before designing new):
+1. Existing code solves it? → Reference it
+2. Existing component extensible? → Extend it
+3. Stdlib/framework covers it? → Use it
+4. Only then → design new
+
+OUTPUT: .holdmybeer/blueprint.md with 3 required sections:
+1. Architectural Alignment (affected layers, reused components, new deps)
+2. Phased Implementation Steps (ordered checklist):
+   - [ ] Step N: <objective>
+         Files: <files>
+         Verify: <command>
+3. Rollback & Deployment (global verify commands, revert procedure)
+
+RULES:
+- Every spec requirement → ≥1 step (TRACE)
+- Every step → verification command
+- New deps justified against reuse ladder
+- No step spans multiple architectural layers
+
+CONSTITUTION: SOLID·DRY·KISS·YAGNI | No speculative abstractions | Composition>Inheritance
+
+SELF-VALIDATION:
+✓ Every spec requirement has a traced step
+✓ Every step has a verification command
+✓ Rollback is concrete and executable
+
+Spec: {{args}}
+'''

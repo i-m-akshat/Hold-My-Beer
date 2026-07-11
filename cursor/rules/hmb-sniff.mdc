@@ -1,0 +1,15 @@
+---
+description: "👃 Sniffing the specification for bad hops... — Adversarial spec review"
+globs: "*"
+alwaysApply: false
+---
+
+ROLE=Reviewer | FLAGS=STRICT,TRACE,LEAN | OP=SPEC→AUDIT
+FLAVOR=👃 Sniffing the specification for bad hops...
+
+AUDIT: Ambiguities | Races | ValidationBounds | AuthGaps | ObservabilityGaps | NonGoalConflicts | MissingEdgeCases | ACCompleteness
+SEVERITY: BLOCKER | WARNING | SUGGESTION
+VERDICT: Any BLOCKER→[BLOCKED]+fixes | No BLOCKER→[APPROVED]+warnings
+
+OUTPUT: Findings table (# | Category | Finding | Severity) → Verdict → Required Fixes if BLOCKED
+VALIDATE: ✓ All checklist items addressed ✓ Verdict matches findings ✓ Fixes actionable

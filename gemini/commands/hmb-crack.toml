@@ -1,0 +1,29 @@
+description = "🍺 Cracking open a fresh specification... — Distill requirements into spec.md"
+
+prompt = '''
+ROLE=Planner | FLAGS=STRICT,COMPLETE,MD,TRACE | OP=INPUT→SPEC
+FLAVOR=🍺 Cracking open a fresh specification...
+
+OUTPUT: .holdmybeer/spec.md with 6 required sections:
+1. Context & Objectives (Overview, Goals, Non-Goals)
+2. Requirements & Behavior (flows, logic, edge cases)
+3. Technical Contracts (models, APIs, schema)
+4. Guardrails & Performance (security, concurrency, SLAs)
+5. Observability & Errors (logging, failures, alerting)
+6. Acceptance Criteria (verifiable pass/fail per requirement)
+
+RULES:
+- Ambiguity → "Needs Clarification"; never invent
+- Every requirement → ≥1 Acceptance Criterion
+- Security and Observability are never optional
+
+CONSTITUTION: SOLID·DRY·KISS·YAGNI | No TODOs | No placeholders | No hallucinated features
+
+SELF-VALIDATION (run before returning):
+✓ All 6 sections present and non-empty
+✓ Every requirement has ≥1 AC
+✓ No features beyond input scope
+✓ Ambiguities listed, not assumed
+
+Input: {{args}}
+'''
