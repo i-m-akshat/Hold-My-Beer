@@ -1,7 +1,6 @@
-# Changelog
+content = """# Changelog
 
-All notable changes to HoldMyBeer are documented here. Format follows
-[Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
+All notable changes to HoldMyBeer are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [0.2.0] - Unreleased
 
@@ -24,22 +23,16 @@ All notable changes to HoldMyBeer are documented here. Format follows
 - `docs/workflow.md`, `docs/philosophy.md`, `docs/customization.md`, `gemini/README.md` fully rewritten to reflect beer pipeline.
 - `uninstall.ps1` / `uninstall.sh` updated to target new `hmb-*` skill names.
 
-### Removed
-
-- Legacy command names: `brew-spec`, `sniff-spec`, `brew-plan`, `stress-plan`, `hack-it`, `ship-it`.
-- Hollow one-liner prompt fragments replaced by structured skill definitions.
-
 ---
 
 ## [0.1.0] - Initial Release
 
 ### Added
 
-- Initial six-mode pipeline: `brew-spec`, `sniff-spec`, `brew-plan`, `stress-plan`, `hack-it`, `ship-it`.
-- Claude Code adapter: `SKILL.md` skills + slash commands.
-- Gemini CLI adapter: `.toml` custom commands + human-readable source prompts.
-- Codex CLI adapter: `SKILL.md` skills (Agent Skills Open Standard).
-- Cursor adapter (🚧): `.mdc` description-matched rules.
-- Cross-platform installers (`install.ps1`, `install.sh`) with `--platform` selection, no-overwrite-by-default, and `--force` override.
+- Initial cross-platform installers (`install.ps1`, `install.sh`) with `--platform` selection, no-overwrite-by-default, and `--force` override.
 - Matching uninstallers (`uninstall.ps1`, `uninstall.sh`).
 - Documentation: `docs/philosophy.md`, `docs/workflow.md`, `docs/customization.md`.
+"""
+
+with open("CHANGELOG.md", "w") as f:
+    f.write(content)
