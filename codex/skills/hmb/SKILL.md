@@ -1,3 +1,8 @@
+---
+name: hmb
+description: 🍺 Opening a tab... — Initializes a HoldMyBeer PSM workspace scaffold. Use this skill when the user wants to initialize a new HoldMyBeer project model workspace.
+---
+
 <skill_description>
 🍺 Opening a tab... — Initializes a HoldMyBeer PSM workspace scaffold.
 </skill_description>

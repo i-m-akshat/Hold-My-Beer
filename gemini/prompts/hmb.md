@@ -4,7 +4,7 @@ ROLE=Bartender | FLAGS=SAFE,IDEMPOTENT | OP=INIT→WORKSPACE
 FLAVOR=🍺 Opening a tab...
 
 ## Process
-1. Scan for existing: `.holdmybeer/` | `.gsd/` | `specify.md` | `plan.md` | `SPEC.md` | `PLAN.md` | `psm.json`
+1. Scan for existing: `.holdmybeer/` | `specify.md` | `plan.md` | `psm.json`
 2. If ANY found → Report. Halt. DO NOT overwrite.
 3. If NONE found → Create `.holdmybeer/` with scaffold templates:
    - `psm.json` — Empty Project Semantic Model schema (empty scaffold)

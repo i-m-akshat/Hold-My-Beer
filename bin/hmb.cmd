@@ -1,2 +1,2 @@
 @echo off
-powershell -NoProfile -ExecutionPolicy Bypass -File "C:\Users\aksha\.local\bin\hmb.ps1"
+powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0hmb.ps1"

@@ -62,6 +62,11 @@ copy_skill_folder() {
   mkdir -p "$2"
   rm -rf "$dest"
   cp -r "$1" "$dest"
+  # Bundle the shared prompt foundations (CONSTITUTION.md, DSL.md, MODEL_*.md)
+  # next to every skill so each skill's "<context> shared/..." references resolve.
+  if [ -d "$REPO_ROOT/shared" ]; then
+    cp -r "$REPO_ROOT/shared" "$dest/shared"
+  fi
   INSTALLED+=("$dest")
 }
 
@@ -89,10 +94,6 @@ install_claude() {
   for skill_dir in "$REPO_ROOT/claude/skills"/*/; do
     name="$(basename "$skill_dir")"
     copy_skill_folder "$skill_dir" "$claude_dir/skills" "$name"
-  done
-
-  for cmd_file in "$REPO_ROOT/claude/commands"/*.md; do
-    copy_single_file "$cmd_file" "$claude_dir/commands"
   done
 }
 

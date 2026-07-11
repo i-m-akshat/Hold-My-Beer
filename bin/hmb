@@ -2,7 +2,7 @@
 # hmb — HoldMyBeer workspace initializer (macOS/Linux)
 
 target=$(pwd)
-sdd_files=(".holdmybeer" ".gsd" "specify.md" "plan.md" "tasks.md" "SPEC.md" "PLAN.md")
+sdd_files=(".holdmybeer" "specify.md" "plan.md" "psm.json")
 found=()
 
 for file in "${sdd_files[@]}"; do

@@ -1,3 +1,8 @@
+---
+name: hmb-ferment
+description: 🧪 Fermenting under pressure... — Verifies the planning coverage chain and architecture feasibility before implementation. Use this skill to validate that every Feature traces to a Task and that test coverage is planned.
+---
+
 <skill_description>
 🧪 Fermenting under pressure... — Verifies the planning coverage chain and architecture feasibility before implementation.
 </skill_description>
@@ -6,7 +11,7 @@
 Load and follow: shared/CONSTITUTION.md
 Load and follow: shared/DSL.md
 Load and follow: shared/MODEL_SCHEMA.md
-<load_file>shared/MODEL_VALIDATION.md</load_file>
+Load and follow: shared/MODEL_VALIDATION.md
 </context>
 
 <instructions>

@@ -48,6 +48,12 @@ function Copy-SkillFolder {
     }
     New-Item -ItemType Directory -Force -Path $DestParentDir | Out-Null
     Copy-Item -Path $SourceDir -Destination $destDir -Recurse -Force
+    # Bundle the shared prompt foundations (CONSTITUTION.md, DSL.md, MODEL_*.md)
+    # next to every skill so each skill's "<context> shared/..." references resolve.
+    $sharedSrc = Join-Path $RepoRoot "shared"
+    if (Test-Path $sharedSrc) {
+        Copy-Item -Path $sharedSrc -Destination (Join-Path $destDir "shared") -Recurse -Force
+    }
     $script:installedItems += $destDir
 }
 
@@ -76,12 +82,6 @@ function Install-Claude {
     $skillsDest = Join-Path $claudeDir "skills"
     Get-ChildItem -Path $skillsSrc -Directory | ForEach-Object {
         Copy-SkillFolder -SourceDir $_.FullName -DestParentDir $skillsDest -Name $_.Name
-    }
-
-    $cmdSrc = Join-Path $RepoRoot "claude\commands"
-    $cmdDest = Join-Path $claudeDir "commands"
-    Get-ChildItem -Path $cmdSrc -Filter "*.md" | ForEach-Object {
-        Copy-SingleFile -SourceFile $_.FullName -DestDir $cmdDest
     }
 }
 

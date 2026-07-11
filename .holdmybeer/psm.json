@@ -1,0 +1,108 @@
+{
+  "meta": {
+    "version": "1",
+    "project": "",
+    "created": "2026-07-12",
+    "updated": "2026-07-12",
+    "model_schema": "1.0"
+  },
+  "domain": {
+    "req-install-message": {
+      "id": "req-install-message",
+      "type": "Requirement",
+      "label": "Display a proper, formatted completion message after install or hmb init instead of abrupt/raw output",
+      "confidence": {
+        "score": 0.85,
+        "reason": "User explicitly wants a 'beautiful and proper message' rather than the window closing with no readable output; intent is unambiguous.",
+        "source": "user"
+      },
+      "properties": {
+        "status": "approved",
+        "priority": "high",
+        "source": "manual",
+        "acceptance_criteria": [
+          "A formatted summary is printed showing installed items, skipped items, and next-step instructions on success.",
+          "On failure or error, a clear human-readable error message is shown (not just a stack trace or silent window close)."
+        ]
+      },
+      "meta": {
+        "created_by": "hmb-crack",
+        "updated_by": "hmb-crack",
+        "updated_at": "2026-07-12"
+      }
+    },
+    "req-install-no-abrupt-close": {
+      "id": "req-install-no-abrupt-close",
+      "type": "Requirement",
+      "label": "Terminal/PowerShell window must not close immediately on completion; it should pause for user acknowledgment",
+      "confidence": {
+        "score": 0.8,
+        "reason": "User states the window 'immediately closing' is undesirable and wants it to stay open with a message.",
+        "source": "user"
+      },
+      "properties": {
+        "status": "approved",
+        "priority": "high",
+        "source": "manual",
+        "acceptance_criteria": [
+          "After printing the summary, the script waits for user input (e.g., 'Press any key to exit') before the window closes.",
+          "Behavior applies to install.ps1/install.sh and the hmb init CLI (hmb.cmd/hmb.ps1) when launched by double-click."
+        ]
+      },
+      "meta": {
+        "created_by": "hmb-crack",
+        "updated_by": "hmb-crack",
+        "updated_at": "2026-07-12"
+      }
+    },
+    "feat-install-summary": {
+      "id": "feat-install-summary",
+      "type": "Feature",
+      "label": "Show a polished post-run summary and keep the terminal open until the user dismisses it",
+      "confidence": {
+        "score": 0.8,
+        "reason": "Directly requested as a single feature covering messaging + terminal persistence. Visual styling ('beautiful') is subjective and may be refined during brew.",
+        "source": "user"
+      },
+      "properties": {
+        "status": "approved",
+        "actor": "End user installing or initializing the toolkit",
+        "acceptance_criteria": [
+          "A formatted success/failure summary is displayed after install or hmb init.",
+          "The terminal pauses for user acknowledgment and does not close abruptly."
+        ]
+      },
+      "meta": {
+        "created_by": "hmb-crack",
+        "updated_by": "hmb-crack",
+        "updated_at": "2026-07-12"
+      }
+    }
+  },
+  "architecture": {},
+  "implementation": {},
+  "relationships": [
+    { "from": "feat-install-summary", "to": "req-install-message", "rel": "implements" },
+    { "from": "feat-install-summary", "to": "req-install-no-abrupt-close", "rel": "implements" }
+  ],
+  "patches": [
+    {
+      "version": 1,
+      "parent": 0,
+      "timestamp": "2026-07-12",
+      "written_by": "hmb-crack",
+      "added": ["req-install-message", "req-install-no-abrupt-close", "feat-install-summary"],
+      "removed": [],
+      "modified": []
+    },
+    {
+      "version": 2,
+      "parent": 1,
+      "timestamp": "2026-07-12",
+      "written_by": "hmb-sniff",
+      "added": [],
+      "removed": [],
+      "modified": ["req-install-message", "req-install-no-abrupt-close", "feat-install-summary"]
+    }
+  ]
+}

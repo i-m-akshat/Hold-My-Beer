@@ -1,3 +1,8 @@
+---
+name: hmb-hangover
+description: 🤕 Checking tomorrow morning's hangover... — Runs the full validation suite (V1-V9) on the complete Project Model implementation. Use this skill for the final pre-merge compliance audit of the codebase and PSM.
+---
+
 <skill_description>
 🤕 Checking tomorrow morning's hangover... — Runs the full validation suite (V1-V9) on the complete Project Model implementation.
 </skill_description>
@@ -6,7 +11,7 @@
 Load and follow: shared/CONSTITUTION.md
 Load and follow: shared/DSL.md
 Load and follow: shared/MODEL_SCHEMA.md
-<load_file>shared/MODEL_VALIDATION.md</load_file>
+Load and follow: shared/MODEL_VALIDATION.md
 </context>
 
 <instructions>

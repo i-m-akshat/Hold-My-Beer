@@ -1,6 +1,6 @@
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $target = Get-Item .
-$sddFiles = @(".holdmybeer", ".gsd", "specify.md", "plan.md", "tasks.md", "SPEC.md", "PLAN.md")
+$sddFiles = @(".holdmybeer", "specify.md", "plan.md", "psm.json")
 $found = @()
 foreach ($file in $sddFiles) {
     if (Test-Path (Join-Path $target $file)) {
@@ -23,7 +23,10 @@ Write-Host "🍺 Initializing HoldMyBeer SDD workspace..." -ForegroundColor Cyan
 $specifyDir = Join-Path $target ".holdmybeer"
 New-Item -ItemType Directory -Force -Path $specifyDir | Out-Null
 
-$templateSource = "C:\Users\aksha\.gemini\config\skills\hmb\templates"
+$templateSource = Join-Path $HOME ".gemini/config/skills/hmb/templates"
+if (-not (Test-Path $templateSource)) {
+    $templateSource = Join-Path $HOME ".claude/skills/hmb/templates"
+}
 if (-not (Test-Path $templateSource)) {
     Write-Host "Error: Could not locate HoldMyBeer templates at $templateSource" -ForegroundColor Red
     Exit 1

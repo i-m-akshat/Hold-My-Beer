@@ -1,3 +1,8 @@
+---
+name: hmb-impact
+description: ⚡ Calculating blast radius... — Analyzes the impact of a changed requirement, marks affected nodes as stale, and plans selective regeneration. Use this skill when a requirement changes and you need to recompute the blast radius.
+---
+
 <skill_description>
 ⚡ Calculating blast radius... — Analyzes the impact of a changed requirement, marks affected nodes as stale, and plans selective regeneration.
 </skill_description>

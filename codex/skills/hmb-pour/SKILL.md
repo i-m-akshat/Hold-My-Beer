@@ -1,3 +1,8 @@
+---
+name: hmb-pour
+description: 🍺 Hold my beer... writing production code. — Implements code artifacts mapped to active tasks in the Project Model. Use this skill to generate implementation for a task, obeying ownership shields.
+---
+
 <skill_description>
 🍺 Hold my beer... writing production code. — Implements code artifacts mapped to active tasks in the Project Model.
 </skill_description>

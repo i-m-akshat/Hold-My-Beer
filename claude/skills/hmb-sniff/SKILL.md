@@ -1,3 +1,8 @@
+---
+name: hmb-sniff
+description: 👃 Sniffing for bad hops... — Validates the Project Model domain layer for gaps and ambiguity. Use this skill to review requirements specification quality and confidence before brewing.
+---
+
 <skill_description>
 👃 Sniffing for bad hops... — Validates the Project Model domain layer for gaps and ambiguity.
 </skill_description>

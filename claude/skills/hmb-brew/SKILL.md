@@ -1,3 +1,8 @@
+---
+name: hmb-brew
+description: 🍻 Brewing the perfect architecture... — Converts approved spec to architecture nodes in the Project Model and exports blueprint.md. Use this skill to design APIs, Entities, and implementation Tasks for approved requirements.
+---
+
 <skill_description>
 🍻 Brewing the perfect architecture... — Converts approved spec to architecture nodes in the Project Model and exports blueprint.md.
 </skill_description>

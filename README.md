@@ -138,9 +138,9 @@ HoldMyBeer runs a 7-stage build/verify pipeline plus an Impact Engine:
 
 ```
 hold-my-beer/
-├── shared/      Shared prompt foundations (CONSTITUTION.md, DSL.md, PSM_SCHEMA.md...)
+├── shared/      Shared prompt foundations (CONSTITUTION.md, DSL.md, MODEL_SCHEMA.md...)
 ├── bin/         Init CLI binaries
-├── claude/      Claude Code SKILL.md skills and command markdown adapters
+├── claude/      Claude Code SKILL.md skills (auto-exposed as slash commands)
 ├── gemini/      Gemini CLI TOML configuration commands and human-readable prompts
 ├── codex/       Codex CLI adapter rules (Claude SKILL.md mirror)
 ├── cursor/      Cursor MDC rules

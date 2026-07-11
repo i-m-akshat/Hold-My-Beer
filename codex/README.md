@@ -28,9 +28,8 @@ cp -r codex/skills/* ~/.codex/skills/
 
 ## Notes
 
-- Codex has no separate "commands" layer analogous to Claude Code's
-  `commands/*.md` — skills are invoked by Codex deciding they're relevant
-  (same description-matching mechanism as Claude), or by naming them
+- Codex has no separate "commands" layer — skills are invoked by Codex deciding they're relevant
+  (same description-matching mechanism as Claude Code's skills), or by naming them
   explicitly in your prompt.
 - Codex supports an optional `openai.yaml` file per skill folder for
   Codex-specific UI metadata and MCP tool dependencies. HoldMyBeer

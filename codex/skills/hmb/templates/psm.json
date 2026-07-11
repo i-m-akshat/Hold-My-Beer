@@ -4,11 +4,11 @@
     "project": "",
     "created": "",
     "updated": "",
-    "psm_schema": "1.0"
+    "model_schema": "1.0"
   },
   "domain": {},
   "architecture": {},
   "implementation": {},
-  "edges": [],
+  "relationships": [],
   "patches": []
 }
